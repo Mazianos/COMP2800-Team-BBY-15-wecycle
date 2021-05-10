@@ -1,0 +1,114 @@
+body {
+    background-color: #EFF9F0;
+    margin: 0px;
+}
+
+.topnav {
+    color: #F8F8F8;
+    border-bottom: 1.5px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    background-color: white;
+}
+
+#back {
+    margin-left: 20px;
+    margin-top: 15px;
+    border-radius: 33%;
+    width: 95px;
+    height: 30px;
+    background-color: #4F772D;
+    color: white;
+}
+
+#posting-title {
+   margin-left: 50px;
+}
+
+#posting-title-form {
+    width: 80%;
+}
+
+#city-total {
+    float: left;
+    margin-left: 50px;
+}
+
+#postal-total {
+    overflow: hidden;
+}
+
+#postal-code-title {
+    margin-left: 20px;
+}
+
+#postal-code-form {
+    margin-left: 20px;
+    width: 60px;
+}
+
+#type-name {
+    position: relative;
+}
+
+#type {
+    margin-left: 50px;
+}
+
+#plastic {
+    float: left;
+    margin-right: 5%;
+}
+
+#glass {
+    float: left;
+    margin-right: 5%;
+    
+}
+
+#aluminum {
+    float: left;
+    margin-right: 5%;
+    
+}
+
+#other {
+    overflow: hidden;
+    margin-right: 5%;
+}
+
+#description {
+    margin-left: 50px;
+}
+
+#textarea {
+    width: 100%;
+}
+
+#contact-info {
+    margin-left: 50px;
+}
+
+#continue {
+    margin-left: 50%;
+    margin-top: 20%;
+}
+/*
+#city-total {
+    margin-left: 50px;
+    float: left;
+}
+
+#postal-total {
+    margin-left: 250px;
+    position: absolute;
+}
+
+#postal-code-form {
+    width: 100px;
+}
+
+#postal-code-form {
+    width: 20%;
+}*/
