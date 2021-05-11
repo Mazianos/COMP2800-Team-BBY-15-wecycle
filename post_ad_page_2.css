@@ -26,3 +26,40 @@ body {
     text-align: center;
     margin-top: 10px;
 }
+
+#description {
+    margin-left: 20px;
+}
+
+#textarea-description {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#textarea-contact {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#general-location {
+    margin-left: 20px;
+}
+
+#textarea-postal-code {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.bottom-left {
+    float: left;
+    margin-left: 5%;
+}
+
+.bottom-right #claim {
+    position: relative;
+    float: right;
+    margin-right: 5%;
+}
