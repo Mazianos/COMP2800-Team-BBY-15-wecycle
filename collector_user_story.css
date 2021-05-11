@@ -12,52 +12,72 @@ body {
     background-color: white;
 }
 
-#back {
-    margin-left: 20px;
+#image {
+    margin-left: 30px;
     margin-top: 15px;
-    border-radius: 16px;
-    text-decoration: none;
+    border-radius: 33%;
     width: 95px;
     height: 30px;
     background-color: #4F772D;
     color: white;
-    border: none;
-    font-family: 'Roboto', sans-serif;
 }
 
-#file-drop {
-    margin-top: 5%;
-}
-
-#textarea {
-    width: 100%;
-}
-
-#file-drop-text {
-    font-family: 'Roboto', sans-serif;
-}
-
-#google-api {
+#posting-pic {
     text-align: center;
-    margin: 0 auto;
-    display: block;
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
-#postal-code {
-    text-align: center;
-}
-
-#update {
-    /*margin-left: 40%;
-    margin-right: 50%;*/
-
-    margin-top: 30px;
+#description {
     margin-left: 20px;
+}
+
+#posting-date {
+    font-family: 'Roboto', sans-serif;
+}
+
+#status {
+    font-family: 'Roboto', sans-serif;
+}
+
+#textarea-description {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#textarea-contact {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#general-location {
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#textarea-postal-code {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.bottom-left {
+    float: left;
+    margin-left: 5%;
+}
+
+.bottom-right #claim {
+    position: relative;
+    float: right;
+    margin-right: 5%;
+}
+
+#return {
     border-radius: 25px;
     text-decoration: none;
-    width: 60px;
-    height: 30px;
+    width: 130px;
+    height: 50px;
     background-color: #4F772D;
     color: white;
     border: none;
@@ -65,13 +85,7 @@ body {
     font-size: 16px;
 }
 
-#finish {
-    /*margin-left: 40%;
-    margin-right: 50%;*/
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-    margin-top: 50px;
+#claim {
     border-radius: 25px;
     text-decoration: none;
     width: 130px;

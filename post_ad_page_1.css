@@ -22,14 +22,24 @@ body {
     background-color: #4F772D;
     color: white;
     border: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 #posting-title {
    margin-left: 5%;
+   margin-top: 5%;
+}
+
+#posting-paragraph {
+    font-family: 'Roboto', sans-serif;
 }
 
 #posting-title-form {
     width: 80%;
+}
+
+#city-title {
+    font-family: 'Roboto', sans-serif;
 }
 
 #city-total {
@@ -44,6 +54,7 @@ body {
 
 #postal-code-title {
     margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #postal-code-form {
@@ -54,6 +65,7 @@ body {
 #type-name {
     position: relative;
     margin-bottom: -5px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #type {
@@ -65,16 +77,26 @@ body {
     margin-right: 5%;
 }
 
+#plastic-description {
+    font-family: 'Roboto', sans-serif;
+}
+
 #glass {
     float: left;
     margin-right: 5%;
-    
+}
+
+#glass-description {
+    font-family: 'Roboto', sans-serif;
 }
 
 #aluminum {
     float: left;
     margin-right: 5%;
-    
+}
+
+#aluminum-description {
+    font-family: 'Roboto', sans-serif;
 }
 
 #other {
@@ -82,9 +104,17 @@ body {
     margin-right: 5%;
 }
 
+#other-description {
+    font-family: 'Roboto', sans-serif;
+}
+
 #description {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#description-text {
+    font-family: 'Roboto', sans-serif;
 }
 
 #textarea {
@@ -94,6 +124,10 @@ body {
 #contact-info {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#contact-text {
+    font-family: 'Roboto', sans-serif;
 }
 
 #continue {
@@ -110,6 +144,8 @@ body {
     background-color: #4F772D;
     color: white;
     border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
 }
 
 /*
