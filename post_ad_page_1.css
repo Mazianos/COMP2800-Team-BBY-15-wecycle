@@ -148,6 +148,68 @@ body {
     font-size: 16px;
 }
 
+#file-drop {
+    margin-top: 5%;
+}
+
+.textarea {
+    width: 100%;
+}
+
+#file-drop-text {
+    font-family: 'Roboto', sans-serif;
+}
+
+#file-drop-textarea {
+    border: none;
+}
+
+#google-api {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 70px;
+}
+
+#postal-code {
+    text-align: center;
+}
+
+#update {
+    /*margin-left: 40%;
+    margin-right: 50%;*/
+
+    margin-top: 30px;
+    margin-left: 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    width: 60px;
+    height: 30px;
+    background-color: #4F772D;
+    color: white;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+#finish {
+    /*margin-left: 40%;
+    margin-right: 50%;*/
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+    border-radius: 25px;
+    text-decoration: none;
+    width: 130px;
+    height: 50px;
+    background-color: #4F772D;
+    color: white;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
 /*
 #city-total {
     margin-left: 50px;
