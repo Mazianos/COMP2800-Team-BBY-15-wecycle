@@ -15,15 +15,17 @@ body {
 #back {
     margin-left: 20px;
     margin-top: 15px;
-    border-radius: 33%;
+    border-radius: 16px;
+    text-decoration: none;
     width: 95px;
     height: 30px;
     background-color: #4F772D;
     color: white;
+    border: none;
 }
 
 #posting-title {
-   margin-left: 50px;
+   margin-left: 5%;
 }
 
 #posting-title-form {
@@ -32,11 +34,12 @@ body {
 
 #city-total {
     float: left;
-    margin-left: 50px;
+    margin-left: 5%;
 }
 
 #postal-total {
     overflow: hidden;
+    margin-left: 5%;
 }
 
 #postal-code-title {
@@ -50,10 +53,11 @@ body {
 
 #type-name {
     position: relative;
+    margin-bottom: -5px;
 }
 
 #type {
-    margin-left: 50px;
+    margin-left: 5%;
 }
 
 #plastic {
@@ -79,7 +83,8 @@ body {
 }
 
 #description {
-    margin-left: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #textarea {
@@ -87,13 +92,26 @@ body {
 }
 
 #contact-info {
-    margin-left: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #continue {
-    margin-left: 50%;
-    margin-top: 20%;
+    /*margin-left: 40%;
+    margin-right: 50%;*/
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+    border-radius: 25px;
+    text-decoration: none;
+    width: 130px;
+    height: 50px;
+    background-color: #4F772D;
+    color: white;
+    border: none;
 }
+
 /*
 #city-total {
     margin-left: 50px;
