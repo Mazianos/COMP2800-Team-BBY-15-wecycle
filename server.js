@@ -38,6 +38,32 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/html/index.html");
 });
 
+app.post("/create-ad", function (req, res){
+  res.setHeader('Content-Type', 'application/json');
+
+  async function newPosting() {
+    try {
+      client.db("WecycleMain").collection("AdPost").insertOne({
+        author: null, //from session cache
+        title: req.body.title,
+        location: req.body.location,
+        postalCode: req.body.postalCaode,
+        type: {
+          plastic: req.body.plastic, // checkbox true or false
+          glass: req.body.glass,
+          aluminum: req.body.aluminum,
+          other: req.body.other
+        },
+        description: req.body.description, //in html, the id's of description and ocntact info are same
+        contact: req.body.contact
+      });
+    } catch (err){
+      console.log(err);
+    };
+  };
+  newPosting();
+  res.send({ status: "success", msg: "Recorded updated." });
+})
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
 
