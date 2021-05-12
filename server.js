@@ -2,9 +2,19 @@
 
 const PORT = 8000;
 const express = require("express");
+const mongoose = require('mongoose');
 const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
+const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+
+
+mongoose.connect(url, {
+  sslKey: credentials,
+  sslCert: credentials,
+  useNewUrlParser: true, 
+  useUnifiedTopology: true}
+);
 
 const {
   MongoClient,
@@ -47,7 +57,7 @@ app.post("/create-ad", function (req, res){
         author: null, //from session cache
         title: req.body.title,
         location: req.body.location,
-        postalCode: req.body.postalCaode,
+        postalCode: req.body.postalCode,
         type: {
           plastic: req.body.plastic, // checkbox true or false
           glass: req.body.glass,
@@ -55,7 +65,8 @@ app.post("/create-ad", function (req, res){
           other: req.body.other
         },
         description: req.body.description, //in html, the id's of description and ocntact info are same
-        contact: req.body.contact
+        contact: req.body.contact,
+        
       });
     } catch (err){
       console.log(err);
