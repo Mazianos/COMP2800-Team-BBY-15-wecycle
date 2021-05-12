@@ -1,11 +1,9 @@
-'use strict';
-
 import React from 'react';
 import ReactDom from 'react-dom';
+import App from './components/App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-function Logo() {
-  return <img src='../public/wordLogo.png'></img>;
-}
-
-ReactDom.render(<Logo/>, document.getElementById('root'));
+ReactDom.render(
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>, document.getElementById('root'));
