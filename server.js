@@ -58,7 +58,7 @@ const {
   ObjectID  // we may actually ned the object id
 } = require("mongodb");
 
-app.use("/js", express.static("js"));
+app.use("/src", express.static("js"));
 app.use("/css", express.static("css"));
 app.use(bodyParser.urlencoded({extended: true}));
 

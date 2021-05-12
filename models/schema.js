@@ -21,7 +21,7 @@ var postSchema = new mongoose.Schema({
     description: String,
     contact: String, // user contact number auto fill?
     postImage: String, // upload image
-    status: String,
+    status: { type: String, default: "Open"},
     postDate: { type: Date, default: Date.now } // need date for the history of ad posting
 });
 
