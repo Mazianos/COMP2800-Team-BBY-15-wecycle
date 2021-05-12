@@ -32,24 +32,22 @@ const db = mongoose.connection;
 db.on('error',  console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   // we're connected!
-  var testPost = new myModels.Post({
-    title: "this is just a test"
-  })
-  // THIS IS TAKING WAY TOO LONG. WHY/?? 
-  console.log(testPost.title); 
-  // test send data to mongodb atlas 
-  // Expectation2: creates collection if it doesnt exit
-  // Expectation: only title, everything else null.
-  // try to send test post to mongodb.
+  // var testPost = new myModels.Post({
+  //   title: "this is just a test"
+  // })
+  // // THIS IS TAKING WAY TOO LONG. WHY/?? 
+  // console.log(testPost.title); 
+  // // test send data to mongodb atlas 
+  // // Expectation2: creates collection if it doesnt exit
+  // // Expectation: only title, everything else null.
+  // // try to send test post to mongodb.
 
 
-  testPost.save(function(err, testPost){
-    if (err) return console.error(err);
-  });
-
-  // testPost.db("Wecycle Main").save(function(err, testPost) {
+  // testPost.save(function(err, testPost){
   //   if (err) return console.error(err);
   // });
+
+
 });
 
 
@@ -94,10 +92,10 @@ app.post("/create-ad", async function (req, res){
     location: req.body.location,
     postalCode: req.body.postalCode,
     type: {
-        plastic: req.body.plastic,
-        glass: req.body.glass,
-        aluminum: req.body.aluminum,
-        other: req.body.other
+        plastic: req.body.type.plastic,
+        glass: req.body.type.glass,
+        aluminum: req.body.type.aluminum,
+        other: req.body.type.other
     },
     estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
     description: req.body.description,

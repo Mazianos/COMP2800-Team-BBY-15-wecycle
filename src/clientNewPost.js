@@ -1,5 +1,7 @@
 document.querySelector("#finish").addEventListener("click", sendData);
 
+// To do: after sending the data, then redirect to ad details or product gallery. 
+
 async function sendData(){
 
     let myData = {
@@ -8,10 +10,10 @@ async function sendData(){
         location: document.querySelector("#posting-city-form").value,
         postalCode: document.querySelector("#postal-code-form").value,
         type: {
-            plastic: document.querySelector("#plastic-checkbox").checked = true|false,
-            glass: document.querySelector("#glass-checkbox").checked = true|false,
-            aluminum: document.querySelector("#aluminum-checkbox").checked = true|false,
-            other: document.querySelector( "#other-checkbox").checked = true|false
+            plastic: document.querySelector("#plastic-checkbox").checked,
+            glass: document.querySelector("#glass-checkbox").checked,
+            aluminum: document.querySelector("#aluminum-checkbox").checked,
+            other: document.querySelector( "#other-checkbox").checked
         },
         estimatedBottles: document.querySelector("#text-estimated-bottle").value,  // number input for bottles. Sent to user Schema
         description: document.querySelector("#post-description").value,
