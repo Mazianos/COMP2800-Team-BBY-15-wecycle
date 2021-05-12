@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Ad Page 1</title>
-    <link rel="stylesheet" href="post_ad_page_1.css">
+    <link rel="stylesheet" href="./css/post_ad_page_1.css">
     <link rel="shortcut icon" type="image/png" href="./favicon-32x32.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
@@ -61,15 +61,29 @@
     
     <div id = "description">
         <p id ="description-text">description</p>
-        <textarea rows="10" cols="100%" id="textarea"></textarea>
+        <textarea rows="10" cols="100%" class="textarea"></textarea>
     </div>
 
     <div id = "contact-info">
         <p id ="contact-text">contact info</p>
-        <textarea rows="5" cols="50%" id="textarea"></textarea>
+        <textarea rows="5" cols="50%" class="textarea"></textarea>
     </div>
     
     <button type="submit" id="continue">Continue</button>
+
+    <div id = "file-drop">
+        <p id ="file-drop-text">post pictures of recyclables</p>
+        <textarea rows="10" cols="50" class="textarea" id = "file-drop-textarea"></textarea>
+    </div>
+
+    <textarea rows="20" cols="70" id="google-api"></textarea>
+
+    <div id = "postal-code">
+        <input type="text" id="postal-code-enter">
+        <button id = "update">update</button>
+    </div>
+
+    <button type="submit" id="finish">finish</button>
 
     <br/>
     <br/>
@@ -77,5 +91,4 @@
     <br/>
 
 </body>
-
 </html>
