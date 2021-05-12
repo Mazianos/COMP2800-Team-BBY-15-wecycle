@@ -1,0 +1,48 @@
+.card {
+    margin: 0;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2vh;
+    column-gap: 2vw;
+}
+
+.card-img-top {
+    max-width: 200px;
+    max-height: 280px;
+    height: auto;
+    display: grid;
+    margin: 0 auto;
+}
+
+h1, h4 {
+    text-align: center;
+    color: #04064d;
+}
+
+h4 {
+    font-size: medium;
+}
+
+body {
+    background-color: #eff9f0;
+}
+
+.card, .navbar {
+    background-color: #f8f8f8;
+}
+
+.navbar {
+    /* border-bottom: 1px solid black; */
+    box-shadow: 2px 2px grey;
+    margin-bottom: 2vh;
+}
+
+@media only screen and (max-width: 600px) {
+    #grid-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
