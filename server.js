@@ -103,7 +103,7 @@ app.post("/create-ad", async function (req, res){
     estimatedBottles: req.body.,  // number input for bottles. Sent to user Schema
     description: req.body.,
     contact: req.body., // user contact number auto fill?
-    postImage: req.body., // upload image
+    postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
     status: req.body.
   })
   
