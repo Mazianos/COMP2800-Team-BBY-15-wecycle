@@ -58,7 +58,7 @@ const {
   ObjectID  // we may actually ned the object id
 } = require("mongodb");
 
-app.use("/src", express.static("js"));
+app.use("/src", express.static("./src/"));
 app.use("/css", express.static("css"));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -86,30 +86,33 @@ app.get("/", (req, res) => {
 });
 
 
-/*
 app.post("/create-ad", async function (req, res){
   res.setHeader('Content-Type', 'application/json');
   var newPost = new myModels.Post({
-    author: req.body., //userID FK in this 
-    title: req.body.,
-    location: req.body.,
-    postalCode: req.body.,
+    author: req.body.author, //userID FK in this 
+    title: req.body.title,
+    location: req.body.location,
+    postalCode: req.body.postalCode,
     type: {
-        plastic: req.body.,
-        glass: req.body.,
-        aluminum: req.body.,
-        other: req.body.
+        plastic: req.body.plastic,
+        glass: req.body.glass,
+        aluminum: req.body.aluminum,
+        other: req.body.other
     },
-    estimatedBottles: req.body.,  // number input for bottles. Sent to user Schema
-    description: req.body.,
-    contact: req.body., // user contact number auto fill?
-    postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-    status: req.body.
+    estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
+    description: req.body.description,
+    contact: req.body.contact, // user contact number auto fill?
+    postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
+    // status: req.body. unused, default open
   })
+
+  newPost.save(function(err, newPost){
+    if (err) return console.error(err);
+  });
   
   res.send({ status: "success", msg: "post created." });
 });
-*/
+
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
 app.post("/create-table", function (req, res) {
