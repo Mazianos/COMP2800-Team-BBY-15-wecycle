@@ -2,13 +2,60 @@
 
 const PORT = 8000;
 const express = require("express");
+const mongoose = require('mongoose');
 const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
+const credentials = fs.readFileSync("./cert.pem");
+const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+// IMPORT SCHEMAS
+const myModels = require('./models/schema.js');
+
+// mongoose.connect comes first
+async function connectToDB(){
+  try {
+    await mongoose.connect(url, {
+      sslKey: credentials,
+      sslCert: credentials,
+      useNewUrlParser: true, 
+      useUnifiedTopology: true}
+    );
+  } catch (err){
+    console.error(err);
+  };
+};
+connectToDB();
+
+const db = mongoose.connection;
+// line code 22-25 retrieved from https://www.mongoosejs.com/docs/
+
+db.on('error',  console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  var testPost = new myModels.Post({
+    title: "this is just a test"
+  })
+  // THIS IS TAKING WAY TOO LONG. WHY/?? 
+  console.log(testPost.title); 
+  // test send data to mongodb atlas 
+  // Expectation2: creates collection if it doesnt exit
+  // Expectation: only title, everything else null.
+  // try to send test post to mongodb.
+
+
+  testPost.save(function(err, testPost){
+    if (err) return console.error(err);
+  });
+
+  // testPost.db("Wecycle Main").save(function(err, testPost) {
+  //   if (err) return console.error(err);
+  // });
+});
+
 
 const {
   MongoClient,
-  ObjectID
+  ObjectID  // we may actually ned the object id
 } = require("mongodb");
 
 app.use("/js", express.static("js"));
@@ -17,7 +64,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
-const credentials = fs.readFileSync("./cert.pem");
+
 
 const client = new MongoClient(
   "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority", {
@@ -35,38 +82,36 @@ client.connect().then(function () {
 // EXPRESS METHODS
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/html/index.html");
+  res.sendFile(__dirname + "/post_ad_page_1.html"); //"/public/index.html" <-- change this back in dev.
 });
 
-app.post("/create-ad", function (req, res){
-  res.setHeader('Content-Type', 'application/json');
 
-  async function newPosting() {
-    try {
-      client.db("WecycleMain").collection("AdPost").insertOne({
-        author: null, //from session cache
-        title: req.body.title,
-        location: req.body.location,
-        postalCode: req.body.postalCaode,
-        type: {
-          plastic: req.body.plastic, // checkbox true or false
-          glass: req.body.glass,
-          aluminum: req.body.aluminum,
-          other: req.body.other
-        },
-        description: req.body.description, //in html, the id's of description and ocntact info are same
-        contact: req.body.contact
-      });
-    } catch (err){
-      console.log(err);
-    };
-  };
-  newPosting();
-  res.send({ status: "success", msg: "Recorded updated." });
-})
+/*
+app.post("/create-ad", async function (req, res){
+  res.setHeader('Content-Type', 'application/json');
+  var newPost = new myModels.Post({
+    author: req.body., //userID FK in this 
+    title: req.body.,
+    location: req.body.,
+    postalCode: req.body.,
+    type: {
+        plastic: req.body.,
+        glass: req.body.,
+        aluminum: req.body.,
+        other: req.body.
+    },
+    estimatedBottles: req.body.,  // number input for bottles. Sent to user Schema
+    description: req.body.,
+    contact: req.body., // user contact number auto fill?
+    postImage: req.body., // upload image
+    status: req.body.
+  })
+  
+  res.send({ status: "success", msg: "post created." });
+});
+*/
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
-
 app.post("/create-table", function (req, res) {
 
   res.setHeader('Content-Type', 'application/json');
