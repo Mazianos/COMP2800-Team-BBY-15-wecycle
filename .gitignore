@@ -25,3 +25,5 @@ yarn-error.log*
 # Mongodb certificate
 /cert.pem
 cert.pem
+
+.env.local

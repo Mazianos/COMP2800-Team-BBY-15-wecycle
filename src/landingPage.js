@@ -102,8 +102,6 @@ function App() {
       </header>
       <div>
 
-    
-
       </div>
       <div class="quoteContainer">
         <ul class="quote">
