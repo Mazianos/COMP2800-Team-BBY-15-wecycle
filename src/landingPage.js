@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css';
+import './landingPage.css';
 import Navbar from "./components/Navbar/Navbar";
 
 //Infinite Scroll constants start
