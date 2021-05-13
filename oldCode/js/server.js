@@ -34,9 +34,6 @@ client.connect().then(function () {
 
 // EXPRESS METHODS
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/html/index.html");
-});
 
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
@@ -128,6 +125,15 @@ app.post("/delete-row/:id", function (req, res) {
       res.json(data);
     })
 });
+
+
+
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/html/index.html");
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

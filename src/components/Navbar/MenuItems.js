@@ -14,14 +14,14 @@ export const MenuItems = [
     },
 
     {
-        title: "Contact",
+        title: "Sign In",
         url: "#",
         cName:"nav-links"
 
     },
 
     {
-        title: "Home",
+        title: "Sign Up",
         url: "#",
         cName:"nav-links"
 

@@ -1,3 +1,10 @@
-.NavbarItems {
-    background-color: #ff000000;
+.navbar-logo {
+display: flex;
+margin: 1rem;
+padding: 1rem;
+float: right;
+}
+
+.navItems {
+    color:white;
 }

@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+html {
+  background-image: url('./components/images/landingpagefinal.jpg');
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.quoteContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.landingQuote{
+ 
+color: white;
+font-weight: bold;
+font-size: 32pt;
+}
+
+.signupBtn {
+  position: fixed;
+  top: 89%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #4f772d;
+  box-shadow: 0 9px #999;
   color: white;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 12px 24px;
+  outline:none;
+  border: none;
+  cursor: pointer;
+  border-radius: 16px;
+}
+.signupBtn:hover {
+  background-color: #31572c;
 }
 
-.App-link {
-  color: #61dafb;
+.signupBtn:active {
+  background-color: #4f772d;
+  box-shadow: 5px 5px #666;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.quoteContainer{
+  top: 80%;
+  left: 50%;
+}
+.quote {
+  list-style-type: none;
+  color: white;
+  font-size: 24pt;
+}
+
+#firstParagraph, #thirdParagraph {
+  text-align: center;
 }
