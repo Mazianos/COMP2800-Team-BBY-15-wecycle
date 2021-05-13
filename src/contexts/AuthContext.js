@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
             setLoading(false);
-        })
+        });
 
         return unsubscribe;
     }, [])
