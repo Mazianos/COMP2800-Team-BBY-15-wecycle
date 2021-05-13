@@ -1,6 +1,6 @@
 'use strict';
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;  // 3001 for node
 const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
@@ -81,6 +81,7 @@ client.connect().then(function () {
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/post_ad_page_1.html"); //"/public/index.html" <-- change this back in dev.
+  // res.sendFile(__dirname + "/src/index.js");
 });
 
 
