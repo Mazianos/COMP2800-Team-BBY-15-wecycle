@@ -1,5 +1,6 @@
 body {
     background-color: #EFF9F0;
+    background-image: url("../image/background-image.jpg");
     margin: 0px;
 }
 
@@ -36,6 +37,7 @@ body {
 
 #posting-title-form {
     width: 80%;
+    border-radius: 5px;
 }
 
 #city-title {
@@ -57,9 +59,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#city-form {
+    border-radius: 5px;
+}
+
 #postal-code-form {
     margin-left: 20px;
     width: 60px;
+    border-radius: 5px;
 }
 
 #type-name {
@@ -117,8 +124,9 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-#textarea {
+.textarea {
     width: 100%;
+    border-radius: 5px;
 }
 
 #contact-info {
@@ -175,6 +183,10 @@ body {
     text-align: center;
 }
 
+#postal-code-enter {
+    border-radius: 5px;
+}
+
 #update {
     /*margin-left: 40%;
     margin-right: 50%;*/
@@ -190,6 +202,7 @@ body {
     border: none;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    border-radius: 5px;
 }
 
 #finish {
