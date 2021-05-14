@@ -1,6 +1,5 @@
-import { Button } from 'bootstrap';
 import React, { useRef, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 export default function PostAd() {
@@ -24,6 +23,7 @@ export default function PostAd() {
         {
             
         }
+        
     }
 
     return (
