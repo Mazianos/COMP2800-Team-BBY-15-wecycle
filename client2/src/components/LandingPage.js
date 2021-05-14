@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import '../css/landingPage.css';
 import Navbar from "./Navbar";
+import { useHistory } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -59,6 +61,7 @@ function MyProvider({ children }) {
 
 
 function Landing() {
+  const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
   const loader = React.useRef(load);
   const observer = React.useRef(
@@ -93,6 +96,9 @@ function Landing() {
     };
   }, [element]);
 
+  function handleCreateAd() {
+    history.push('/postAd');
+  }
  
   return (
     
@@ -107,7 +113,7 @@ function Landing() {
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div>
-      <button class="signupBtn">Post A New Ad</button>
+      <button className="signupBtn" onClick={handleCreateAd}>Post A New Ad</button>
     <div class="adListings">
       <ul>
       {data.map(row =>(

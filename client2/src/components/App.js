@@ -8,6 +8,7 @@ import Landing from "./LandingPage";
 import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
+import PostAd from "./PostAd";
 
 function App() {
     return (
@@ -15,11 +16,11 @@ function App() {
             <Router>
             <AuthProvider>
                 <Switch>
-                    {/* <PrivateRoute exact path="/" component={Landing}/> */}
-                    <Route exact path="/" component={Landing}/> 
+                    <Route exact path="/" component={Landing}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
+                    <Route path="/postAd" component={PostAd}/>
                 </Switch>
             </AuthProvider>
             </Router>
