@@ -32,7 +32,9 @@ var userSchema = new mongoose.Schema({
     contactNumber: String,      
     bottlesDonated: Number,     // updates to the respective donor/collecotr
     bottlesTaken: Number,       // only updated when 'finished' is clicked
-    address: String
+    address: String,
+    _id: String,
+    email: String
 });
 
 // create the model for users and expose it to our app

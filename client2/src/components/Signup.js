@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router-dom';
+import $ from 'jquery';
 
 export default function Signup() {
     const emailRef = useRef();
@@ -26,6 +27,27 @@ export default function Signup() {
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
             login(emailRef.current.value, passwordRef.current.value);
+
+            let myData = {
+                name: nameRef,
+                address: postalRef,
+                contactNum: "testNum",
+                id: currentUser.id
+            }
+
+            $.ajax({
+                url: "/create-user",
+                data: myData,
+                dataType: "json",
+                type: "POST",
+                success: function(data) {
+                    console.log("Success: ", data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error:", jqXHR, textStatus, errorThrown);
+                },
+            });
+
             history.push("/");
         } catch {
             setError("Failed to create an account");

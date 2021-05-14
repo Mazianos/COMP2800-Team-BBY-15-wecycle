@@ -75,7 +75,6 @@ app.post("/create-ad", async function (req, res){
   var newPost = new myModels.Post({
     author: req.body.author, //userID FK in this 
     title: req.body.title,
-    location: req.body.location,
     postalCode: req.body.postalCode,
     type: {
         plastic: req.body.type.plastic,
@@ -83,7 +82,7 @@ app.post("/create-ad", async function (req, res){
         aluminum: req.body.type.aluminum,
         other: req.body.type.other
     },
-    estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
+    // estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
     description: req.body.description,
     contact: req.body.contact, // user contact number auto fill?
     postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
@@ -95,6 +94,21 @@ app.post("/create-ad", async function (req, res){
   });
   
   res.send({ status: "success", msg: "post created." });
+});
+
+app.post("/create-user", async function (req, res) {
+  var newUser = new myModels.User({
+    name: req.body.name,
+    contactNumber: req.body.contactNumber,
+    bottlesDonated: 0,
+    bottlesTaken: 0,
+    address: req.body.address,
+    _id: req.body.id
+  });
+
+  newUser.save(function(err, newUser) {
+    if (err) return console.error(err);
+  })
 });
 
 

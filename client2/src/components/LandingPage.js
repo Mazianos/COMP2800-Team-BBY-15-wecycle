@@ -106,15 +106,15 @@ function Landing() {
       <div id="navbarContainer">
         <Navbar/>
       </div>
-      <div class="quoteContainer">
-        <ul class="quote">
+      <div className="quoteContainer">
+        <ul className="quote">
           <li id="firstParagraph">One World, One Community</li>
           <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div>
       <button className="signupBtn" onClick={handleCreateAd}>Post A New Ad</button>
-    <div class="adListings">
+    <div className="adListings">
       <ul>
       {data.map(row =>(
         <li key={row} style={{background: "transparent", color: "white"}}>
