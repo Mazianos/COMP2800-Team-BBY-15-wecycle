@@ -1,6 +1,6 @@
 import React from 'react'
-import './landingPage.css';
-import Navbar from "../../../client/src/components/Navbar/Navbar";
+import '../css/landingPage.css';
+import Navbar from "./Navbar";
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -58,7 +58,7 @@ function MyProvider({ children }) {
 //Infinite Scroll Constants end
 
 
-function App() {
+function Landing() {
   const { data, loading, more, load } = React.useContext(MyContext);
   const loader = React.useRef(load);
   const observer = React.useRef(
@@ -96,12 +96,9 @@ function App() {
  
   return (
     
-    <body>
-      <header>
+    <div id="landingPage">
+      <div id="navbarContainer">
         <Navbar/>
-      </header>
-      <div>
-
       </div>
       <div class="quoteContainer">
         <ul class="quote">
@@ -127,14 +124,14 @@ function App() {
       )}
       </ul>
     </div>
-    </body>
+    </div>
   );
 }
 
-export default () => {
+export default function LandingPage() {
   return (
     <MyProvider>
-      <App/>
+      <Landing/>
     </MyProvider>
   );
 };
