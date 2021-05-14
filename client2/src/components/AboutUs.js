@@ -1,8 +1,15 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
-import "../css/about-us.css";
+import '../css/about-us.css';
 import Navbar from './Navbar';
+<<<<<<< HEAD
 // import {jasonFiltered, jLauFiltered, rayFiltered, mazFiltered} from '../images/'
+=======
+import Ray from '../images/rayFiltered.png';
+import Jason from '../images/jasonFiltered.png';
+import Johnson from '../images/jLauFiltered.png';
+import Mazin from '../images/mazFiltered.png';
+>>>>>>> eaed68c6e94301a691ee24b37a1903be278d0110
 
 export default function AboutUs() {
     return (
@@ -12,7 +19,11 @@ export default function AboutUs() {
             <Container>
                 <Card>
                     <a href="https://www.linkedin.com/in/rwong97/">
+<<<<<<< HEAD
                         <img src={require('../images/rayFiltered.png').default} class="card-img-top" alt="https://www.linkedin.com/in/rwong97/"/>
+=======
+                    <img src={Ray} class="card-img-top" alt="https://www.linkedin.com/in/rwong97/"/>
+>>>>>>> eaed68c6e94301a691ee24b37a1903be278d0110
                     </a>
                     <Card.Body>
                         <Card.Title>Raymond Wong</Card.Title>
@@ -24,7 +35,11 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/jasonja-ahn/">
+<<<<<<< HEAD
                         <img src={require('../images/jasonFiltered.png').default} class="card-img-top" alt="https://www.linkedin.com/in/jasonja-ahn/"/>
+=======
+                        <img src={Jason} class="card-img-top" alt="https://www.linkedin.com/in/jasonja-ahn/"/>
+>>>>>>> eaed68c6e94301a691ee24b37a1903be278d0110
                     </a>
                     <Card.Body>
                         <Card.Title>Jason Ahn</Card.Title>
@@ -36,7 +51,11 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/johnsonlau/">
+<<<<<<< HEAD
                         <img src={require('../images/jLauFiltered.png').default} class="card-img-top" alt="https://www.linkedin.com/in/johnsonlau/"/>
+=======
+                        <img src={Johnson} class="card-img-top" alt="https://www.linkedin.com/in/johnsonlau/"/>
+>>>>>>> eaed68c6e94301a691ee24b37a1903be278d0110
                     </a>
                     <Card.Body>
                         <Card.Title>Johnson Lau</Card.Title>
@@ -48,7 +67,11 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/mazin-marwan-0b3409154/">
+<<<<<<< HEAD
                         <img src={require('../images/mazFiltered.png').default}class="card-img-top" alt="https://www.linkedin.com/in/mazin-marwan-0b3409154/"/>
+=======
+                        <img src={Mazin} class="card-img-top" alt="https://www.linkedin.com/in/mazin-marwan-0b3409154/"/>
+>>>>>>> eaed68c6e94301a691ee24b37a1903be278d0110
                     </a>
                     <Card.Body>
                         <Card.Title>Mazin Marwan</Card.Title>
