@@ -1,6 +1,6 @@
 'use strict';
 
-const PORT = process.env.PORT || 8000;  // 3001 for node
+const PORT = process.env.PORT || 8001;  // 3001 for react
 const express = require("express");
 const mongoose = require('mongoose');
 const app = express();
@@ -79,10 +79,11 @@ client.connect().then(function () {
 
 // EXPRESS METHODS
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/post_ad_page_1.html"); //"/public/index.html" <-- change this back in dev.
-  // res.sendFile(__dirname + "/src/index.js");
-});
+// Comment out for now... see if  node and app.js is hooked up
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "/post_ad_page_1.html"); //"/public/index.html" <-- change this back in dev.
+//   // res.sendFile(__dirname + "/src/index.js");
+// });
 
 
 app.post("/create-ad", async function (req, res){
@@ -142,11 +143,6 @@ app.post("/create-table", function (req, res) {
 
 });
 
-app.get('/', function (req, res) {
-  let doc = fs.readFileSync('./index.html', "utf8");
-  res.send(doc);
-});
-
 
 app.get("/read-table", function (req, res) {
   res.setHeader("Content-Type", "application/json");
@@ -201,6 +197,13 @@ app.post("/delete-row/:id", function (req, res) {
       res.json(data);
     })
 });
+
+
+// **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
+app.get('*', (req, res) => {                       
+  res.sendFile(__dirname + "/public/index.html");                              
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
