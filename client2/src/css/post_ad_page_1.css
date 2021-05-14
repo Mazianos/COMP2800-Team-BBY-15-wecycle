@@ -108,6 +108,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+#estimated-bottle {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 #description {
     margin-left: 5%;
     margin-right: 5%;
