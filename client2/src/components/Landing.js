@@ -24,8 +24,9 @@ export default function Landing() {
         <>
             <Card>
                 <Card.Body>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <strong>ObjectID: </strong> {auth.currentUser.uid}
+                    <p>why are we forcing people to loginnnnnnn</p>
+                    {/* {error && <Alert variant="danger">{error}</Alert>}
+                    <strong>ObjectID: </strong> {auth.currentUser.uid} */}
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
