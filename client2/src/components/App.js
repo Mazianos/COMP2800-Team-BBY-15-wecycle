@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Landing from "./Landing";
 import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
+import PostAd from "./PostAd";
+import AboutUs from "./AboutUs";
 
 function App() {
     return (
@@ -16,6 +18,8 @@ function App() {
                     <PrivateRoute exact path="/" component={Landing}/>
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/createAd" component={PostAd}/>
+                    <Route path="/aboutUs" component={AboutUs}/>
                 </Switch>
             </AuthProvider>
             </Router>
