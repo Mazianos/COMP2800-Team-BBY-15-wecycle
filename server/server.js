@@ -31,22 +31,6 @@ const db = mongoose.connection;
 
 db.on('error',  console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  // we're connected!
-  // var testPost = new myModels.Post({
-  //   title: "this is just a test"
-  // })
-  // // THIS IS TAKING WAY TOO LONG. WHY/?? 
-  // console.log(testPost.title); 
-  // // test send data to mongodb atlas 
-  // // Expectation2: creates collection if it doesnt exit
-  // // Expectation: only title, everything else null.
-  // // try to send test post to mongodb.
-
-
-  // testPost.save(function(err, testPost){
-  //   if (err) return console.error(err);
-  // });
-
 
 });
 
@@ -199,23 +183,12 @@ app.post("/delete-row/:id", function (req, res) {
 });
 
 
-<<<<<<< HEAD:server.js
-
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/html/index.html");
-});
-
-
-
-=======
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
-app.get('*', (req, res) => {                       
-  res.sendFile(__dirname + "/public/index.html");                              
+// this is for aws hosting
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client2/build', 'index.html'));
 });
 
-
->>>>>>> config_node_react:server/server.js
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
