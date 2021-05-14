@@ -1,6 +1,6 @@
 import React from 'react'
 import './landingPage.css';
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "../../../client/src/components/Navbar/Navbar";
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
