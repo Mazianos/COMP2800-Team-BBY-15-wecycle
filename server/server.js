@@ -188,7 +188,7 @@ app.post("/delete-row/:id", function (req, res) {
 
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
 // this is for aws hosting
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client2/build', 'index.html'));
 });
 
