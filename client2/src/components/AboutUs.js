@@ -1,8 +1,11 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
-import "../css/about-us.css";
+import '../css/about-us.css';
 import Navbar from './Navbar';
-import {jasonFiltered, jLauFiltered, rayFiltered, mazFiltered} from '../images/images'
+import Ray from '../images/rayFiltered.png';
+import Jason from '../images/jasonFiltered.png';
+import Johnson from '../images/jLauFiltered.png';
+import Mazin from '../images/mazFiltered.png';
 
 export default function AboutUs() {
     return (
@@ -12,7 +15,7 @@ export default function AboutUs() {
             <Container>
                 <Card>
                     <a href="https://www.linkedin.com/in/rwong97/">
-                        <img src={rayFiltered} class="card-img-top" alt="https://www.linkedin.com/in/rwong97/"/>
+                    <img src={Ray} class="card-img-top" alt="https://www.linkedin.com/in/rwong97/"/>
                     </a>
                     <Card.Body>
                         <Card.Title>Raymond Wong</Card.Title>
@@ -24,7 +27,7 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/jasonja-ahn/">
-                        <img src={jasonFiltered} class="card-img-top" alt="https://www.linkedin.com/in/jasonja-ahn/"/>
+                        <img src={Jason} class="card-img-top" alt="https://www.linkedin.com/in/jasonja-ahn/"/>
                     </a>
                     <Card.Body>
                         <Card.Title>Jason Ahn</Card.Title>
@@ -36,7 +39,7 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/johnsonlau/">
-                        <img src={jLauFiltered} class="card-img-top" alt="https://www.linkedin.com/in/johnsonlau/"/>
+                        <img src={Johnson} class="card-img-top" alt="https://www.linkedin.com/in/johnsonlau/"/>
                     </a>
                     <Card.Body>
                         <Card.Title>Johnson Lau</Card.Title>
@@ -48,7 +51,7 @@ export default function AboutUs() {
 
                 <Card>
                     <a href="https://www.linkedin.com/in/mazin-marwan-0b3409154/">
-                        <img src={mazFiltered} class="card-img-top" alt="https://www.linkedin.com/in/mazin-marwan-0b3409154/"/>
+                        <img src={Mazin} class="card-img-top" alt="https://www.linkedin.com/in/mazin-marwan-0b3409154/"/>
                     </a>
                     <Card.Body>
                         <Card.Title>Mazin Marwan</Card.Title>
