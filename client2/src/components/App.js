@@ -11,7 +11,7 @@ import AboutUs from "./AboutUs";
 function App() {
     return (
         <Container>
-            <H1>HELLO WORLD GET ME DONER</H1>
+            <p>HELLO WORLD GET ME DONER</p>
             <Router>
             <AuthProvider>
                 <Switch>
