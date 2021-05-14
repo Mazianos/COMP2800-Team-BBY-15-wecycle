@@ -10,6 +10,7 @@ const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
+const path = require('path');
 
 // mongoose.connect comes first
 async function connectToDB(){
@@ -46,6 +47,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
+// For hosting   THIS IS REQUIRED* 
+app.use(express.static(path.resolve(__dirname, '../client2/build')));
 
 
 const client = new MongoClient(
