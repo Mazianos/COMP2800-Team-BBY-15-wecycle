@@ -7,6 +7,7 @@ const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./cert.pem");
+const path = require('path');
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
