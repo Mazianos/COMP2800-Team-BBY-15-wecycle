@@ -10,6 +10,7 @@ import PrivateRoute from './PrivateRoute';
 function App() {
     return (
         <Container >
+            <H1>HELLO HELLO</H1>
             <Router>
             <AuthProvider>
                 <Switch>
