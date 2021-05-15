@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import '../css/Navbar.css';
+import logo from '../images/wecycle_logo.PNG';
 
 export default function Navbar() {
     const { currentUser, logout } = useAuth();
@@ -39,13 +40,13 @@ export default function Navbar() {
 
     return (
         <nav className="NavbarItems">
-                <h1 className="navbar-logo">WeCycle</h1>
-                <ul>
-                    <Button variant="link" onClick={landingRedirect}>Home</Button>
-                    <Button variant="link" onClick={aboutUsRedirect}>About Us!</Button>
-                    <Button variant="link" onClick={loginRedirect}>Log in!</Button>
-                    <Button variant="link" onClick={signupRedirect}>Sign up!</Button>
-                    <Button variant="link" onClick={handleLogout}>Log Out</Button>
+                <img src = {logo} className = "logo" width = "100" height = "50" />
+                <ul id = "buttons">
+                    <Button className = "button1" variant="link" onClick={landingRedirect}>Home</Button>
+                    <Button className = "button2" variant="link" onClick={loginRedirect}>Log in</Button>
+                    <Button className = "button3" variant="link" onClick={signupRedirect}>Sign up</Button>
+                    <Button className = "button4" variant="link" onClick={handleLogout}>Log Out</Button>
+                    <Button className = "button5" variant="link" onClick={aboutUsRedirect}>Team</Button>
                 </ul>
             </nav>
     )

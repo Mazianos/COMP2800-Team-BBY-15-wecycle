@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/landingPage.css';
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -108,12 +108,10 @@ function Landing() {
       </div>
       <div class="quoteContainer">
         <ul class="quote">
-          <li id="firstParagraph">One World, One Community</li>
-          <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
-          <li id="thirdParagraph">In the City of Vancouver</li>
+          <li id="firstParagraph">Donate Bottles Now</li>
         </ul>
       </div>
-      <button className="signupBtn" onClick={handleCreateAd}>Post A New Ad</button>
+      <button className="signupBtn" onClick={handleCreateAd}>Donate Now</button>
     <div class="adListings">
       <ul>
       {data.map(row =>(

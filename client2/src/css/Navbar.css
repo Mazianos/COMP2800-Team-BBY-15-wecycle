@@ -1,10 +1,55 @@
-.navbar-logo {
-display: flex;
-margin: 1rem;
-padding: 1rem;
-float: right;
+.NavbarItems {
+    border: 1px solid black;
+    background-color: white;
 }
 
-.navItems {
-    color:white;
+.logo {
+    float: left;
+    margin-left: 10px;
 }
+
+.navbar-logo {
+    float: left;
+}
+
+#buttons {
+    text-align: right;
+}
+
+.button1 {
+    text-decoration: none;
+}
+
+#firstParagraph {
+    color: rgba(114, 190, 114, 0.671);
+    margin-top: 20px;
+}
+/*#NavbarItems {
+    margin-top: 15px;
+    background-color: #4F772D;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-logo {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.button {
+    margin: 3px;
+}
+
+#buttons {
+    border: 1px solid black;
+}
+
+#buttons {
+    float: right;
+}
+
+#button1 {
+    float: left;
+}
+
+*/
