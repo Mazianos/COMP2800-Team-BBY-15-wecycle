@@ -115,12 +115,12 @@ function Landing() {
     <div class="adListings">
       <ul>
       {data.map(row =>(
-        <li key={row} style={{background: "transparent", color: "white"}}>
+        <li key={row} style={{background: "transparent", color: "green"}}>
           {row}
         </li>
       ))}
 
-      {loading && <li>Loading...</li>}
+      {loading && <p>Loading...</p>}
 
       {!loading && more &&(
         <li ref={setElement} style={{background: "white"}}>

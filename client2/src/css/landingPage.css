@@ -21,16 +21,16 @@
 
 .signupBtn {
   position: fixed;
-  top: 89%;
+  top: 95%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #4f772d;
-  box-shadow: 0 4px #999;
+  box-shadow: 0 3px #999;
   color: white;
   font-size: 16px;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 10px 16px;
   outline:none;
   border: none;
   cursor: pointer;
@@ -43,7 +43,7 @@
 
 .signupBtn:active {
   background-color: #4f772d;
-  box-shadow: 5px 5px #666;
+  box-shadow: 2px 2px #666;
 }
 
 .quoteContainer{
