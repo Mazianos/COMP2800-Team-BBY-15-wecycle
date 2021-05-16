@@ -6,11 +6,12 @@ const mongoose = require('mongoose');
 const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
-const credentials = fs.readFileSync("./cert.pem");
+const credentials = fs.readFileSync("./server/cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 const path = require('path');
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
+const path = require('path');
 
 // mongoose.connect comes first
 async function connectToDB(){
@@ -41,12 +42,17 @@ const {
   ObjectID  // we may actually ned the object id
 } = require("mongodb");
 
+// For hosting  ** THIS IS REQUIRED*** 
+app.use(express.static(path.resolve(__dirname, '../client2/build')));
+
 app.use("/src", express.static("./src/"));
 app.use("/css", express.static("css"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
+// For hosting   THIS IS REQUIRED* 
+app.use(express.static(path.resolve(__dirname, '../client2/build')));
 
 
 const client = new MongoClient(
