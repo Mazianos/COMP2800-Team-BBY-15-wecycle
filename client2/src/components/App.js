@@ -9,6 +9,8 @@ import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
+import { Typography } from '@material-ui/core';
+
 
 function App() {
     return (
