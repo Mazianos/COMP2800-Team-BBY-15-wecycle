@@ -1,6 +1,6 @@
 import React from 'react';
 //import { Card, Container } from 'react-bootstrap';
-import '../css/about-us.css';
+//import '../css/about-us.css';
 import Navbar from './Navbar';
 import Ray from '../images/rayFiltered.png';
 import Jason from '../images/jasonFiltered.png';
