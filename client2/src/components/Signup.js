@@ -15,6 +15,7 @@ export default function Signup() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    const { currentUser } = useAuth();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -26,13 +27,13 @@ export default function Signup() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-            login(emailRef.current.value, passwordRef.current.value);
+            await login(emailRef.current.value, passwordRef.current.value);
 
             let myData = {
                 name: nameRef,
                 address: postalRef,
                 contactNum: "testNum",
-                id: currentUser.id
+                id: currentUser.uid
             }
 
             $.ajax({

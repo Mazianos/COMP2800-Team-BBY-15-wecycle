@@ -8,6 +8,7 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+const path = require('path');
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 
