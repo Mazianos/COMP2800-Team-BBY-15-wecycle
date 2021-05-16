@@ -1,7 +1,8 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Typography, Collapse } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -9,10 +10,10 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: "100vh",
+        fontFamily: "Roboto",
     },
     appbar:{
         background:"none",
-        fontFamily: "Roboto",
     },
     appbarWrapper: {
         width: "80%",
@@ -31,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
     colorText: {
         color:"#5AFF3D",
     },
+    container: {
+        textAlign: "center",
+    },
+    title: {
+        color: "#fff",
+        fontSize: "3.5rem",
+    },
+    goDown: {
+        color: '#5AFF3D',
+        fontSize: '3rem',
+    },
 }));
 
 export default function Header() {
@@ -47,11 +59,17 @@ export default function Header() {
                 </IconButton>
             </Toolbar>
         </AppBar>
-        <div>
-            <h1> 
-                Welcome to <br/> <span className = {classes.colorText}>Wecycle </span>
-            </h1>
-        </div>
+
+        <Collapse in={true} {...(true ? { timeout: 1000 } : {})}> 
+            <div className = {classes.container}>
+                <h1 className={classes.title}> 
+                    Welcome to <br/> <span className = {classes.colorText}>Wecycle </span>
+                </h1>
+                <IconButton>
+                    <ExpandMoreIcon className = {classes.goDown} />
+                </IconButton>
+            </div>
+        </Collapse>
     </div>
     );
 }
