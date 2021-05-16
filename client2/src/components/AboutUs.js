@@ -8,7 +8,7 @@ import Johnson from '../images/jLauFiltered.png';
 import Mazin from '../images/mazFiltered.png';
 
 // Components imported from material-ui
-import {Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
+import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
 
 // Retrieved photo camera icon from material icons
 // See www.material-ui.com/components/material-icons/ to get more icons
@@ -29,24 +29,40 @@ export default function AboutUs() {
     return (
         <>
             <CssBaseline />
-            <AppBar position = "relative">
+            <AppBar position="relative">
                 <Toolbar>
-                    <PhotoCamera />
-                    <Typography variant = "h6">
+                    <PhotoCamera className={classes.icon} />
+                    <Typography variant="h6">
                         Photo Album
                     </Typography>
+                    <div className={classes.buttons}></div>
                 </Toolbar>
             </AppBar>
             <main>
-                <div className = {classes.container}>
-                    <Container maxWidth = "sm">
-                        <Typography variant = "h2" align = "center" color = "textPrimary" gutterBottom>
+                <div className={classes.container}>
+                    <Container maxWidth="sm">
+                        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
                             Photo Album
                         </Typography>
-                        <Typography variant = "h5" align = "center" color = "textSecondary" paragraph>
-                            Hello everyone This is a photo and I'm trying to make this sentence as long as possible so we can see how does it fit in the long screen.
+                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                            Hello everonye
                         </Typography>
+                        <div className={classes.buttons}>
+                            <Grid container spacing={2} justify="center">
+                                <Grid item>
+                                    <Button variant="contained" color="primary">
+                                        See my photos
+                            </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button variant="outlined" color="primary">
+                                        Secondary action
+                            </Button>
+                                </Grid>
+                            </Grid>
+                        </div>
                     </Container>
+
                 </div>
             </main>
         </>
