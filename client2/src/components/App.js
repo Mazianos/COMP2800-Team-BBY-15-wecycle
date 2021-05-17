@@ -9,6 +9,7 @@ import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
+import PostDetails from "./PostDetails";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
                     <Route path="/postAd" component={PostAd}/>
+                    <Route path="/postDetails" component={PostDetails}/>
                 </Switch>
             </AuthProvider>
             </Router>
