@@ -1,15 +1,15 @@
-import React from 'react';
-import '../css/landingPage.css';
+import React from "react";
+import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
 const perPage = 60;
 const types = {
   start: "START",
-  loaded: "LOADED"
+  loaded: "LOADED",
 };
 
 const reducer = (state, action) => {
@@ -22,22 +22,23 @@ const reducer = (state, action) => {
         loading: false,
         data: [...state.data, ...action.newData],
         more: action.newData.length === perPage,
-        after: state.after + action.newData.length
+        after: state.after + action.newData.length,
       };
     default:
       throw new Error("Don't understand action");
   }
 };
 
-
 const MyContext = React.createContext();
+
+
 
 function MyProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, {
     loading: false,
     more: true,
     data: [],
-    after: 0
+    after: 0,
   });
   const { loading, data, after, more } = state;
 
@@ -59,14 +60,49 @@ function MyProvider({ children }) {
 
 //Infinite Scroll Constants end
 
+// dynamically generate cards using maps
 
 function Landing() {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     error: null,
+  //     isLoaded: false,
+  //     count: 0
+  //   };
+  // };
+
+
+  // // ---------------
+  // // Make a request to grab the number of docs.
+  // // ---------------
+  // componentDidMount() {
+  //   fetch("/get-count-records")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         console.log(result);
+  //         this.setState({
+  //           isLoaded: true,
+  //           count: result.records
+  //         });
+  //       },
+  //       (error) => {
+  //         this.setState({
+  //           isLoaded: true,
+  //           error
+  //         });
+  //       }
+  //     )
+  // }
+  
+
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
   const loader = React.useRef(load);
   const observer = React.useRef(
     new IntersectionObserver(
-      entries => {
+      (entries) => {
         const first = entries[0];
         if (first.isIntersecting) {
           loader.current();
@@ -97,14 +133,13 @@ function Landing() {
   }, [element]);
 
   function handleCreateAd() {
-    history.push('/postAd');
+    history.push("/postAd");
   }
- 
+
   return (
-    
     <div id="landingPage">
       <div id="navbarContainer">
-        <Navbar/>
+        <Navbar />
       </div>
       <div className="quoteContainer">
         <ul className="quote">
@@ -113,23 +148,26 @@ function Landing() {
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div>
-      <button className="signupBtn" onClick={handleCreateAd}>Post A New Ad</button>
-    <div className="adListings">
-      <ul>
-      {data.map(row =>(
-        <li key={row} style={{background: "transparent", color: "white"}}>
-          {row}
-        </li>
-      ))}
+      <button className="signupBtn" onClick={handleCreateAd}>
+        Post A New Ad
+      </button>
 
-      {loading && <li>Loading...</li>}
+      {/* grid container for the dynamically generated cards go here! */}
+      <div className="adListings">
+        <ul>
+          {data.map((row) => (
+            <li key={row} style={{ background: "transparent", color: "white" }}>
+              {row}
+            </li>
+          ))}
 
-      {!loading && more &&(
-        <li ref={setElement} style={{background: "white"}}>
-        </li>
-      )}
-      </ul>
-    </div>
+          {loading && <li>Loading...</li>}
+
+          {!loading && more && (
+            <li ref={setElement} style={{ background: "white" }}></li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -137,8 +175,7 @@ function Landing() {
 export default function LandingPage() {
   return (
     <MyProvider>
-      <Landing/>
+      <Landing />
     </MyProvider>
   );
-};
-
+}
