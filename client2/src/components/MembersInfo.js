@@ -7,15 +7,33 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+
+import waterBottle from '../images/ray.jpg';
 
 // All the code has been retrieved from https://material-ui.com/components/cards/#card
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 645,
+    minHeight: '100vh',
+    background: "rgba(0,0,0,0.5)",
+    margin: '20px',
+    
   },
   media: {
-    height: 140,
+    height: 500,
   },
+  title: {
+      fontFamily: "Roboto",
+      fontWeight: "bold",
+      fontSize: "2rem",
+      color: "#fff",
+  },
+  desc: {
+    fontFamily: "Roboto",
+    fontSize: "1.1rem",
+    color: "#ddd",
+  }
 });
 
 export default function MembersInfo() {
@@ -26,27 +44,39 @@ export default function MembersInfo() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={process.env.PUBLIC_URL + ""}
-          title="Contemplative Reptile"
+          image={waterBottle}
+          title="Wecycle Team"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+          <Typography 
+            gutterBottom variant="h5" 
+            component="h1" 
+            className={classes.title}>
+            Ray Wong
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+          <Typography 
+            variant="body2" 
+            color="textSecondary" 
+            component="p" 
+            className = {classes.desc} >
+           Ray is a business graduate pursuing a tech career. His specializations are HTML/CSS
+           and JavaScript. He has a passion for giving back and works with Burnaby Neighbourhood House as a
+           digital literacy volunteer.
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <a href = "www.google.ca" target="_blank">
+            <Button size="small" color="primary">
+                LinkedIn
+            </Button>
+        </a>
+     
       </CardActions>
+
+      
     </Card>
+
+    
   );
 }
