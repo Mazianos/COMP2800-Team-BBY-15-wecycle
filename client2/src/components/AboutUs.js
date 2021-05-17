@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import waterBottle from '../images/water-bottle.jpg';
 import Header from './Header';
+import Members from './members';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +36,7 @@ export default function AboutUs() {
     <div className = {classes.root}>
         <CssBaseline />
         <Header />
+        <Members />
     </div>
     
     );
