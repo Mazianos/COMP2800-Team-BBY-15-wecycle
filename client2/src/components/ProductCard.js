@@ -8,7 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Paper from '@material-ui/core/Paper';
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140,
+  },
+  contentCentered: {
+    alignContent: "center",
+    fontSize: 15,
   },
 });
 
@@ -30,30 +35,23 @@ export default function MediaCard(props) {
           image="https://source.unsplash.com/random"
           title="Random Images"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            My Title {props.title}
-          </Typography>
-          <Typography gutterBottom variant="subtitle2" component="h6">
-            Posting Date: {props.date}
-          </Typography>
-          <Typography gutterBottom variant="subtitle2" component="h6">
-            Status: {props.status}
-          </Typography>
-          <div>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+        <div className={classes.contentCentered}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              Location {props.title}
             </Typography>
-          </div>
-        </CardContent>
+            <Typography gutterBottom variant="subtitle2" component="h6">
+              Posting Date: {props.date}
+            </Typography>
+            <Typography gutterBottom variant="subtitle2" component="h6">
+              Status: {props.status}
+            </Typography>
+          </CardContent>
+        </div>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Return
-        </Button>
         <Button size="small" color="primary" variant="contained">
-          Claim
+          Details
         </Button>
       </CardActions>
     </Card>

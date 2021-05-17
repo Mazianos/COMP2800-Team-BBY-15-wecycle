@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import ProductCard from "./ProductCard";
+import Grid from "@material-ui/core/Grid";
 
 //Infinite Scroll constants start
-const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
+// const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
+
+var allData;
+
+fetch("/get-landing-records")
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+    allData = result;
+  })
+  .catch((err) => {
+    console.log(err + " data not loaded!");
+    allData = new Array(30).fill(0).map((_val, i) => i + 1); // random assignment of numbers
+  });
+
 const perPage = 60;
 const types = {
   start: "START",
@@ -30,8 +46,6 @@ const reducer = (state, action) => {
 };
 
 const MyContext = React.createContext();
-
-
 
 function MyProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, {
@@ -63,39 +77,29 @@ function MyProvider({ children }) {
 // dynamically generate cards using maps
 
 function Landing() {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     error: null,
-  //     isLoaded: false,
-  //     count: 0
-  //   };
-  // };
+  // const [count, setCount] = useState({}); // dont need this anymore
+  const [postDetails, setDetails] = useState({}); // Nested JSON objected with all data.
+  const [isLoaded, setIsLoaded] = useState({});
 
-
-  // // ---------------
-  // // Make a request to grab the number of docs.
-  // // ---------------
-  // componentDidMount() {
-  //   fetch("/get-count-records")
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         console.log(result);
-  //         this.setState({
-  //           isLoaded: true,
-  //           count: result.records
-  //         });
-  //       },
-  //       (error) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           error
-  //         });
-  //       }
-  //     )
-  // }
-  
+  useEffect(() => {
+    fetch("/get-landing-records")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          this.setState({
+            isLoaded: true,
+            postDetails: result.records, // Large JSON object with everything open or pending
+          });
+        }
+        // (error) => {
+        //   this.setState({
+        //     isLoaded: false,
+        //     postDetails: [],
+        //   });
+        // }
+      );
+  }, []);
 
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
@@ -154,19 +158,32 @@ function Landing() {
 
       {/* grid container for the dynamically generated cards go here! */}
       <div className="adListings">
-        <ul>
-          {data.map((row) => (
-            <li key={row} style={{ background: "transparent", color: "white" }}>
-              {row}
-            </li>
+        <Grid container spacing={4}>
+          {data.map((card) => (
+            // <li key={row} style={{ background: "transparent", color: "white" }}>
+            //   {row}
+            // </li>
+            <Grid item key={card} xs={12} sm={6} md={3}>
+              <ProductCard
+                title={card.title}
+                date={card.postDate}
+                status={card.status}
+              />
+            </Grid>
           ))}
 
-          {loading && <li>Loading...</li>}
+          {/* {this.postDetails.map((card) => (
+              <Grid item key={card}>
+                <ProductCard title={card.title} date={card.postDate} status={card.status/>
+              </Grid>  
+            ))} */}
+        </Grid>
 
-          {!loading && more && (
-            <li ref={setElement} style={{ background: "white" }}></li>
-          )}
-        </ul>
+        {loading && <li>Loading...</li>}
+
+        {!loading && more && (
+          <li ref={setElement} style={{ background: "white" }}></li>
+        )}
       </div>
     </div>
   );
