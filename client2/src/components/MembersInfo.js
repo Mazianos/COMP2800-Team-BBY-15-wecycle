@@ -8,8 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import Collapse from '@material-ui/core/Collapse';
 
-import waterBottle from '../images/ray.jpg';
+import ray from '../images/ray.jpg';
 
 // All the code has been retrieved from https://material-ui.com/components/cards/#card
 const useStyles = makeStyles({
@@ -36,15 +37,16 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MembersInfo() {
+export default function MembersInfo({checked}) {
   const classes = useStyles();
 
   return (
+    <Collapse in = {checked} {...(checked ? { timeout: 1000} : {})}>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={waterBottle}
+          image={ray}
           title="Wecycle Team"
         />
         <CardContent>
@@ -75,8 +77,43 @@ export default function MembersInfo() {
       </CardActions>
 
       
-    </Card>
 
+
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={ray}
+          title="Wecycle Team"
+        />
+        <CardContent>
+          <Typography 
+            gutterBottom variant="h5" 
+            component="h1" 
+            className={classes.title}>
+            Ray Wong
+          </Typography>
+          <Typography 
+            variant="body2" 
+            color="textSecondary" 
+            component="p" 
+            className = {classes.desc} >
+           Ray is a business graduate pursuing a tech career. His specializations are HTML/CSS
+           and JavaScript. He has a passion for giving back and works with Burnaby Neighbourhood House as a
+           digital literacy volunteer.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <a href = "www.google.ca" target="_blank">
+            <Button size="small" color="primary">
+                LinkedIn
+            </Button>
+        </a>
+     
+      </CardActions>
+
+    </Card>
+    </Collapse>
     
   );
 }

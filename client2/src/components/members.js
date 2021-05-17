@@ -2,6 +2,8 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ImageCard from './MembersInfo';
 import membersCollection from "../static/membersCollection";
+import { useLayoutEffect, useLAyoutEffect, useState } from 'react';
+import useWindowPosition from '../hook/useWindowPosition';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -9,14 +11,18 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        [theme.breakpoints.down("md")]: {
+            flexDirection: "column",
+        }
     },
 }));
 
 export default function() {
     const classes = useStyles();
-    return ( 
-    <div className = {classes.root}>
-        <ImageCard memberCollection = {membersCollection[0]} />
+    const checked = useWindowPosition('header');
+    return (
+    <div className = {classes.root} id="place-to-visit">
+        <ImageCard checked = {checked} />
     </div>
     );
 }
