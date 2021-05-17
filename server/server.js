@@ -118,6 +118,17 @@ app.post("/create-user", async function (req, res) {
   })
 });
 
+// when landing page loads, then run this request to determine the # of cards we need to dynamically generate. -Ray
+app.post("/get-count-records", function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+
+  let count = db.collection("posts").countDocuments({
+    status: 'open' || 'pending'
+  });
+
+  res.send({ records: `${count}` });
+
+})
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
 app.post("/create-table", function (req, res) {
