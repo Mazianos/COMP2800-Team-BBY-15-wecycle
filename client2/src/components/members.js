@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import ImageCard from './MembersInfo';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -9,5 +10,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function() {
     const classes = useStyles();
-    return <div className = {classes.root}></div>;
+    return <div className = {classes.root}>
+        <ImageCard/>
+    </div>;
 }

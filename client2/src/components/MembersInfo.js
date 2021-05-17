@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+// All the code has been retrieved from https://material-ui.com/components/cards/#card
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+export default function MembersInfo() {
   const classes = useStyles();
 
   return (
@@ -25,7 +26,7 @@ export default function MediaCard() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={process.env.PUBLIC_URL + ""}
           title="Contemplative Reptile"
         />
         <CardContent>
