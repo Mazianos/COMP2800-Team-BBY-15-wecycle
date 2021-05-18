@@ -6,9 +6,9 @@ const mongoose = require('mongoose');
 const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
-const credentials = fs.readFileSync("./server/cert.pem");
+const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-const path = require('path');
+// const path = require('path');
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 const path = require('path');
@@ -104,13 +104,15 @@ app.post("/create-ad", async function (req, res){
 });
 
 app.post("/create-user", async function (req, res) {
+  console.log("accessing server side");
   var newUser = new myModels.User({
     name: req.body.name,
     contactNumber: req.body.contactNumber,
     bottlesDonated: 0,
     bottlesTaken: 0,
     address: req.body.address,
-    _id: req.body.id
+    _id: req.body.id,
+    email: req.body.email
   });
 
   newUser.save(function(err, newUser) {
