@@ -54,3 +54,10 @@ font-size: 32pt;
 #firstParagraph, #thirdParagraph {
   text-align: center;
 }
+
+
+.paperCSS {
+  background: rgba(255, 255, 255, 0.2);
+  height: 140px;
+  width: 100px;
+}
