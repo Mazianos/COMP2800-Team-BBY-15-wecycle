@@ -7,7 +7,6 @@ import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container, Paper, Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-//import { Button } from 'react-bootstrap';
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -229,23 +228,6 @@ function Landing() {
           <li ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
-      <button className="signupBtn" onClick={handleCreateAd}>Donate Now!</button>
-    <div className="adListings">
-      <ul>
-      {data.map(row =>(
-        <li key={row} style={{background: "transparent", color: "white"}}>
-          {row}
-        </li>
-      ))}
-
-      {loading && <li>Loading...</li>}
-
-      {!loading && more &&(
-        <li ref={setElement} style={{background: "white"}}>
-        </li>
-      )}
-      </ul>
-    </div>
     </div>
   );
 }
