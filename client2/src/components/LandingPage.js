@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
-<<<<<<< HEAD
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container, Paper, Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-=======
 //import { Button } from 'react-bootstrap';
->>>>>>> signup_login_materialUI
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -232,8 +229,6 @@ function Landing() {
           <li ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
-<<<<<<< HEAD
-=======
       <button className="signupBtn" onClick={handleCreateAd}>Donate Now!</button>
     <div className="adListings">
       <ul>
@@ -251,7 +246,6 @@ function Landing() {
       )}
       </ul>
     </div>
->>>>>>> signup_login_materialUI
     </div>
   );
 }
