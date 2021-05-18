@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ImageCard from './MembersInfo';
-import membersCollection from "../static/membersCollection";
 import { useLayoutEffect, useLAyoutEffect, useState } from 'react';
 import useWindowPosition from '../hook/useWindowPosition';
 
