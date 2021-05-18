@@ -8,7 +8,6 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-// const path = require('path');
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 const path = require('path');
@@ -33,17 +32,14 @@ const db = mongoose.connection;
 
 db.on('error',  console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-
+  console.log("mongoose running");
 });
 
 
-const {
-  MongoClient,
-  ObjectID  // we may actually ned the object id
-} = require("mongodb");
 
 // For hosting  ** THIS IS REQUIRED*** 
 app.use(express.static(path.resolve(__dirname, '../client2/build')));
+// app.use(express.static(path.resolve(__dirname, '../client2/public')));
 
 app.use("/src", express.static("./src/"));
 app.use("/css", express.static("css"));
@@ -51,31 +47,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
-// For hosting   THIS IS REQUIRED* 
-app.use(express.static(path.resolve(__dirname, '../client2/build')));
-
-
-const client = new MongoClient(
-  "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/myFirstDatabase?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority", {
-  sslKey: credentials,
-  sslCert: credentials,
-  useUnifiedTopology: true
-}
-);
-
-client.connect().then(function () {
-  console.log("check before the db run");
-});
-
 
 // EXPRESS METHODS
-
-// Comment out for now... see if  node and app.js is hooked up
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/post_ad_page_1.html"); //"/public/index.html" <-- change this back in dev.
-//   // res.sendFile(__dirname + "/src/index.js");
-// });
-
 
 app.post("/create-ad", async function (req, res){
   res.setHeader('Content-Type', 'application/json');
@@ -120,96 +93,58 @@ app.post("/create-user", async function (req, res) {
   })
 });
 
-
-// THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
-app.post("/create-table", function (req, res) {
-
+// when landing page loads, then run this request to determine the # of cards we need to dynamically generate. -Ray
+app.post("/get-count-records", function (req, res) {
   res.setHeader('Content-Type', 'application/json');
 
-  console.log(req.body.name);
-
-  // The values added stores into MongoDB collections
-  function addToUsersCollection(
-    nameValue = req.body.name,
-    contactNumberValue = req.body.contactNumber,
-    bottlesDonatedValue = req.body.bottlesDonated,
-    bottlesTakenValue = req.body.bottlesTaken,
-    addressValue = req.body.address,
-  ) {
-    client.db("WecycleMain").collection("Users").insertOne({
-      name: nameValue,
-      contactNumber: contactNumberValue,
-      bottlesDonated: bottlesDonatedValue,
-      bottlesTaken: bottlesTakenValue,
-      address: addressValue,
-    });
-  }
-  addToUsersCollection();
-
-  res.send({ status: "success", msg: "Recorded updated." });
-
-});
-
-
-app.get("/read-table", function (req, res) {
-  res.setHeader("Content-Type", "application/json");
-
-  // where 'client' is a constant of the mongodb atlas url + SSL certificates
-
-
-  async function grabData() {
-    client.db("WecycleMain").collection("Users")
-      .find()
-      .toArray()
-      .then((data) => {
-        res.json(data); //is this part wrong?
-      })
-      .catch((error) => console.error(error));
-  };
-
-
-  try {
-    grabData();
-  } catch (err) {
-    throw new Error("grab data didnt execute properly");
-  }
-
-
-});
-
-//when updating, use number.parseInt()
-app.post("/update-table/", function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  async function update() {
-    client.db("WecycleMain").collection("Users").updateOne(
-      {_id: ObjectID(req.body.id)},
-      {$set: req.body.data}).catch((error) => console.log(error));
-  };
-  update();
-
-    res.send({ status: "success", msg: "Update worked" });    
-});
-
-app.post("/delete-row/:id", function (req, res) {
-  //Find the id of the user from the parameters in the request. Use that id to find it and delete it
-  let id = req.params.id;
-  client.db("WecycleMain").collection("Users").findOneAndDelete({
-    _id: ObjectID(id)
+  let count = db.collection("posts").countDocuments({
+    status: 'open' || 'pending'
   });
-  //Respond with the remaining users in the db as a json array.
-  client.db("WecycleMain").collection("Users")
-    .find()
-    .toArray()
-    .then((data) => {
-      res.json(data);
-    })
-});
+
+  res.send({ records: `${count}` });
+
+})
+
+// get all open or pending records
+app.get("/get-landing-records", function (req, res) {
+  // res.setHeader('Content-Type', 'application/json');
+
+  getData().catch((err) => console.error(err));
+
+  async function getData() {
+    let dataToSend = await db.collection("posts").find({
+      status: 'Open' //|| 'pending'
+    }).toArray();
+
+    console.log(dataToSend);
+
+    res.json(dataToSend);
+  
+  }
+})
+
+// Similar to loading all the landing recording. But only one record... and complete info displayed
+app.get("/postDetails/:postID", function(req, res) {
+  getData().catch((err) => console.error(err));
+  console.log(req.params.postID, "server side is called")
+  async function getData() {
+    let dataToSend = await db.collection("posts")
+      .find({id: req.params.postID})
+      .toArray();
+
+    console.log(dataToSend);
+
+    res.json(dataToSend);
+  
+  }
+})
 
 
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
 // this is for aws hosting
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client2/build', 'index.html'));
+  // res.sendFile(path.resolve(__dirname, '../client2/public', 'index.html'));
 });
 
 app.listen(PORT, () => {

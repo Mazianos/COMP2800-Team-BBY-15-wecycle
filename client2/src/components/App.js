@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./Signup";
-import { Container } from "react-bootstrap";
+import { Container } from '@material-ui/core'; //removed react-boostrap
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import Landing from "./Landing";
 import Landing from "./LandingPage";
@@ -9,10 +9,13 @@ import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
+import DonorPost from "./DonorPost";
+import ProductCard from "./ProductCard";
+import useStyles from './styles';
 
 function App() {
     return (
-        <Container>
+        <>
             <Router>
             <AuthProvider>
                 <Switch>
@@ -20,11 +23,13 @@ function App() {
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
-                    <Route path="/postAd" component={PostAd}/>
+                    <PrivateRoute path="/postAd" component={PostAd}/>
+                    <Route path="/postDetails" component={ProductCard}/>
+                    <Route path="/donorPost" component={DonorPost}/>
                 </Switch>
             </AuthProvider>
             </Router>
-        </Container>
+        </>
     )
 };
 
