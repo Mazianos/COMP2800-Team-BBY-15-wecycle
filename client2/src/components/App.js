@@ -13,7 +13,7 @@ import ProductCard from "./ProductCard";
 
 function App() {
     return (
-        <Container>
+        <>
             <Router>
             <AuthProvider>
                 <Switch>
@@ -26,7 +26,7 @@ function App() {
                 </Switch>
             </AuthProvider>
             </Router>
-        </Container>
+        </>
     )
 };
 

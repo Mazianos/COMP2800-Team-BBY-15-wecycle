@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
+import { Container, Paper, Typography, Card } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -74,12 +76,34 @@ function MyProvider({ children }) {
 
 //Infinite Scroll Constants end
 
-// dynamically generate cards using maps
+// -----------
+// CSS STYLING FOR MUI
+// -----------
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  control: {
+    padding: theme.spacing(2),
+  },
+  sizing: {
+    height: "100%",
+  },
+}));
+
+// dynamically generate cards using maps
 function Landing() {
   // const [count, setCount] = useState({}); // dont need this anymore
   const [postDetails, setDetails] = useState({}); // Nested JSON objected with all data.
   const [isLoaded, setIsLoaded] = useState({});
+  const [spacing, setSpacing] = React.useState(2);
+  const classes = useStyles();
 
   useEffect(() => {
     fetch("/get-landing-records")
@@ -145,38 +169,56 @@ function Landing() {
       <div id="navbarContainer">
         <Navbar />
       </div>
-      <div className="quoteContainer">
+      {/* <div className="quoteContainer">
         <ul className="quote">
           <li id="firstParagraph">One World, One Community</li>
           <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
-      </div>
+      </div> */}
+      <Container className={classes.sizing} height="100vh">
+        <Grid container className={classes.sizing}>
+          <Grid item xs={12} className={classes.sizing}>
+            <Grid container justify="center" spacing={4}>
+              {[0, 1, 2].map((value) => (
+                <Grid key={value} item>
+                  <div className="paperCSS">
+                    <Typography>Hello</Typography>
+                  </div>
+                  <Card cardStyle={{ backgroundColor: 'transparent', shadowOpacity: 0 }}>
+                    
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+
       <button className="signupBtn" onClick={handleCreateAd}>
         Post A New Ad
       </button>
 
       {/* grid container for the dynamically generated cards go here! */}
       <div className="adListings">
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={4}
+          // direction="column"
+        >
           {data.map((card) => (
             // <li key={row} style={{ background: "transparent", color: "white" }}>
             //   {row}
             // </li>
-            <Grid item key={card} xs={12} sm={6} md={3}>
+            <Grid item key={card} xs={12} sm={6} md={3} align="center">
               <ProductCard
                 title={card.title}
                 date={card.postDate}
                 status={card.status}
+                postID={card._id}
               />
             </Grid>
           ))}
-
-          {/* {this.postDetails.map((card) => (
-              <Grid item key={card}>
-                <ProductCard title={card.title} date={card.postDate} status={card.status/>
-              </Grid>  
-            ))} */}
         </Grid>
 
         {loading && <li>Loading...</li>}

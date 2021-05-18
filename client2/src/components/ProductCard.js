@@ -29,7 +29,7 @@ export default function MediaCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={()=> window.location.href=`/postDetails/:postID=${props.postID}`}>
         <CardMedia
           className={classes.media}
           image="https://source.unsplash.com/random"
@@ -50,7 +50,7 @@ export default function MediaCard(props) {
         </div>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" variant="contained">
+        <Button size="small" color="primary" variant="contained" onClick={()=> window.location.href=`/postDetails/:postID=${props.postID}`}>
           Details
         </Button>
       </CardActions>
