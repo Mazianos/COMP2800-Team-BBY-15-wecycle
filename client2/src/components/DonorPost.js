@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
+
 import { Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar, Typography, Collapse } from '@material-ui/core';
 
 import clsx from 'clsx';
@@ -7,9 +9,8 @@ import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     main: {
         display: 'flex',
         justifyContent: 'center',
@@ -56,10 +57,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Header() {
+export default function DonorPost() {
     const classes = useStyles();
-    
-    // NEW
 
     const [state, setState] = React.useState({
         right: false,
@@ -103,41 +102,28 @@ export default function Header() {
     );
 
     return (
-        <div className={classes.main} id="header">
+        <div className={classes.main}>
             <AppBar className={classes.navbar}>
-                <Toolbar className={classes.navbarContent}>
-                    <h1 className={classes.navbarTitle}>
-                        We<span className={classes.colorText}>cycle</span>
-                    </h1>
-                    <IconButton>
+                <h1 className={classes.navbarTitle}>
+                    We<span className={classes.colorText}>cycle</span>
+                </h1>
+                <IconButton>
 
-                        {['right'].map((anchor) => (
+                    {['right'].map((anchor) => (
 
-                            <React.Fragment key={anchor}>
-                                <IconButton onClick={toggleDrawer(anchor, true)}>
-                                    <SortIcon className={classes.icon} />
-                                </IconButton>
+                        <React.Fragment key={anchor}>
+                            <IconButton onClick={toggleDrawer(anchor, true)}>
+                                <SortIcon className={classes.icon} />
+                            </IconButton>
 
-                                <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                                    {list(anchor)}
-                                </Drawer>
-                            </React.Fragment>
-                        ))}
-                    </IconButton>
-
-                </Toolbar>
+                            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                                {list(anchor)}
+                            </Drawer>
+                        </React.Fragment>
+                    ))}
+                </IconButton>
             </AppBar>
-
-            <Collapse collapsedHeight={120}>
-                <div className={classes.container}>
-                    <h1 className={classes.title}>
-                        Meet the Team
-                    </h1>
-                    <IconButton>
-                        <ExpandMoreIcon className={classes.arrow} />
-                    </IconButton>
-                </div>
-            </Collapse>
         </div>
-    );
+    )
 }
+

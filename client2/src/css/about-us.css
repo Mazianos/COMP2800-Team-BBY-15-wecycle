@@ -53,9 +53,9 @@ body {
     margin-bottom: 2vh;
 }
 
-@media only screen and (max-width: 600px) {
+/*@media only screen and (max-width: 600px) {
     #grid-container {
         display: grid;
         grid-template-columns: 1fr;
     }
-}
+}*/
