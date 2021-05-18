@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
 const perPage = 60;
-const types = {
+const types = { 
   start: "START",
   loaded: "LOADED"
 };

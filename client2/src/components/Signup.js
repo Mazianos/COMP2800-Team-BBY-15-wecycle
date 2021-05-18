@@ -73,7 +73,7 @@ export default function Signup() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-            await login(emailRef.current.value, passwordRef.current.value);
+           // await login(emailRef.current.value, passwordRef.current.value);
             console.log(currentUser.uid, emailRef.current.value);
 
             let myData = {
@@ -239,7 +239,7 @@ export default function Signup() {
             <Grid container justify="center">
               <Grid item>
                 <Link href="/login" variant="body1" align="center">
-                  Already have an account? Sign in
+                  Already have an account? Log in
                 </Link>
               </Grid>
             </Grid>
