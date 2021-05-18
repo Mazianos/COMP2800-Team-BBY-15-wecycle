@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function DonorPost() {
+export default function DonorPostHeading() {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -126,3 +126,4 @@ export default function DonorPost() {
         </div>
     )
 }
+*/

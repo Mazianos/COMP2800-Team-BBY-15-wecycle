@@ -56,10 +56,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * The code line 63 to 147 is composed of Material UI Drawer Component code. 
+ * Please refer to https://material-ui.com/components/drawers/ for 'Temporary Drawer'
+ * 
+ * @returns header 
+ */
 export default function Header() {
     const classes = useStyles();
-    
-    // NEW
 
     const [state, setState] = React.useState({
         right: false,
