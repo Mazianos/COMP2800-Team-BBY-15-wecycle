@@ -10,6 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
 import DonorPost from "./DonorPost";
+import ProductCard from "./ProductCard";
 import useStyles from './styles';
 
 function App() {

@@ -125,10 +125,10 @@ app.get("/get-landing-records", function (req, res) {
 // Similar to loading all the landing recording. But only one record... and complete info displayed
 app.get("/postDetails/:postID", function(req, res) {
   getData().catch((err) => console.error(err));
-
+  console.log(req.params.postID, "server side is called")
   async function getData() {
     let dataToSend = await db.collection("posts")
-      .findByID(req.params.postID)
+      .find({id: req.params.postID})
       .toArray();
 
     console.log(dataToSend);
