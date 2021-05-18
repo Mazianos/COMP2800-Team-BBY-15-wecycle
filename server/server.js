@@ -8,7 +8,6 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./server/cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-// const path = require('path'); remove this comment on merge. Some branches dont have this.
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 const path = require('path');
@@ -125,10 +124,10 @@ app.get("/get-landing-records", function (req, res) {
 // Similar to loading all the landing recording. But only one record... and complete info displayed
 app.get("/postDetails/:postID", function(req, res) {
   getData().catch((err) => console.error(err));
-
+  console.log("looking for specific post");
   async function getData() {
     let dataToSend = await db.collection("posts")
-      .findByID(req.params.postID)
+      .find({id: req.params.postID})
       .toArray();
 
     console.log(dataToSend);
