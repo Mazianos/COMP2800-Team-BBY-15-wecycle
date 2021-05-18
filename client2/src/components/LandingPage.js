@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
-<<<<<<< HEAD
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container, Paper, Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-=======
-
->>>>>>> jason-testing
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -173,17 +169,11 @@ function Landing() {
       <div id="navbarContainer">
         <Navbar />
       </div>
-<<<<<<< HEAD
       {/* <div className="quoteContainer">
         <ul className="quote">
           <li id="firstParagraph">One World, One Community</li>
           <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
-=======
-      <div class="quoteContainer">
-        <ul class="quote">
-          <li id="firstParagraph">Donate Bottles Now</li>
->>>>>>> jason-testing
         </ul>
       </div> */}
       <Container className={classes.sizing} height="100vh">
@@ -237,26 +227,6 @@ function Landing() {
           <li ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
-<<<<<<< HEAD
-=======
-      <button className="signupBtn" onClick={handleCreateAd}>Donate Now</button>
-    <div class="adListings">
-      <ul>
-      {data.map(row =>(
-        <li key={row} style={{background: "transparent", color: "green"}}>
-          {row}
-        </li>
-      ))}
-
-      {loading && <p>Loading...</p>}
-
-      {!loading && more &&(
-        <li ref={setElement} style={{background: "white"}}>
-        </li>
-      )}
-      </ul>
-    </div>
->>>>>>> jason-testing
     </div>
   );
 }
