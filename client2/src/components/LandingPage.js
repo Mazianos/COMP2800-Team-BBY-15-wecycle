@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
+<<<<<<< HEAD
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container, Paper, Typography, Card } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+=======
+//import { Button } from 'react-bootstrap';
+>>>>>>> signup_login_materialUI
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -25,7 +29,7 @@ fetch("/get-landing-records")
   });
 
 const perPage = 60;
-const types = {
+const types = { 
   start: "START",
   loaded: "LOADED",
 };
@@ -171,8 +175,9 @@ function Landing() {
       </div>
       {/* <div className="quoteContainer">
         <ul className="quote">
-          <li id="firstParagraph">One World, One Community</li>
-          <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
+          <li id="firstParagraph">Donate bottles for the community</li>
+          <br></br>
+          <li id="secondParagraph">Recycle bottles for the community </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div> */}
@@ -227,6 +232,26 @@ function Landing() {
           <li ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
+<<<<<<< HEAD
+=======
+      <button className="signupBtn" onClick={handleCreateAd}>Donate Now!</button>
+    <div className="adListings">
+      <ul>
+      {data.map(row =>(
+        <li key={row} style={{background: "transparent", color: "white"}}>
+          {row}
+        </li>
+      ))}
+
+      {loading && <li>Loading...</li>}
+
+      {!loading && more &&(
+        <li ref={setElement} style={{background: "white"}}>
+        </li>
+      )}
+      </ul>
+    </div>
+>>>>>>> signup_login_materialUI
     </div>
   );
 }

@@ -142,7 +142,7 @@ export default function PostAd() {
                             <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
                             <img src={imageState.file} id="previewImage"/>
                         </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Create New Ad</Button>
+                        <Button disabled={loading} className="w-100" type="submit">Create New Donation Post</Button>
                     </Form>
                 </Card.Body>
             </Card>
