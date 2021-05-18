@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Roboto",
     },
     navbar: {
-        backgroundColor: "grey",
+        backgroundColor: "white",
     },
     navbarContent: {
         width: "100%",
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: '2',
     },
     icon: {
-        color: '#fff',
+        color: 'black',
         fontSize: "2rem",
     },
     colorText: {
@@ -41,12 +41,6 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: "#fff",
         fontSize: "2.5rem",
-    },
-    arrow: {
-        color: '#5AFF3D',
-        fontSize: '4rem',
-        position: 'relative',
-        marginTop: '-10px',
     },
     list: { //NEW
         width: 250,
@@ -132,16 +126,6 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
 
-            <Collapse collapsedHeight={120}>
-                <div className={classes.container}>
-                    <h1 className={classes.title}>
-                        Meet the Team
-                    </h1>
-                    <IconButton>
-                        <ExpandMoreIcon className={classes.arrow} />
-                    </IconButton>
-                </div>
-            </Collapse>
         </div>
     );
 }

@@ -7,7 +7,9 @@ import Mazin from '../images/MazM.jpg';
 import waterBottle from '../images/water-bottle.jpg';
 
 // Components imported from material-ui
-import { Button, Typography, AppBar, Card, CardActions, CardActionArea, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
+import { Collapse, IconButton, Button, Typography, AppBar, Card, CardActions, CardActionArea, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
+
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Retrieved photo camera icon from material icons
 // See www.material-ui.com/components/material-icons/ to get more icons
@@ -29,7 +31,7 @@ const useStyles = makeStyles(() => ({
         background: "rgba(0,0,0,0.5)",
         margin: '20px',
         marginTop: '5rem',
-        
+
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -40,12 +42,27 @@ const useStyles = makeStyles(() => ({
         fontFamily: "Roboto",
         fontWeight: "bold",
         fontSize: "2rem",
-        color: "#fff",
+        color: "black",
+    },
+    titleBar: {
+        marginTop: "-200px",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+    },
+    container: {
+        textAlign: "center",
     },
     body: {
         fontFamily: "Roboto",
         fontSize: "1.1rem",
         color: "#ddd",
+    },
+    arrow: {
+        color: '#5AFF3D',
+        fontSize: '4rem',
+        position: 'relative',
+        marginTop: '-10px',
     },
     linkedin: {
         textDecoration: "none",
@@ -62,6 +79,15 @@ export default function AboutUs() {
     return (
         <div className={classes.main}>
             <AboutUsHeading />
+            <div className={classes.titleBar}>
+                <h1 className={classes.title}>
+                    Meet the Team
+                </h1>
+                <IconButton>
+                    <ExpandMoreIcon className={classes.arrow} />
+                </IconButton>
+            </div>
+
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -121,7 +147,6 @@ export default function AboutUs() {
                     </a>
                 </CardActions>
 
-
                 <CardActionArea>
                     <CardMedia
                         className={classes.image}
@@ -176,13 +201,13 @@ export default function AboutUs() {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                    <CardActions>
+                <CardActions>
                     <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
                         <Button size="small" color="white" className={classes.linkedin}>
                             LinkedIn
                         </Button>
                     </a>
-                    </CardActions>
+                </CardActions>
             </Card>
         </div>
 
