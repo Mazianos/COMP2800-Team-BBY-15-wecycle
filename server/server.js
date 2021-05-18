@@ -8,7 +8,7 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./server/cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-// const path = require('path'); remove this comment on merge. Some branches dont have this.
+
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 const path = require('path');

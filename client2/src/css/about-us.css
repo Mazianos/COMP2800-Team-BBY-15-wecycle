@@ -9,10 +9,23 @@
     column-gap: 2vw;
 }
 
+.card-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .card-img-top {
     max-width: 220px;
     max-height: 280px;
     height: auto;
+    display: grid;
+    margin: 0 auto;
+}
+
+.card-img-top-johnson {
+    width: 265px;
+    height: 280px;
     display: grid;
     margin: 0 auto;
 }
@@ -40,9 +53,9 @@ body {
     margin-bottom: 2vh;
 }
 
-@media only screen and (max-width: 600px) {
+/*@media only screen and (max-width: 600px) {
     #grid-container {
         display: grid;
         grid-template-columns: 1fr;
     }
-}
+}*/

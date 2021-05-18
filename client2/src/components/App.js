@@ -9,7 +9,8 @@ import Login from "./Login";
 import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
-import ProductCard from "./ProductCard";
+import DonorPost from "./DonorPost";
+import useStyles from './styles';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/aboutUs" component={AboutUs}/>
                     <PrivateRoute path="/postAd" component={PostAd}/>
                     <Route path="/postDetails" component={ProductCard}/>
+                    <Route path="/donorPost" component={DonorPost}/>
                 </Switch>
             </AuthProvider>
             </Router>
