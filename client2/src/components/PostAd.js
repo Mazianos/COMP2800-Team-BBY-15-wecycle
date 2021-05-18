@@ -70,8 +70,8 @@ export default function PostAd() {
     
     
         try {
-
-            $.ajax({
+            setLoading(true);
+            await $.ajax({
                 url: "/create-ad",
                 data: myData,
                 dataType: "json",
@@ -83,6 +83,8 @@ export default function PostAd() {
                     console.log("Error:", jqXHR, textStatus, errorThrown);
                 },
             });
+
+            setLoading(false);
 
             history.push("/");
 

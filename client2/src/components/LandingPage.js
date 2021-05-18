@@ -2,7 +2,6 @@ import React from 'react';
 import '../css/landingPage.css';
 import Navbar from "./Navbar";
 import { useHistory } from "react-router-dom";
-import { Button } from 'react-bootstrap';
 
 //Infinite Scroll constants start
 const allData = new Array(1000).fill(0).map((_val, i) => i + 1);

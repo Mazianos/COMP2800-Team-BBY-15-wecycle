@@ -20,7 +20,7 @@ function App() {
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
-                    <Route path="/postAd" component={PostAd}/>
+                    <PrivateRoute path="/postAd" component={PostAd}/>
                 </Switch>
             </AuthProvider>
             </Router>
