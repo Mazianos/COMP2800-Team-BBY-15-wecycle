@@ -4,40 +4,37 @@ import { Paper, Button, List, ListItem, ListItemText } from '@material-ui/core'
 import { useAuth } from "../contexts/AuthContext";
 import $ from 'jquery';
 
-// const
+const { currentUser } = useAuth();
+
+async function generateActive() {
+    console.log(currentUser.uid);
+    let condition = {
+        author: currentUser.uid
+    }
+    await $.ajax({
+        url: "/generate-active-donations",
+        type: "POST",
+        data: condition,
+        dataType: "json",
+        success: function(data) {
+            console.log("Success: ", data);
+            return data.map((donation) => (
+                <ListItem key={donation.author}>
+                    <ListItemText primary={donation.author}/>
+                    <Paper>Contact Number: {donation.contactNumber}{/* <br/>Total Bottles: {donation.totalBottles} */}</Paper>
+                </ListItem>)
+            );
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error:", jqXHR, textStatus, errorThrown);
+        },
+    })
+    
+    
+}
 
 export default function Inbox() {
-    const { currentUser } = useAuth();
-
-    async function generateActive() {
-        let active = null;
-        let condition = {
-            id: currentUser.uid
-        }
-        $.ajax({
-            url: "/generate-active-donations",
-            type: "GET",
-            data: condition,
-            dataType: "json",
-            success: function(data) {
-                console.log("Success: ", data);
-                active = data.toArray();
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error:", jqXHR, textStatus, errorThrown);
-            },
-        })
-        console.log(active);
-        
-        return active.map((donation) => 
-            React.cloneElement(
-                <ListItem>
-                    <ListItemText primary={donation.donorName}/>
-                    <Paper>Contact Number: {donation.contactNumber}<br/>Total Bottles: {donation.totalBottles}</Paper>
-                </ListItem>
-            ),
-        );
-    }
 
     return (
         <>

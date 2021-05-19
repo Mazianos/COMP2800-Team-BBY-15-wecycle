@@ -78,6 +78,9 @@ client.connect().then(function () {
 
 app.post("/create-ad", async function (req, res){
   res.setHeader('Content-Type', 'application/json');
+  myModels.User.findOne({
+
+  })
   var newPost = new myModels.Post({
     author: req.body.author, //userID FK in this 
     title: req.body.title,
@@ -120,10 +123,10 @@ app.post("/create-user", function (req, res) {
 });
 
 
-app.get("/generate-active-donations", function (req, res) {
-  console.log("Call to query db successful");
+app.post("/generate-active-donations", function (req, res) {
+  console.log("Call to query db successful" + JSON.stringify(req.body));
   myModels.Post.find({
-    id: req.body.id,
+    author: req.body.author,
     status: 'Open',
   }, function(err, docs) {
     console.log(docs);

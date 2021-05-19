@@ -18,7 +18,7 @@ export default function PostAd() {
     const glassRef = useRef();
     const [imageState, setState] = useState('');
     const [loading, setLoading] = useState(false);
-    const currentUser = useAuth();
+    const {currentUser} = useAuth();
     const history = useHistory();
 
     function handleChange(e) {
@@ -51,7 +51,7 @@ export default function PostAd() {
             otherBot = true;
         }
 
-        console.log();
+        console.log(currentUser.uid);
 
         let myData = {
             author: currentUser.uid, // from session data
