@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
+import { useAuth } from "../contexts/AuthContext";
 
 export default function PostAd() {
     const titleRef = useRef();
@@ -17,7 +18,7 @@ export default function PostAd() {
     const glassRef = useRef();
     const [imageState, setState] = useState('');
     const [loading, setLoading] = useState(false);
-    const currentUser = useState();
+    const currentUser = useAuth();
     const history = useHistory();
 
     function handleChange(e) {
@@ -50,10 +51,10 @@ export default function PostAd() {
             otherBot = true;
         }
 
-        console.log("y tho");
+        console.log();
 
         let myData = {
-            author: currentUser.id, // from session data
+            author: currentUser.uid, // from session data
             title: titleRef.current.value,
             postalCode: postalRef.current.value,
             type: {

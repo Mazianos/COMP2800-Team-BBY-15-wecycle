@@ -10,8 +10,7 @@ export default function Signup() {
     const passwordConfirmRef = useRef();
     const nameRef = useRef();
     const postalRef = useRef();
-    const { signup } = useAuth();
-    const { login } = useAuth();
+    const { signup, login } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -27,14 +26,14 @@ export default function Signup() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-            await login(emailRef.current.value, passwordRef.current.value);
 
             let myData = {
-                name: nameRef,
-                address: postalRef,
+                name: nameRef.current.value,
+                address: postalRef.current.value,
                 contactNum: "testNum",
-                id: currentUser.uid
-            }
+                id: currentUser.uid,
+                email: emailRef.current.value
+            }   
 
             $.ajax({
                 url: "/create-user",

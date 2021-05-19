@@ -6,12 +6,11 @@ const mongoose = require('mongoose');
 const app = express();
 const fs = require("fs");
 const bodyParser  = require('body-parser');
-const credentials = fs.readFileSync("./server/cert.pem");
+const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
 const path = require('path');
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
-const path = require('path');
 
 // mongoose.connect comes first
 async function connectToDB(){
@@ -103,20 +102,35 @@ app.post("/create-ad", async function (req, res){
   res.send({ status: "success", msg: "post created." });
 });
 
-app.post("/create-user", async function (req, res) {
-  var newUser = new myModels.User({
+app.post("/create-user", function (req, res) {
+  console.log("Call to server successful");
+  let newUser = new myModels.User({
     name: req.body.name,
     contactNumber: req.body.contactNumber,
     bottlesDonated: 0,
     bottlesTaken: 0,
     address: req.body.address,
-    _id: req.body.id
+    _id: req.body.id,
+    email: req.body.email
   });
 
   newUser.save(function(err, newUser) {
     if (err) return console.error(err);
   })
 });
+
+
+app.get("/generate-active-donations", function (req, res) {
+  console.log("Call to query db successful");
+  myModels.Post.find({
+    id: req.body.id,
+    status: 'Open',
+  }, function(err, docs) {
+    console.log(docs);
+    res.send(docs);
+  });
+  
+})
 
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
