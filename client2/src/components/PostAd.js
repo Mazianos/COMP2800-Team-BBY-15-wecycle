@@ -196,6 +196,7 @@ export default function PostAd() {
                 </Card.Body>
             </Card> */}
 
+<link rel = "shortcut icon" type="image/png" href="../../image/favicon-32x32.png"></link>
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div classname={classes.paper}>
@@ -257,19 +258,19 @@ export default function PostAd() {
 
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="plastic" color="primary" />}
+                control={<Checkbox value="plastic" color="primary" inputRef={plasticRef} />}
                 label="Plastic"
               />
               <FormControlLabel
-                control={<Checkbox value="Glass" color="primary" />}
+                control={<Checkbox value="Glass" color="primary" inputRef={glassRef} />}
                 label="Glass"
               />
               <FormControlLabel
-                control={<Checkbox value="Aluminium" color="primary" />}
-                label="Aluminium"
+                control={<Checkbox value="Aluminum" color="primary" inputRef={aluminumRef} />}
+                label="Aluminum"
               />
               <FormControlLabel
-                control={<Checkbox value="Other" color="primary" />}
+                control={<Checkbox value="Other" color="primary" inputRef={otherRef} />}
                 label="Other"
               />
             </Grid>

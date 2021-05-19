@@ -8,6 +8,7 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
+const multer = require("multer");
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
 const path = require('path');
@@ -36,6 +37,18 @@ db.once('open', function() {
 });
 
 
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "../client2/src/images/uploads"); 
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalName);
+  }
+})
+
+const upload = multer({storage: storage});
+
+
 
 // For hosting  ** THIS IS REQUIRED*** 
 app.use(express.static(path.resolve(__dirname, '../client2/build')));
@@ -50,7 +63,9 @@ app.use(bodyParser.json());
 
 // EXPRESS METHODS
 
-app.post("/create-ad", async function (req, res){
+//Add a new ad
+app.post("/create-ad", upload.single("postImage"), async function (req, res){
+  console.log(req.file);
   res.setHeader('Content-Type', 'application/json');
   var newPost = new myModels.Post({
     author: req.body.author, //userID FK in this 
@@ -62,12 +77,20 @@ app.post("/create-ad", async function (req, res){
         aluminum: req.body.type.aluminum,
         other: req.body.type.other
     },
-    // estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
     description: req.body.description,
     contact: req.body.contact, // user contact number auto fill?
-    postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-    // status: req.body. unused, default open
-  })
+    postImage: req.file.postImage //May 18th Changed to an image that user can post
+  });
+
+  app.post("/", upload.single("postImage"), (req, res) => {
+    image.findById(req.params.id)
+    .then((image) => {
+      image.title = req.body.title,
+      image.image = req.body.image,
+      image.author = req.body.author,
+      image.postImage = req.file.path
+    })
+  });
 
   newPost.save(function(err, newPost){
     if (err) return console.error(err);
