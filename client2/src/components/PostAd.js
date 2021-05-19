@@ -1,7 +1,26 @@
 import React, { useRef, useState } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
+import { auth } from '../firebase';
+
+
+//Material ui Imports
+
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+
+
 
 export default function PostAd() {
     const titleRef = useRef();
@@ -19,6 +38,41 @@ export default function PostAd() {
     const [loading, setLoading] = useState(false);
     const currentUser = useState();
     const history = useHistory();
+    const [fileName, setFileName] = useState("");
+
+    function Copyright() {
+        return (
+          <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="https://material-ui.com/">
+              WeCycle
+            </Link>{'.com '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
+        );
+      }
+
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+          marginTop: theme.spacing(8),
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
+        avatar: {
+          margin: theme.spacing(1),
+          backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+          width: '100%', // Fix IE 11 issue.
+          marginTop: theme.spacing(1),
+        },
+        submit: {
+          margin: theme.spacing(3, 0, 2),
+        },
+      }));
+
 
     function handleChange(e) {
         setState({
@@ -65,7 +119,7 @@ export default function PostAd() {
             estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
             description: descRef.current.value,
             contact: contactRef.current.value, // user contact number auto fill?
-            postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
+            postImage: fileRef.current.value,   // upload image, null for now. on client side when rendering. If null --> dummyimage.com
         }
     
     
@@ -113,7 +167,7 @@ export default function PostAd() {
         <link rel = "shortcut icon" type="image/png" href="../../image/favicon-32x32.png"></link>
             <Card>
                 <Card.Body>
-                    <Form onSubmit={createAd}>
+                    <Form onSubmit={createAd} encType="multipart/form-data">
                         <Form.Group id="title">
                             <Form.Control type="text" ref={titleRef} required placeholder="Title"/>
                         </Form.Group>
@@ -146,6 +200,11 @@ export default function PostAd() {
                     </Form>
                 </Card.Body>
             </Card>
+
+            <Container>
+                <CssBaseline/>
+                
+            </Container>
         </>
     )
 }
