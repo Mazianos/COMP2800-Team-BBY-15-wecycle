@@ -1,4 +1,4 @@
-#landingPage {
+.adListings {
   background-image: url('../images/white-concrete.jpg');
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -6,6 +6,11 @@
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+#hero {
+  background-image: url('../images/landingpagefinal.jpg');
+  height: 82vh;
 }
 
 .quoteContainer {
@@ -66,4 +71,12 @@
   background: rgba(255, 255, 255, 0.2);
   height: 140px;
   width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  #hero {
+    background-image: url('../images/mobileLanding.png');
+    object-fit: cover;
+    background-repeat: no-repeat;
+  }
 }
