@@ -124,11 +124,14 @@ app.get("/get-landing-records", function (req, res) {
 
 // Similar to loading all the landing recording. But only one record... and complete info displayed
 app.get("/postDetails/:postID", function(req, res) {
+
+  const _postID = req.params.postID;
+  console.log(_postID, "server side is called")
+  
   getData().catch((err) => console.error(err));
-  console.log(req.params.postID, "server side is called")
   async function getData() {
     let dataToSend = await db.collection("posts")
-      .find({id: req.params.postID})
+      .find({_id: mongoose.Types.ObjectId(_postID)})
       .toArray();
 
     console.log(dataToSend);

@@ -10,7 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import AboutUs from "./AboutUs";
 import PostAd from "./PostAd";
 import DonorPost from "./DonorPost";
-import ProductCard from "./ProductCard";
+// import PostingDetails from "./PostingDetails";
 import useStyles from './styles';
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
                     <PrivateRoute path="/postAd" component={PostAd}/>
-                    <Route path="/postDetails" component={ProductCard}/>
+                    {/* <Route path="/postDetails" component={PostingDetails}/> */}
                     <Route path="/donorPost" component={DonorPost}/>
                 </Switch>
             </AuthProvider>
