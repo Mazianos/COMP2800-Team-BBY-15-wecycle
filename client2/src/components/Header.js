@@ -7,18 +7,25 @@ import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import LockOpenIcon from '@material-ui/icons/LockOpen'; // log in
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'; // sign out
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'; //user profile?
+import GroupIcon from '@material-ui/icons/Group'; // team 
+
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import wecycle from '../images/wecycle_logo.PNG';
 
 const useStyles = makeStyles((theme) => ({
     main: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: "100vh",
+        /*height: "100vh",*/
         fontFamily: "Roboto",
     },
     navbar: {
-        backgroundColor: "grey",
+        backgroundColor: "white",
     },
     navbarContent: {
         width: "100%",
@@ -29,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: '2',
     },
     icon: {
-        color: '#fff',
+        color: 'black',
         fontSize: "2rem",
     },
     colorText: {
@@ -42,18 +49,16 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
         fontSize: "2.5rem",
     },
-    arrow: {
-        color: '#5AFF3D',
-        fontSize: '4rem',
-        position: 'relative',
-        marginTop: '-10px',
-    },
     list: { //NEW
         width: 250,
     },
     fullList: {
         width: 'auto',
     },
+    wecycleLogo: {
+        width: "115px",
+        height: "50px",
+    }
 }));
 
 /**
@@ -87,18 +92,18 @@ export default function Header() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Home', 'Log In', 'Sign Up'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['Profile', 'About'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <AccountBoxIcon /> : <GroupIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -111,7 +116,7 @@ export default function Header() {
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
                     <h1 className={classes.navbarTitle}>
-                        We<span className={classes.colorText}>cycle</span>
+                        <img src = {wecycle} className={classes.wecycleLogo} />
                     </h1>
                     <IconButton>
 
@@ -132,16 +137,6 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
 
-            <Collapse collapsedHeight={120}>
-                <div className={classes.container}>
-                    <h1 className={classes.title}>
-                        Meet the Team
-                    </h1>
-                    <IconButton>
-                        <ExpandMoreIcon className={classes.arrow} />
-                    </IconButton>
-                </div>
-            </Collapse>
         </div>
     );
 }
