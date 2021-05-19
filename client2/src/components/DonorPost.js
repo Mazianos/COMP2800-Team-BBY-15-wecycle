@@ -43,9 +43,17 @@ const useStyles = makeStyles(() => ({
         marginBottom: "4em",
     },
     buttons: {
-        marginBottom: "4em",
-        flexDirection: "row",
+        marginBottom: "5em",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
     },
+    return: {
+        marginLeft: "5rem",
+    },
+    update: {
+        marginRight: "5rem",
+    }
     
 }));
 
