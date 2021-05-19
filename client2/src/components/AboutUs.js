@@ -30,23 +30,33 @@ const useStyles = makeStyles(() => ({
         minHeight: '100vh',
         background: "rgba(0,0,0,0.5)",
         margin: '20px',
-        marginTop: '53rem',
+        marginTop: '25rem',
         justifyContent: 'center',
         alignItems: 'center',
     },
     image: {
         height: 500,
     },
-    title: {
+    imageJohnson: {
+        height: 700,
+    },
+    titleHead: {
         fontFamily: "Roboto",
         fontWeight: "bold",
         fontSize: "2rem",
         color: "black",
+        position: "absolute",
     },
     titleBar: {
-        textAlign: "center",
-        position: "absolute",
+        display: "flex",
+        justifyContent: "center", 
+        alignItems: "center",
         marginTop: "15rem",
+    },
+    arrow: {
+        color: '#5AFF3D',
+        fontSize: '4rem',
+        marginTop: "8rem",
     },
     container: {
         textAlign: "center",
@@ -56,9 +66,8 @@ const useStyles = makeStyles(() => ({
         fontSize: "1.1rem",
         color: "#ddd",
     },
-    arrow: {
-        color: '#5AFF3D',
-        fontSize: '4rem',
+    title: {
+        fontWeight: "bold",
     },
     linkedin: {
         textDecoration: "none",
@@ -76,7 +85,7 @@ export default function AboutUs() {
         <div className={classes.main}>
             <AboutUsHeading />
             <div className={classes.titleBar}>
-                <h1 className={classes.title}>
+                <h1 className={classes.titleHead}>
                     Meet the Team
                 </h1>
                 <IconButton>
@@ -112,7 +121,14 @@ export default function AboutUs() {
                             LinkedIn
                         </Button>
                     </a>
+                    <a href="https://github.com/ray165" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
+                        </Button>
+                    </a>
                 </CardActions>
+
+                
 
                 <CardActionArea>
                     <CardMedia
@@ -141,11 +157,16 @@ export default function AboutUs() {
                             LinkedIn
                         </Button>
                     </a>
+                    <a href="https://github.com/j-ahn94" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
+                        </Button>
+                    </a>
                 </CardActions>
 
                 <CardActionArea>
                     <CardMedia
-                        className={classes.image}
+                        className={classes.imageJohnson}
                         image={Johnson}
                     />
                     <CardContent>
@@ -170,6 +191,11 @@ export default function AboutUs() {
                     <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
                         <Button size="small" color="white" className={classes.linkedin}>
                             LinkedIn
+                        </Button>
+                    </a>
+                    <a href="https://github.com/JohnsonLau" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
                         </Button>
                     </a>
                 </CardActions>
@@ -198,9 +224,14 @@ export default function AboutUs() {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
+                    <a href="https://www.linkedin.com/in/mazin-marwan-0b3409154/" target="_blank">
                         <Button size="small" color="white" className={classes.linkedin}>
                             LinkedIn
+                        </Button>
+                    </a>
+                    <a href="https://github.com/Mazianos" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
                         </Button>
                     </a>
                 </CardActions>
