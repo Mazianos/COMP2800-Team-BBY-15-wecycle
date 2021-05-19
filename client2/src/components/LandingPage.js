@@ -222,6 +222,7 @@ function Landing() {
                 date={card.postDate}
                 status={card.status}
                 postID={card._id}
+                allData={card} // how about i just pass the entire card instead of making another fetch(0)
               />
               {/* <Drawer
                 anchor={"bottom"}

@@ -74,7 +74,7 @@ export default function MediaCard(props) {
         </CardActions>
       </Card>
       <Drawer anchor={"bottom"} open={state} onClose={toggleDrawer(false)}>
-        {<DrawerContent postID={props.postID}/>}
+        {<DrawerContent postID={props.postID} allData={props.allData}/>}
       </Drawer>
     </>
   );

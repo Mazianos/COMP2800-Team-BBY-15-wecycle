@@ -24,7 +24,7 @@ function grabData(inputPostID) {
     })
     .catch((err) => {
       console.log(err + " data not loaded!");
-      alert("Are you sure you have the correct postID?");
+    //   alert("Are you sure you have the correct postID?");
       return null;
     });
 }
@@ -69,19 +69,19 @@ export default function DrawerContent(props) {
         <div className={classes.contentCentered}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Location: 
+              Location: {props.allData.postalCode}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
-              Posting Date: 
+              Posting Date: {props.allData.postDate}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
-              Status: 
+              Status: {props.allData.status}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
-              Description: 
+              Description: {props.allData.description}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
-              Contact: 
+              Contact: {props.allData.contact}
             </Typography>
           </CardContent>
         </div>
