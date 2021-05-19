@@ -8,13 +8,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import wecycle from '../images/wecycle_logo.PNG';
 
 const useStyles = makeStyles((theme) => ({
     main: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: "100vh",
+        /*height: "100vh",*/
         fontFamily: "Roboto",
     },
     navbar: {
@@ -48,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
     fullList: {
         width: 'auto',
     },
+    wecycleLogo: {
+        width: "115px",
+        height: "50px",
+    }
 }));
 
 /**
@@ -105,7 +110,7 @@ export default function Header() {
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
                     <h1 className={classes.navbarTitle}>
-                        We<span className={classes.colorText}>cycle</span>
+                        <img src = {wecycle} className={classes.wecycleLogo} />
                     </h1>
                     <IconButton>
 

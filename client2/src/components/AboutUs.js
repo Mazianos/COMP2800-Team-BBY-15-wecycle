@@ -30,8 +30,7 @@ const useStyles = makeStyles(() => ({
         minHeight: '100vh',
         background: "rgba(0,0,0,0.5)",
         margin: '20px',
-        marginTop: '5rem',
-
+        marginTop: '53rem',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -45,10 +44,9 @@ const useStyles = makeStyles(() => ({
         color: "black",
     },
     titleBar: {
-        marginTop: "-200px",
-        justifyContent: "center",
-        alignItems: "center",
+        textAlign: "center",
         position: "absolute",
+        marginTop: "15rem",
     },
     container: {
         textAlign: "center",
@@ -61,8 +59,6 @@ const useStyles = makeStyles(() => ({
     arrow: {
         color: '#5AFF3D',
         fontSize: '4rem',
-        position: 'relative',
-        marginTop: '-10px',
     },
     linkedin: {
         textDecoration: "none",
