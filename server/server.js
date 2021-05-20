@@ -94,8 +94,8 @@ app.post("/create-ad", async function (req, res){
     // estimatedBottles: req.body.estimatedBottles,  // number input for bottles. Sent to user Schema
     description: req.body.description,
     contact: req.body.contact, // user contact number auto fill?
-    postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-    // status: req.body. unused, default open
+    postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
+    totalBottles: req.body.estimatedBottles
   })
 
   newPost.save(function(err, newPost){
@@ -123,17 +123,50 @@ app.post("/create-user", function (req, res) {
 });
 
 
-app.post("/generate-active-donations", function (req, res) {
-  console.log("Call to query db successful" + JSON.stringify(req.body));
-  myModels.Post.find({
-    author: req.body.author,
-    status: 'Open',
-  }, function(err, docs) {
-    console.log(docs);
-    res.send(docs);
-  });
+app.get("/generate-active-donations/:id", function (req, res) {
+  console.log("Call to query db successful, returning active donations");
   
+  async function getData() {
+    let dataToSend = await db.collection("posts")
+      .find({collectorID: req.params.id, status: "Open"}).toArray();
+
+    console.log(dataToSend);
+
+    res.json(dataToSend);
+  
+  }
+  getData().catch((err) => console.error(err));
+
 })
+
+
+app.get("/generate-complete-donations/:id", function (req, res) {
+  console.log("Call to query db successful, returning completed donations");
+  
+  async function getData() {
+    let dataToSend = await db.collection("posts")
+      .find({collectorID: req.params.id, status: "Closed"}).toArray();
+
+    console.log(dataToSend);
+
+    res.json(dataToSend);
+  
+  }
+  
+  getData().catch((err) => console.error(err));
+
+});
+
+
+app.get("/getName/:id", function (req, res) {
+  console.log("Call to server for user's name successful");
+  async function getData() {
+    let response = await db.collection("users").findOne({_id: req.params.id});
+    console.log(response);
+    res.send(response);
+  }
+  getData();
+});
 
 
 // THIS POST CREATES A TABLE DATA WITH USE OF MONGODB

@@ -1,40 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import { Paper, Button, List, ListItem, ListItemText } from '@material-ui/core'
 import { useAuth } from "../contexts/AuthContext";
-import $ from 'jquery';
 
-const { currentUser } = useAuth();
-
-async function generateActive() {
-    console.log(currentUser.uid);
-    let condition = {
-        author: currentUser.uid
-    }
-    await $.ajax({
-        url: "/generate-active-donations",
-        type: "POST",
-        data: condition,
-        dataType: "json",
-        success: function(data) {
-            console.log("Success: ", data);
-            return data.map((donation) => (
-                <ListItem key={donation.author}>
-                    <ListItemText primary={donation.author}/>
-                    <Paper>Contact Number: {donation.contactNumber}{/* <br/>Total Bottles: {donation.totalBottles} */}</Paper>
-                </ListItem>)
-            );
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Error:", jqXHR, textStatus, errorThrown);
-        },
-    })
-    
-    
-}
 
 export default function Inbox() {
+    const { currentUser } = useAuth();
+    // --> session handling by deault XYZ logged in. 
+    const [activeDonations, setActive] = useState([]); // Nested JSON objected with all data.
+    const [completeDonations, setComplete] = useState([]);
+
+    useEffect( () => {
+        fetch(`/generate-active-donations/${currentUser.uid}`)
+          .then((res) => res.json())
+          .then(
+            (result) => {
+              console.log(result);
+              setActive(result);
+              console.log(activeDonations);
+            }
+          );
+      }, []);
+
+      useEffect( () => {
+        fetch(`/generate-complete-donations/${currentUser.uid}`)
+          .then((res) => res.json())
+          .then(
+            (result) => {
+              console.log(result);
+              setComplete(result);
+              console.log(completeDonations);
+            }
+          );
+      }, []);
+
 
     return (
         <>
@@ -48,13 +47,23 @@ export default function Inbox() {
             <div>
                 Accepted Donations
                 <List>
-                    {generateActive()}
+                    {activeDonations.map((donation) => (
+                        <ListItem key={donation}>
+                            <ListItemText primary={donation.title}/>
+                            <Paper>Name: {donation.author.name}<br/>Contact Number: {donation.contact}<br/>Total Bottles: {donation.totalBottles}</Paper>
+                        </ListItem>
+                        ))}
                 </List>
             </div>
             <div>
                 Completed Donations
                 <List>
-                    
+                {completeDonations.map((donation) => (
+                    <ListItem key={donation}>
+                        <ListItemText primary={donation.author.name}/>
+                        <Paper>Total Bottles: {donation.totalBottles}</Paper>
+                    </ListItem>
+                ))}
                 </List>
             </div>
         </>

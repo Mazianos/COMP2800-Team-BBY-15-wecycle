@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
@@ -20,12 +20,23 @@ export default function PostAd() {
     const [loading, setLoading] = useState(false);
     const {currentUser} = useAuth();
     const history = useHistory();
+    const [name, setName] = useState();
 
     function handleChange(e) {
         setState({
             file: URL.createObjectURL(e.target.files[0])
         });
     }
+
+    useEffect( () => {
+        fetch(`/getName/${currentUser.uid}`)
+            .then((res) => res.json())
+            .then((result) => {
+                console.log("Name sent back was " + result.name);
+                setName(result.name);
+            }
+        )
+    });
 
     async function createAd(e){
         e.preventDefault();
@@ -53,8 +64,13 @@ export default function PostAd() {
 
         console.log(currentUser.uid);
 
+        
+    
+    
+        try {
+
         let myData = {
-            author: currentUser.uid, // from session data
+            author: {id: currentUser.uid, name: name}, // from session data
             title: titleRef.current.value,
             postalCode: postalRef.current.value,
             type: {
@@ -68,9 +84,6 @@ export default function PostAd() {
             contact: contactRef.current.value, // user contact number auto fill?
             postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
         }
-    
-    
-        try {
             setLoading(true);
             await $.ajax({
                 url: "/create-ad",
@@ -79,30 +92,14 @@ export default function PostAd() {
                 type: "POST",
                 success: function(data) {
                     console.log("Success: ", data);
+                    setLoading(false)
+                    history.push("/")
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("Error:", jqXHR, textStatus, errorThrown);
                 },
             });
 
-            setLoading(false);
-
-            history.push("/");
-
-            // await fetch('/create-ad', {
-            //     method: 'POST', // or 'PUT'
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(myData),
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log('Success:', data);
-            // })
-            // .catch((e) => {
-            //     console.error('Error:', e);
-            // });
         } catch (err){
             console.error(err);
         }

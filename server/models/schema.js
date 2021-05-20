@@ -7,7 +7,10 @@ var mongoose = require('mongoose');
 
 
 var postSchema = new mongoose.Schema({
-    author: String, //userID FK in this 
+    author: {
+        id: String,
+        name: String
+    }, //userID FK in this 
     title: String,
     location: String,
     postalCode: String,
@@ -17,10 +20,11 @@ var postSchema = new mongoose.Schema({
         aluminum: Boolean,
         other: Boolean
     },
-    estimatedBottles: Number,  // number input for bottles. Sent to user Schema
+    totalBottles: Number,  // number input for bottles. Sent to user Schema
     description: String,
     contact: String, // user contact number auto fill?
     postImage: String, // upload image
+    collectorID: { type: String, default: null },
     status: { type: String, default: "Open"},
     postDate: { type: Date, default: Date.now } // need date for the history of ad posting
 });
