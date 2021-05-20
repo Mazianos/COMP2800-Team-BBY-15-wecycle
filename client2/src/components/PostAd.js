@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+     
     },
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -200,14 +201,11 @@ export default function PostAd() {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div classname={classes.paper}>
-            <Typography 
-            component="h1" 
-            variant= "h5" c
-            >
-                Create a new donation
-            </Typography>
-            </div>
-            <form className={classes.form} noValidate></form>
+            <Typography component="h1" variant="h5">
+        Create a new donation
+    </Typography>
+            
+            <form className={classes.form} noValidate>
             <TextField
              variant="outlined"
              margin="normal"
@@ -312,7 +310,8 @@ export default function PostAd() {
         >
         Submit Donation
         </Button>
-
+        </form>
+        </div>
             </Container>
         </>
 
