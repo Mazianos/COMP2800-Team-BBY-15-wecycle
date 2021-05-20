@@ -188,7 +188,11 @@ function Landing() {
   }, [element]);
 
   function handleCreateAd() {
+<<<<<<< HEAD
     history.push("/postAd");
+=======
+    history.push('/postDono');
+>>>>>>> InboxFeature1
   }
 
   return (
@@ -199,9 +203,13 @@ function Landing() {
       </div>
       {/* <div className="quoteContainer">
         <ul className="quote">
+<<<<<<< HEAD
           <li id="firstParagraph">Donate bottles for the community</li>
           <br></br>
           <li id="secondParagraph">Recycle bottles for the community </li>
+=======
+          <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
+>>>>>>> InboxFeature1
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div> */}
@@ -263,6 +271,26 @@ function Landing() {
           <li ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
+<<<<<<< HEAD
+=======
+      <button className="signupBtn" onClick={handleCreateAd}>Post A New Donation</button>
+    <div className="adListings">
+      <ul>
+      {data.map(row =>(
+        <li key={row} style={{background: "transparent", color: "white"}}>
+          {row}
+        </li>
+      ))}
+
+      {loading && <li>Loading...</li>}
+
+      {!loading && more &&(
+        <li ref={setElement} style={{background: "white"}}>
+        </li>
+      )}
+      </ul>
+    </div>
+>>>>>>> InboxFeature1
     </div>
   );
 }

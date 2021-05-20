@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+<<<<<<< HEAD
     "@material-ui/icons": "^4.11.2",
+=======
+>>>>>>> InboxFeature1
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -13,6 +16,7 @@
     "chokidar": "^3.4.3",
     "firebase": "^8.6.1",
     "jquery": "^3.6.0",
+    "material-ui": "^0.20.2",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
