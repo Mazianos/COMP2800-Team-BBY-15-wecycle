@@ -7,7 +7,9 @@ import Mazin from '../images/MazM.jpg';
 import waterBottle from '../images/water-bottle.jpg';
 
 // Components imported from material-ui
-import { Button, Typography, AppBar, Card, CardActions, CardActionArea, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
+import { Collapse, IconButton, Button, Typography, AppBar, Card, CardActions, CardActionArea, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
+
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Retrieved photo camera icon from material icons
 // See www.material-ui.com/components/material-icons/ to get more icons
@@ -28,24 +30,44 @@ const useStyles = makeStyles(() => ({
         minHeight: '100vh',
         background: "rgba(0,0,0,0.5)",
         margin: '20px',
-        marginTop: '5rem',
-        
+        marginTop: '25rem',
         justifyContent: 'center',
         alignItems: 'center',
     },
     image: {
         height: 500,
     },
-    title: {
+    imageJohnson: {
+        height: 700,
+    },
+    titleHead: {
         fontFamily: "Roboto",
         fontWeight: "bold",
         fontSize: "2rem",
-        color: "#fff",
+        color: "black",
+        position: "absolute",
+    },
+    titleBar: {
+        display: "flex",
+        justifyContent: "center", 
+        alignItems: "center",
+        marginTop: "15rem",
+    },
+    arrow: {
+        color: '#5AFF3D',
+        fontSize: '4rem',
+        marginTop: "8rem",
+    },
+    container: {
+        textAlign: "center",
     },
     body: {
         fontFamily: "Roboto",
         fontSize: "1.1rem",
         color: "#ddd",
+    },
+    title: {
+        fontWeight: "bold",
     },
     linkedin: {
         textDecoration: "none",
@@ -62,6 +84,15 @@ export default function AboutUs() {
     return (
         <div className={classes.main}>
             <AboutUsHeading />
+            <div className={classes.titleBar}>
+                <h1 className={classes.titleHead}>
+                    Meet the Team
+                </h1>
+                <IconButton>
+                    <ExpandMoreIcon className={classes.arrow} />
+                </IconButton>
+            </div>
+
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -90,7 +121,14 @@ export default function AboutUs() {
                             LinkedIn
                         </Button>
                     </a>
+                    <a href="https://github.com/ray165" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
+                        </Button>
+                    </a>
                 </CardActions>
+
+                
 
                 <CardActionArea>
                     <CardMedia
@@ -119,12 +157,16 @@ export default function AboutUs() {
                             LinkedIn
                         </Button>
                     </a>
+                    <a href="https://github.com/j-ahn94" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
+                        </Button>
+                    </a>
                 </CardActions>
-
 
                 <CardActionArea>
                     <CardMedia
-                        className={classes.image}
+                        className={classes.imageJohnson}
                         image={Johnson}
                     />
                     <CardContent>
@@ -149,6 +191,11 @@ export default function AboutUs() {
                     <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
                         <Button size="small" color="white" className={classes.linkedin}>
                             LinkedIn
+                        </Button>
+                    </a>
+                    <a href="https://github.com/JohnsonLau" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
                         </Button>
                     </a>
                 </CardActions>
@@ -176,13 +223,18 @@ export default function AboutUs() {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                    <CardActions>
-                    <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
+                <CardActions>
+                    <a href="https://www.linkedin.com/in/mazin-marwan-0b3409154/" target="_blank">
                         <Button size="small" color="white" className={classes.linkedin}>
                             LinkedIn
                         </Button>
                     </a>
-                    </CardActions>
+                    <a href="https://github.com/Mazianos" target="_blank">
+                        <Button size="small" color="white" className={classes.linkedin}>
+                            Github
+                        </Button>
+                    </a>
+                </CardActions>
             </Card>
         </div>
 

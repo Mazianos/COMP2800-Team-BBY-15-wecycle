@@ -298,3 +298,9 @@ export default function PostAd() {
 
     )
 }
+
+    function createAd() {
+        //Ajax call wtih all the data to create an ad here.
+        
+    }
+    

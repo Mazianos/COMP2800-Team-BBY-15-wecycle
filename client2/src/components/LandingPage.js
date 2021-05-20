@@ -5,8 +5,10 @@ import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
-import { Container, Paper, Typography, Card } from "@material-ui/core";
+import { Container, Paper, Typography, Card, Drawer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import TemporaryDrawer from "./subcomponents/CustomDrawer";
+import DrawerContent from "./subcomponents/DrawerContent";
 
 //Infinite Scroll constants start
 // const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
@@ -93,7 +95,27 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   sizing: {
-    height: "100%",
+    height: "50vh",
+    marginBottom: "0vh",
+    padding: 0,
+  },
+  list: {
+    width: "100%",
+    height: "80vh",
+    background: "red",
+  },
+  fullList: {
+    // width: 'auto',
+  },
+  root: {
+    // maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+  contentCentered: {
+    alignContent: "center",
+    fontSize: 15,
   },
 }));
 
@@ -104,6 +126,11 @@ function Landing() {
   const [isLoaded, setIsLoaded] = useState({});
   const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
+  const [state, setState] = React.useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    setState(open);
+  };
 
   useEffect(() => {
     fetch("/get-landing-records")
@@ -165,6 +192,7 @@ function Landing() {
   }
 
   return (
+    
     <div id="landingPage">
       <div id="navbarContainer">
         <Navbar />
@@ -177,24 +205,23 @@ function Landing() {
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div> */}
-      <Container className={classes.sizing} height="100vh">
-        <Grid container className={classes.sizing}>
-          <Grid item xs={12} className={classes.sizing}>
-            <Grid container justify="center" spacing={4}>
-              {[0, 1, 2].map((value) => (
-                <Grid key={value} item>
-                  <div className="paperCSS">
-                    <Typography>Hello</Typography>
-                  </div>
-                  <Card cardStyle={{ backgroundColor: 'transparent', shadowOpacity: 0 }}>
-                    
-                  </Card>
-                </Grid>
-              ))}
+      <div id="hero">
+        <Container className={classes.sizing}>
+          <Grid container className={classes.sizing}>
+            <Grid item xs={12} className={classes.sizing}>
+              <Grid container justify="center" spacing={4}>
+                {[0, 1, 2].map((value) => (
+                  <Grid key={value} style={{ marginTop: "5vh" }} item>
+                    <div className="paperCSS">
+                      <Typography>Hello</Typography>
+                    </div>
+                  </Grid>
+                ))}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </div>
 
       <button className="signupBtn" onClick={handleCreateAd}>
         Post A New Ad
@@ -217,7 +244,15 @@ function Landing() {
                 date={card.postDate}
                 status={card.status}
                 postID={card._id}
+                allData={card} // how about i just pass the entire card instead of making another fetch(0)
               />
+              {/* <Drawer
+                anchor={"bottom"}
+                open={state}
+                onClose={toggleDrawer(false)}
+                >
+                {<DrawerContent />}
+              </Drawer> */}
             </Grid>
           ))}
         </Grid>
