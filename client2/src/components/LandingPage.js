@@ -96,7 +96,7 @@ function Landing() {
   }, [element]);
 
   function handleCreateAd() {
-    history.push('/postAd');
+    history.push('/postDono');
   }
  
   return (
@@ -107,12 +107,11 @@ function Landing() {
       </div>
       <div className="quoteContainer">
         <ul className="quote">
-          <li id="firstParagraph">One World, One Community</li>
           <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div>
-      <button className="signupBtn" onClick={handleCreateAd}>Post A New Ad</button>
+      <button className="signupBtn" onClick={handleCreateAd}>Post A New Donation</button>
     <div className="adListings">
       <ul>
       {data.map(row =>(
