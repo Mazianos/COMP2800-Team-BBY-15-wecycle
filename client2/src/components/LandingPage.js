@@ -217,7 +217,7 @@ function Landing() {
             // <li key={row} style={{ background: "transparent", color: "white" }}>
             //   {row}
             // </li>
-            <Grid item key={card} xs={12} sm={6} md={3} align="center">
+            <Grid item key={card._id} xs={12} sm={6} md={3} align="center">
               <ProductCard
                 title={card.title}
                 date={card.postDate}
@@ -239,7 +239,7 @@ function Landing() {
         {loading && <li>Loading...</li>}
 
         {!loading && more && (
-          <li ref={setElement} style={{ background: "white" }}></li>
+          <li key={more} ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
     </div>
