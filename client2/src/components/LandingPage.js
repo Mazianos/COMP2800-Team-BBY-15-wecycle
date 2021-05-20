@@ -214,9 +214,6 @@ function Landing() {
           // direction="column"
         >
           {data.map((card) => (
-            // <li key={row} style={{ background: "transparent", color: "white" }}>
-            //   {row}
-            // </li>
             <Grid item key={card._id} xs={12} sm={6} md={3} align="center">
               <ProductCard
                 title={card.title}
@@ -225,13 +222,6 @@ function Landing() {
                 postID={card._id}
                 allData={card} // how about i just pass the entire card instead of making another fetch(0)
               />
-              {/* <Drawer
-                anchor={"bottom"}
-                open={state}
-                onClose={toggleDrawer(false)}
-                >
-                {<DrawerContent />}
-              </Drawer> */}
             </Grid>
           ))}
         </Grid>

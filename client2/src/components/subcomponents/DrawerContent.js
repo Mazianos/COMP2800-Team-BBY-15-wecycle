@@ -100,28 +100,22 @@ export default function DrawerContent(props) {
     let dataToSend = {
       postID: props.allData._id,
       postAuthor: props.allData.author,
-      // postCollector: currentUser.uid || "testUser",
-      postCollector: "testUser",
+      postCollector: currentUser.uid || "testUser",
+      // postCollector: "testUser",
     };
     console.log("your data", dataToSend);
 
     console.log("trying to right before running fetch");
     updateData(dataToSend)
     console.log("runs after the updateData")
-    // async function run() {
-    //   try {
-
-
-    //   } catch(err) {
-    //     console.log(err);
-    //   }
-    // }
-
-
 
     handleClick();
     // Close the drawer
+    // props.reRender();
     props.onClose();
+    // setTimeout(history.push("/"), 3000);
+    
+   
 
     // Post some sort of feedback.
 
@@ -172,8 +166,8 @@ export default function DrawerContent(props) {
         </CardActions>
       </Card>
       <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        // open={open}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={open}
         onClose={handleClose}
         autoHideDuration={6000}
         message="Successfully Claimed!"
