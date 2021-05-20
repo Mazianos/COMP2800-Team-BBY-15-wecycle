@@ -35,7 +35,10 @@ function updateData(myData) {
   console.log("running updateData", myData);
   fetch("/claim_Req", {
     method: "POST", 
-    body: (myData),
+    body: JSON.stringify(myData), // stringify is needed to send!!!
+    headers: {  
+      "Content-Type": "application/json" // content type is needed as well!!!
+  },
   })
     .then((res) => res.json())
     .then((data) => {
