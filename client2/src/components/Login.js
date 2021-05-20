@@ -16,10 +16,19 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+
+   {/* 
+* Used template of copyright blurb from material UI templates and MUI CSS. Lines 33-65.
+* @author oliviertassinari
+* @author eps1lon
+* @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
 
 function Copyright() {
     return (
@@ -34,6 +43,7 @@ function Copyright() {
     );
   }
 
+  //Styling for MUI
 const useStyles = makeStyles((theme) => ({
     paper: {
       marginTop: theme.spacing(8),
@@ -82,35 +92,17 @@ export default function Login() {
 
         setLoading(false);
     }
-    return (
-        // <>
-        //   <Card>
-        //       <Card.Body>
-        //           <h2 className="text-center mb-4">Log In!</h2>
-        //           {error && <Alert variant="danger">{error}</Alert>}
-        //           <Form onSubmit={handleSubmit}>
-        //               <Form.Group id="email">
-        //                   <Form.Label>Email</Form.Label>
-        //                   <Form.Control type="email" ref={emailRef} required/>
-        //               </Form.Group>
-        //               <Form.Group id="password">
-        //                   <Form.Label>Password</Form.Label>
-        //                   <Form.Control type="password" ref={passwordRef} required/>
-        //               </Form.Group>
-        //               <Button disabled={loading} className="w-100" type="submit">Log In</Button>
-        //           </Form>
-        //             <Button disabled={loading} className="w-100" onClick={ () =>clickSignup() }>
-        //             Sign Up</Button>
-        //       </Card.Body>
-        //   </Card>
-        //   <div className="w-100 text-center mt-2">
-        //       Start saving the world
-        //   </div>
-        //   <div className="w-100 text-center mt-2">
-        //       Making an impact, one bottle at a time.
-        //   </div>
-        // </>
 
+       {/* 
+* Used Template of a page with textfields to make our Log in page. Lines 94-157
+* @author oliviertassinari
+* @author eps1lon
+* @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
+    return (
+        
     <Container component="main" maxWidth="xs">
     <CssBaseline />
     <div className={classes.paper}>

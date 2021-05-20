@@ -15,7 +15,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-//Copyright box at bottom
+     {/* 
+* Used template of copyright blurb from material UI templates and MUI CSS. Lines 26-55.
+* @author oliviertassinari
+* @author eps1lon
+* @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
@@ -107,43 +114,15 @@ export default function Signup() {
 
         setLoading(false);
     }
-    // return (
-    //     <>
-    //       <Card>
-    //           <Card.Body>
-    //               <h2 className="text-center mb-4">Sign up!</h2>
-    //               {error && <Alert variant="danger">{error}</Alert>}
-    //               <Form onSubmit={handleSubmit}>
-    //                   <Form.Group id="email">
-    //                       <Form.Label>Email</Form.Label>
-    //                       <Form.Control type="email" ref={emailRef} required/>
-    //                   </Form.Group>
-    //                   <Form.Group id="password">
-    //                       <Form.Label>Password</Form.Label>
-    //                       <Form.Control type="password" ref={passwordRef} required/>
-    //                   </Form.Group>
-    //                   <Form.Group id="password-confirm">
-    //                       <Form.Label>Password Confirmation</Form.Label>
-    //                       <Form.Control type="password" ref={passwordConfirmRef} required/>
-    //                   </Form.Group>
-    //                   <Form.Group id="full-name">
-    //                       <Form.Label>Full Name</Form.Label>
-    //                       <Form.Control type="name" ref={nameRef} required/>
-    //                   </Form.Group>
-    //                   <Form.Group id="postal">
-    //                       <Form.Label>Postal Code</Form.Label>
-    //                       <Form.Control type="postalCode" ref={postalRef} required/>
-    //                   </Form.Group>
-    //                   <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
-    //               </Form>
-    //           </Card.Body>
-    //       </Card>
-    //       <Copyright/>
-    //       <div className="w-100 text-center mt-2">
-    //           Lets make a stand, together.
-    //       </div>
-    //    </>
-
+  
+    {/* 
+* Used Template of a page with textfields to make our post Sign up page. Lines 122-223
+* @author oliviertassinari
+* @author eps1lon
+* @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-up/SignUp.js
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
     
     return (
         

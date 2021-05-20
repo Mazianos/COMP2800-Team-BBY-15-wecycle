@@ -18,7 +18,14 @@ import Container from '@material-ui/core/Container';
 
 
 
-
+   {/* 
+* Used template of copyright blurb from material UI templates and MUI CSS. Lines 29-60.
+* @author oliviertassinari
+* @author eps1lon
+* @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
@@ -160,42 +167,14 @@ export default function PostAd() {
 
     return (
         <>
-        {/* <link rel = "shortcut icon" type="image/png" href="../../image/favicon-32x32.png"></link>
-            <Card>
-                <Card.Body>
-                    <Form onSubmit={createAd}>
-                        <Form.Group id="title">
-                            <Form.Control type="text" ref={titleRef} required placeholder="Title"/>
-                        </Form.Group>
-                        <Form.Group id="city">
-                            <Form.Control type="text" ref={cityRef} required placeholder="City/Neighbourhood"/>
-                        </Form.Group>
-                        <Form.Group id="postalCode">
-                            <Form.Control type="text" ref={postalRef} required placeholder="Postal Code"/>
-                        </Form.Group>
-                        <Form.Group id="bottleTotal">
-                            <Form.Control type="number" ref={bottleRef} required placeholder="0"/>
-                        </Form.Group>
-                        <Form.Group id="material">
-                            <Form.Check inline type="checkbox" label="Plastic" id="plastic" ref={plasticRef}/>
-                            <Form.Check inline type="checkbox" label="Glass" id="glass" ref={glassRef}/>
-                            <Form.Check inline type="checkbox" label="Aluminum" id="aluminum" ref={aluminumRef}/>
-                            <Form.Check inline type="checkbox" label="Other" id="other" ref={otherRef}/>
-                        </Form.Group>
-                        <Form.Group id="description">
-                            <Form.Control type="text" ref={descRef} required placeholder="Description"/>
-                        </Form.Group>
-                        <Form.Group id="contactInfo">
-                            <Form.Control type="text" ref={contactRef} required placeholder="Contact Information"/>
-                        </Form.Group>
-                        <Form.Group id="pictures">
-                            <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
-                            <img src={imageState.file} id="previewImage"/>
-                        </Form.Group>
-                        <Button disabled={loading} className="w-100" type="submit">Create New Donation Post</Button>
-                    </Form>
-                </Card.Body>
-            </Card> */}
+{/* 
+* Used Template of a page with textfields to make our post ad page. Lines 210-323
+* @author oliviertassinari
+* @author eps1lon
+* @seehttps://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-in/SignIn.js
+* @see https://material-ui.com/getting-started/templates/
+*
+**/}
 
 <link rel = "shortcut icon" type="image/png" href="../../image/favicon-32x32.png"></link>
         <Container component="main" maxWidth="xs">
@@ -204,7 +183,6 @@ export default function PostAd() {
             <Typography component="h1" variant="h5">
         Create a new donation
     </Typography>
-            
             <form className={classes.form} noValidate>
             <TextField
              variant="outlined"
@@ -312,6 +290,7 @@ export default function PostAd() {
         </Button>
         </form>
         </div>
+        <Copyright/>
             </Container>
         </>
 
