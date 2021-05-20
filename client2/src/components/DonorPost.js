@@ -53,7 +53,7 @@ const useStyles = makeStyles(() => ({
     },
     update: {
         marginRight: "5rem",
-    }
+    },
     
 }));
 
@@ -66,7 +66,9 @@ export default function DonorPost() {
             <div className={classes.overall}>
                 <div className={classes.topHeading}>
                     <p>Posting Date: </p>
+                        <div className = {classes.postingDate}></div> // where posting date woud go into
                     <p>Status: </p>
+                        <div className = {classes.status}></div> // where status would go into
                 </div>
                 <div className={classes.claimNotification}>
 

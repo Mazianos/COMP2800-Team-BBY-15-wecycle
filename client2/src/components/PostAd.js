@@ -110,17 +110,18 @@ export default function PostAd() {
 
     return (
         <>
+        <PostAdHeading />
         <link rel = "shortcut icon" type="image/png" href="../../image/favicon-32x32.png"></link>
-            <Card>
+            <Card className = {classes.main}>
                 <Card.Body>
                     <Form onSubmit={createAd}>
-                        <Form.Group id="title">
+                        <Form.Group id="title" className = {classes.button}>
                             <Form.Control type="text" ref={titleRef} required placeholder="Title"/>
                         </Form.Group>
-                        <Form.Group id="city">
+                        <Form.Group id="city" className = {classes.button}>
                             <Form.Control type="text" ref={cityRef} required placeholder="City/Neighbourhood"/>
                         </Form.Group>
-                        <Form.Group id="postalCode">
+                        <Form.Group id="postalCode" className = {classes.button}>
                             <Form.Control type="text" ref={postalRef} required placeholder="Postal Code"/>
                         </Form.Group>
                         <Form.Group id="bottleTotal">
@@ -132,13 +133,13 @@ export default function PostAd() {
                             <Form.Check inline type="checkbox" label="Aluminum" id="aluminum" ref={aluminumRef}/>
                             <Form.Check inline type="checkbox" label="Other" id="other" ref={otherRef}/>
                         </Form.Group>
-                        <Form.Group id="description">
+                        <Form.Group id="description" className = {classes.button}>
                             <Form.Control type="text" ref={descRef} required placeholder="Description"/>
                         </Form.Group>
-                        <Form.Group id="contactInfo">
+                        <Form.Group id="contactInfo" className = {classes.button}>
                             <Form.Control type="text" ref={contactRef} required placeholder="Contact Information"/>
                         </Form.Group>
-                        <Form.Group id="pictures">
+                        <Form.Group id="pictures" className = {classes.button}>
                             <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
                             <img src={imageState.file} id="previewImage"/>
                         </Form.Group>
@@ -149,3 +150,9 @@ export default function PostAd() {
         </>
     )
 }
+
+    function createAd() {
+        //Ajax call wtih all the data to create an ad here.
+        
+    }
+    

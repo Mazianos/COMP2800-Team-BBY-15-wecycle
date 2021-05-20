@@ -132,6 +132,26 @@ function Landing() {
     setState(open);
   };
 
+  useEffect(() => {
+    fetch("/get-landing-records")
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          this.setState({
+            isLoaded: true,
+            postDetails: result.records, // Large JSON object with everything open or pending
+          });
+        }
+        // (error) => {
+        //   this.setState({
+        //     isLoaded: false,
+        //     postDetails: [],
+        //   });
+        // }
+      );
+  }, []);
+
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
   const loader = React.useRef(load);
@@ -172,7 +192,11 @@ function Landing() {
   }
 
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <div id="landingPage">
+>>>>>>> jason-testing
       <div id="navbarContainer">
         <Navbar />
       </div>

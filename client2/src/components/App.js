@@ -12,6 +12,7 @@ import PostAd from "./PostAd";
 import DonorPost from "./DonorPost";
 // import PostingDetails from "./PostingDetails";
 import useStyles from './styles';
+import Error from './Error';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <PrivateRoute path="/postAd" component={PostAd}/>
                     {/* <Route path="/postDetails" component={PostingDetails}/> */}
                     <Route path="/donorPost" component={DonorPost}/>
+                    <Route path="/error" component={Error}/>
                 </Switch>
             </AuthProvider>
             </Router>
