@@ -153,7 +153,7 @@ export default function DonorPost() {
                     fullWidth
                     id="title"
                     label="Title"
-                    value={dono.title}
+                    defaultValue={dono.title}
                     name="Title"
                     autoFocus
                     inputRef={titleRef}
@@ -165,7 +165,7 @@ export default function DonorPost() {
                     fullWidth
                     id="City"
                     label="City/Neighbourhood"
-                    value={dono.location}
+                    defaultValue={dono.location}
                     name="City"
                     inputRef={cityRef}
                     />
@@ -176,7 +176,7 @@ export default function DonorPost() {
                     fullWidth
                     id="postalCode"
                     label="Postal Code"
-                    value={dono.postalCode}
+                    defaultValue={dono.postalCode}
                     name="Postal Code"
                     inputRef={postalRef}
                     />
@@ -186,7 +186,7 @@ export default function DonorPost() {
                     name="Bottles"
                     type="number"
                     label="Total bottles"
-                    value={dono.totalBottles}
+                    defaultValue={dono.totalBottles}
                     fullWidth
                     margin="normal"
                     variant="outlined"
@@ -217,7 +217,7 @@ export default function DonorPost() {
                     fullWidth
                     id="description"
                     label="Description"
-                    value={dono.description}
+                    defaultValue={dono.description}
                     name="Description"
                     inputRef={descRef}
                     />
@@ -228,7 +228,7 @@ export default function DonorPost() {
                     fullWidth
                     id="contactInfo"
                     label="Contact Info"
-                    value={dono.contact}
+                    defaultValue={dono.contact}
                     name="Contact Info"
                     inputRef={contactRef}
                     />

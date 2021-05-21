@@ -49,7 +49,7 @@ export default function Inbox() {
                     {activeDonations.map((donation) => (
                         <ListItem key={donation._id}>
                             <ListItemText primary={donation.title}/>
-                            <Paper>Name: {donation.authorName || "missing name"}<br/>Contact Number: {donation.contact}<br/>Total Bottles: {donation.totalBottles}</Paper>
+                            <Paper>Name: {donation.authorName || "Missing name"}<br/>Contact Number: {donation.contact}<br/>Total Bottles: {donation.totalBottles}</Paper>
                         </ListItem>
                         ))}
                 </List>
@@ -60,7 +60,7 @@ export default function Inbox() {
                 {completeDonations.map((donation) => (
                     <ListItem key={donation}>
                         <ListItemText primary={donation.title}/>
-                        <Paper>Name: {donation.authorName}<br/>Total Bottles: {donation.totalBottles}</Paper>
+                        <Paper>Name: {donation.authorName || "Missing name"}<br/>Total Bottles: {donation.totalBottles}</Paper>
                     </ListItem>
                 ))}
                 </List>
