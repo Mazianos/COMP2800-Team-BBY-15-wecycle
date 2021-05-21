@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
     main: {
         textAlign: "center",
-        marginTop: "50%",
+        marginTop: "15vh",
     },
     error: {
         fontSize: "2em",

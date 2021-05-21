@@ -184,6 +184,15 @@ export default function Header() {
                     </ListItem>
                 ))}
             </List>
+            <Divider />
+            <List>
+                {['Log Out'].map((text, index) => (
+                    <ListItem button key={text} onClick = {handleLogout}>
+                        <ListItemIcon>{index  == <GroupIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
         </div>
     );
 

@@ -24,10 +24,10 @@ function App() {
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
-                    <Route path="/error" component={Error}/>
                     <PrivateRoute path="/donorPost" component={DonorPost}/>
                     <PrivateRoute path="/postDono" component={PostAd}/>
                     <PrivateRoute path="/inbox" component={Inbox}/>
+                    <Route  component={Error}/>
                 </Switch>
             </AuthProvider>
             </Router>
