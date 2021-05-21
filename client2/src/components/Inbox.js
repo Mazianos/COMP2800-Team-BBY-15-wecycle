@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from './Navbar'
 import Header from "./Header";
-import { Paper, Button, List, ListItem, ListItemText } from '@material-ui/core'
+import { Paper, Button, List, ListItem, ListItemText, Container } from '@material-ui/core'
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router-dom';
 
@@ -39,13 +38,10 @@ export default function Inbox() {
 
 
     return (
-        <>
+        <Container>
             <Header />
             <div style={{ marginTop: "13vh" }}>
-                Your Donation
-                <Paper elevation={0} variant="outlined">
-                    <Button variant="contained" onClick={history.push("/donorPost")}></Button>
-                </Paper>
+                <Button variant="contained" onClick={() => (history.push("/donorPost"))}>Your Donation</Button>
             </div>
             <div>
                 Accepted Donations
@@ -69,6 +65,6 @@ export default function Inbox() {
                 ))}
                 </List>
             </div>
-        </>
+        </Container>
     )
 }
