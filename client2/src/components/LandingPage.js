@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
+import Header from "./Header";
 import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
@@ -98,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
     height: "50vh",
     marginBottom: "0vh",
     padding: 0,
+    marginTop: "40px",
   },
   list: {
     width: "100%",
@@ -195,7 +197,7 @@ function Landing() {
     
     <div id="landingPage">
       <div id="navbarContainer">
-        <Navbar />
+        <Header />
       </div>
       {/* <div className="quoteContainer">
         <ul className="quote">

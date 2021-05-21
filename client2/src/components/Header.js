@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar, Typography, Collapse } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import clsx from 'clsx';
 import SortIcon from '@material-ui/icons/Sort';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -70,6 +72,45 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
     const classes = useStyles();
 
+    const {currentUser, logout } = useAuth();
+    const [error, setError] = useState("");
+    const history = useHistory();
+
+    function aboutUsRedirect() {
+        history.push("/aboutUs");
+    }
+
+    function landingRedirect() {
+        history.push("/");
+    }
+
+    function loginRedirect() {
+        history.push("/login");
+    }
+
+    function signupRedirect() {
+        history.push("/signup");
+    }
+
+    function donorPost() {
+        history.push("/donorPost");
+    }
+
+    function postAd() {
+        history.push("/postAd");
+    }
+
+    async function handleLogout() {
+        setError('');
+
+        try {
+            await logout();
+            history.pushState("/");
+        } catch {
+            setError("Failed to log out");
+        }
+    }
+    
     const [state, setState] = React.useState({
         right: false,
     });
@@ -92,18 +133,42 @@ export default function Header() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Home', 'Log In', 'Sign Up'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>
+                {['Home'].map((text, index) => (
+                    <ListItem button key={text} onClick = {landingRedirect}>
+                        <ListItemIcon>{index == <HomeIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+            <List>
+                {['Log In'].map((text, index) => (
+                    <ListItem button key = {text} onClick = {loginRedirect}>
+                        <ListItemIcon>{index == <MailIcon />}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                ))}
+            </List>
+            <List>
+                {['Sign Up'].map((text, index) => (
+                    <ListItem button key = {text} onClick = {signupRedirect}>
+                        <ListItemIcon>{index == <AccountCircleIcon />}</ListItemIcon>
+                        <ListItemText primary = {text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
             <List>
-                {['Profile', 'About'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <AccountBoxIcon /> : <GroupIcon />}</ListItemIcon>
+                {['Post Bottles'].map((text, index) => (
+                    <ListItem button key = {text} onClick = {loginRedirect}>
+                        <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
+                        <ListItemText primary = {text} />
+                    </ListItem>
+                ))}
+            </List>
+            <List>
+                {['About Us'].map((text, index) => (
+                    <ListItem button key={text} onClick = {aboutUsRedirect}>
+                        <ListItemIcon>{index  == <GroupIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -115,9 +180,9 @@ export default function Header() {
         <div className={classes.main} id="header">
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
-                    <h1 className={classes.navbarTitle}>
-                        <img src = {wecycle} className={classes.wecycleLogo} />
-                    </h1>
+                    <div className={classes.navbarTitle} onClick = "/">
+                        <img src = {wecycle} className={classes.wecycleLogo} onClick = "/" />
+                    </div>
                     <IconButton>
 
                         {['right'].map((anchor) => (
