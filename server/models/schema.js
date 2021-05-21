@@ -7,10 +7,8 @@ var mongoose = require('mongoose');
 
 
 var postSchema = new mongoose.Schema({
-    author: {
-        id: String,
-        name: String
-    }, //userID FK in this 
+    authorID: String,
+    authorName: String, //userID FK in this 
     title: String,
     location: String,
     postalCode: String,

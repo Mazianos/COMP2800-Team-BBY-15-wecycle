@@ -129,8 +129,10 @@ export default function PostAd() {
         try {
 
         let myData = {
-            author: {id: currentUser.uid, name: name}, // from session data
+            authorID: currentUser.uid, 
+            authorName: name, // from session data
             title: titleRef.current.value,
+            location: cityRef.current.value,
             postalCode: postalRef.current.value,
             type: {
                 plastic: plasticBot,

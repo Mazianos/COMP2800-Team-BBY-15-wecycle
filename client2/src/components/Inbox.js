@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import { Paper, Button, List, ListItem, ListItemText } from '@material-ui/core'
 import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from 'react-router-dom';
 
 
 export default function Inbox() {
@@ -9,6 +10,7 @@ export default function Inbox() {
     // --> session handling by deault XYZ logged in. 
     const [activeDonations, setActive] = useState([]); // Nested JSON objected with all data.
     const [completeDonations, setComplete] = useState([]);
+    const history = useHistory();
 
     useEffect( () => {
         fetch(`/generate-active-donations/${currentUser.uid}`)
@@ -41,7 +43,7 @@ export default function Inbox() {
             <div>
                 Your Donation
                 <Paper elevation={0} variant="outlined">
-                    <Button variant="contained" ></Button>
+                    <Button variant="contained" onClick={history.push("/donorPost")}></Button>
                 </Paper>
             </div>
             <div>

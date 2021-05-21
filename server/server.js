@@ -58,8 +58,10 @@ app.post("/create-ad", async function (req, res){
 
   })
   var newPost = new myModels.Post({
-    author: req.body.author, //userID FK in this 
+    authorID: req.body.authorID, //userID FK in this 
+    authorName: req.body.authorName,
     title: req.body.title,
+    location: req.body.location,
     postalCode: req.body.postalCode,
     type: {
         plastic: req.body.type.plastic,
@@ -69,7 +71,7 @@ app.post("/create-ad", async function (req, res){
     },
     description: req.body.description,
     contact: req.body.contact, // user contact number auto fill?
-    postImage: req.file.postImage, //May 18th Changed to an image that user can post
+    postImage: null, //req.file.postImage, //May 18th Changed to an image that user can post
     totalBottles: req.body.estimatedBottles
   })
 
@@ -148,7 +150,7 @@ app.get("/getName/:id", function (req, res) {
   console.log("Call to server for user's name successful");
   async function getData() {
     let response = await db.collection("users").findOne({_id: req.params.id});
-    console.log(response);
+    console.log("Returned document: " + response);
     res.send(response);
   }
   getData();
@@ -161,7 +163,7 @@ app.post("/get-count-records", function (req, res) {
   res.setHeader('Content-Type', 'application/json');
 
   let count = db.collection("posts").countDocuments({
-    status: 'open' || 'pending'
+    status: 'Open' || 'pending'
   });
 
   res.send({ records: `${count}` });
@@ -172,7 +174,6 @@ app.post("/get-count-records", function (req, res) {
 app.get("/get-landing-records", function (req, res) {
   // res.setHeader('Content-Type', 'application/json');
 
-  getData().catch((err) => console.error(err));
 
   async function getData() {
     let dataToSend = await db.collection("posts").find({
@@ -184,6 +185,7 @@ app.get("/get-landing-records", function (req, res) {
     res.json(dataToSend);
   
   }
+  getData().catch((err) => console.error(err));
 })
 
 // Similar to loading all the landing recording. But only one record... and complete info displayed
@@ -224,6 +226,45 @@ app.post("/claim_Req", (req, res) => {
 
   res.send({ records: `claim req success` });
 })
+
+app.post("update-own-post", (req, res) => {
+  db.collection("posts").replaceOne({
+    _id: mongoose.Types.ObjectId(req.body._id),
+    }, {
+      authorID: req.body.authorID,
+      authorName: req.body.authorName,
+      title: req.body.title,
+      postalCode: req.body.postalCode,
+      type: {
+        plastic: req.body.plastic,
+        glass: req.body.glass,
+        aluminum: req.body.aluminum,
+        other: req.body.other
+      },
+      totalBottles: req.body.totalBottles,
+      description: req.body.description,
+      contact: req.body.contact,
+      postImage: req.body.imageURL,
+      collectorID: null,
+      status: "Open",
+      postDate: req.body.date
+    });
+})
+
+app.get('/get-own-post/:id', (req, res) => {
+  console.log("Call to server for user's own post successful");
+  async function getOwnPost(){
+    let dataToSend = await db.collection("posts").find({
+      authorID: req.params.id,
+      status: "Open"
+    }).toArray();
+    console.log("Returning own post: " + dataToSend);
+    res.send(dataToSend);
+  }
+  getOwnPost();
+
+  
+});
 
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
 // this is for aws hosting

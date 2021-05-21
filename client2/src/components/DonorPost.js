@@ -8,9 +8,9 @@ import { CardMedia, Drawer, Button, List, Divider, ListItem, ListItemIcon, ListI
 
 import AboutUsHeading from './Header';
 
-const photo = [
-    "https://dummyimage.com/600x400/000/fff",
-];
+// const photo = [
+//     "https://dummyimage.com/600x400/000/fff",
+// ];
 
 const useStyles = makeStyles(() => ({
     topHeading: {
@@ -71,18 +71,40 @@ export default function DonorPost() {
     const aluminumRef = useRef();
     const glassRef = useRef();
     const history = useHistory();
+    const [postIDState, setID] = useState("");
+    const [authorName, setAuthorName] = useState("");
 
     useEffect(() => {
-        fetch(`/get-own-post/${currentUser.uid}`).then((res) => res.json())
+        fetch(`/get-own-post/${currentUser.uid}${authorName}`).then((res) => res.json())
         .then((result) => {
             setDonation(result);
-            console.log(yourDonation);
+            console.log("Your dono: " + yourDonation);
+            setID(result._id);
+            setAuthorName(result.authorName);
         })
     }, []);
 
-    async function handleUpdate() {
+    async function handleUpdate(e) {
+        e.preventDefault();
         let newData = {
-
+            _id: postIDState,
+            author: {
+                id: currentUser.uid,
+                name: authorName
+            },
+            title: titleRef.current.value,
+            postalCode: postalRef.current.value,
+            type: {
+                // plastic: plastic.checked,
+                // glass: glass.checked,
+                // aluminum: aluminum.checked,
+                // other: other.checked,
+            },
+            totalBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
+            description: descRef.current.value,
+            contact: contactRef.current.value,
+            imageURL: null, //We will change this when we figure out image storing
+            // postDate: dateRef.current.value
         }
 
         // Default options are marked with *
@@ -100,12 +122,19 @@ export default function DonorPost() {
         }); // parses JSON response into native JavaScript objects
     }
 
+    function handleReturn(e) {
+        e.preventDefault();
+        history.push("/inbox");
+    }
+
     return (
         <div className={classes.background}>
             <AboutUsHeading />
             <div className={classes.overall}>
-                {yourDonation.map((dono) => (
-                    <div>
+                {yourDonation.map((dono) => 
+                (<Container>
+                    
+                        <Container />
                     <div className={classes.topHeading}>
                         <p>Posting Date: {dono.postDate}</p>
                             <div className = {classes.postingDate}></div> {/* where posting date woud go into*/}
@@ -116,15 +145,15 @@ export default function DonorPost() {
                         <img src={dono.postImage} width={200} height={100} />
                         <Button variant="outlined" className={classes.updatePhoto}>Update Photo</Button>
                     </div> */}
-                    </div>
-                ))}
-                <Container>
+                
+                
                     <TextField
                     variant="outlined"
                     margin="normal"
                     fullWidth
                     id="title"
                     label="Title"
+                    value={dono.title}
                     name="Title"
                     autoFocus
                     inputRef={titleRef}
@@ -136,6 +165,7 @@ export default function DonorPost() {
                     fullWidth
                     id="City"
                     label="City/Neighbourhood"
+                    value={dono.location}
                     name="City"
                     inputRef={cityRef}
                     />
@@ -146,6 +176,7 @@ export default function DonorPost() {
                     fullWidth
                     id="postalCode"
                     label="Postal Code"
+                    value={dono.postalCode}
                     name="Postal Code"
                     inputRef={postalRef}
                     />
@@ -155,6 +186,7 @@ export default function DonorPost() {
                     name="Bottles"
                     type="number"
                     label="Total bottles"
+                    value={dono.totalBottles}
                     fullWidth
                     margin="normal"
                     variant="outlined"
@@ -163,19 +195,19 @@ export default function DonorPost() {
 
                     <Grid item xs={12}>
                     <FormControlLabel
-                        control={<Checkbox value="plastic" color="primary" inputRef={plasticRef} />}
+                        control={<Checkbox value="plastic" color="primary" id="plastic" checked={dono.type.plastic}/>}
                         label="Plastic"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Glass" color="primary" inputRef={glassRef} />}
+                        control={<Checkbox value="Glass" color="primary" id="glass" checked={dono.type.glass}/>}
                         label="Glass"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Aluminum" color="primary" inputRef={aluminumRef} />}
+                        control={<Checkbox value="Aluminum" color="primary" id="aluminum" checked={dono.type.aluminum}/>}
                         label="Aluminum"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Other" color="primary" inputRef={otherRef} />}
+                        control={<Checkbox value="Other" color="primary" id="other" checked={dono.type.other}/>}
                         label="Other"
                     />
                     </Grid>
@@ -185,6 +217,7 @@ export default function DonorPost() {
                     fullWidth
                     id="description"
                     label="Description"
+                    value={dono.description}
                     name="Description"
                     inputRef={descRef}
                     />
@@ -193,14 +226,16 @@ export default function DonorPost() {
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    id="postalCode"
+                    id="contactInfo"
                     label="Contact Info"
+                    value={dono.contact}
                     name="Contact Info"
                     inputRef={contactRef}
                     />
             </Container>
+            ))}
                 <div className={classes.buttons}>
-                    <Button variant="outlined" className={classes.return} onClick={history.push("/inbox")}>Return</Button>
+                    <Button variant="outlined" className={classes.return} onClick={handleReturn}>Return</Button>
                     <Button variant="outlined" className={classes.update} onClick={handleUpdate}>Update</Button>
                 </div>
             </div>

@@ -3,7 +3,6 @@ import "../css/landingPage.css";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import { useHistory } from "react-router-dom";
-// import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container, Paper, Typography, Card, Drawer } from "@material-ui/core";
@@ -133,26 +132,6 @@ function Landing() {
   const toggleDrawer = (open) => (event) => {
     setState(open);
   };
-
-  useEffect(() => {
-    fetch("/get-landing-records")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          this.setState({
-            isLoaded: true,
-            postDetails: result.records, // Large JSON object with everything open or pending
-          });
-        }
-        // (error) => {
-        //   this.setState({
-        //     isLoaded: false,
-        //     postDetails: [],
-        //   });
-        // }
-      );
-  }, []);
 
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);

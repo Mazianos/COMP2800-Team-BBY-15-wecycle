@@ -97,7 +97,7 @@ export default function Header() {
     }
 
     function postAd() {
-        history.push("/postAd");
+        history.push("/postDono");
     }
 
     function inbox() {
@@ -163,7 +163,7 @@ export default function Header() {
             <Divider />
             <List>
                 {['Post Bottles'].map((text, index) => (
-                    <ListItem button key = {text} onClick = {loginRedirect}>
+                    <ListItem button key = {text} onClick = {postAd}>
                         <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
                         <ListItemText primary = {text} />
                     </ListItem>
