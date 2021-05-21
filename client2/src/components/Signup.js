@@ -79,11 +79,6 @@ export default function Signup() {
             setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-<<<<<<< HEAD
-           // await login(emailRef.current.value, passwordRef.current.value);
-            console.log(currentUser.uid, emailRef.current.value);
-=======
->>>>>>> InboxFeature1
 
             let myData = {
                 name: nameRef.current.value,
@@ -91,14 +86,8 @@ export default function Signup() {
                 contactNum: "testNum",
                 id: currentUser.uid,
                 email: emailRef.current.value
-<<<<<<< HEAD
-            }
-            
-            console.log(myData);
-=======
             }   
 
->>>>>>> InboxFeature1
             $.ajax({
                 url: "/create-user",
                 data: myData,

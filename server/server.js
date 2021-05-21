@@ -8,9 +8,9 @@ const fs = require("fs");
 const bodyParser  = require('body-parser');
 const credentials = fs.readFileSync("./cert.pem");
 const url = "mongodb+srv://wecycle-vancouver.2hson.mongodb.net/WecycleMain?authSource=%24external&authMechanism=MONGODB-X509&retryWrites=true&w=majority";
-const multer = require("multer");
 // IMPORT SCHEMAS
 const myModels = require('./models/schema.js');
+const path = require('path');
 
 // mongoose.connect comes first
 async function connectToDB(){
@@ -36,18 +36,6 @@ db.once('open', function() {
 });
 
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "../client2/src/images/uploads"); 
-  },
-  filename: (req, file, callback) => {
-    callback(null, file.originalName);
-  }
-})
-
-const upload = multer({storage: storage});
-
-
 
 // For hosting  ** THIS IS REQUIRED*** 
 app.use(express.static(path.resolve(__dirname, '../client2/build')));
@@ -63,7 +51,7 @@ app.use(bodyParser.json());
 // EXPRESS METHODS
 
 //Add a new ad
-app.post("/create-ad", upload.single("postImage"), async function (req, res){
+app.post("/create-ad", async function (req, res){
   console.log(req.file);
   res.setHeader('Content-Type', 'application/json');
   myModels.User.findOne({
@@ -81,11 +69,11 @@ app.post("/create-ad", upload.single("postImage"), async function (req, res){
     },
     description: req.body.description,
     contact: req.body.contact, // user contact number auto fill?
-<<<<<<< HEAD
-    postImage: req.file.postImage //May 18th Changed to an image that user can post
-  });
+    postImage: req.file.postImage, //May 18th Changed to an image that user can post
+    totalBottles: req.body.estimatedBottles
+  })
 
-  app.post("/", upload.single("postImage"), (req, res) => {
+  app.post("/", (req, res) => {
     image.findById(req.params.id)
     .then((image) => {
       image.title = req.body.title,
@@ -94,11 +82,6 @@ app.post("/create-ad", upload.single("postImage"), async function (req, res){
       image.postImage = req.file.path
     })
   });
-=======
-    postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-    totalBottles: req.body.estimatedBottles
-  })
->>>>>>> InboxFeature1
 
   newPost.save(function(err, newPost){
     if (err) return console.error(err);
@@ -107,15 +90,9 @@ app.post("/create-ad", upload.single("postImage"), async function (req, res){
   res.send({ status: "success", msg: "post created." });
 });
 
-<<<<<<< HEAD
-app.post("/create-user", async function (req, res) {
-  console.log("accessing server side");
-  var newUser = new myModels.User({
-=======
 app.post("/create-user", function (req, res) {
   console.log("Call to server successful");
   let newUser = new myModels.User({
->>>>>>> InboxFeature1
     name: req.body.name,
     contactNumber: req.body.contactNumber,
     bottlesDonated: 0,
@@ -130,10 +107,7 @@ app.post("/create-user", function (req, res) {
   })
 });
 
-<<<<<<< HEAD
-// when landing page loads, then run this request to determine the # of cards we need to dynamically generate. -Ray
-app.post("/get-count-records", function (req, res) {
-=======
+
 
 app.get("/generate-active-donations/:id", function (req, res) {
   console.log("Call to query db successful, returning active donations");
@@ -181,10 +155,9 @@ app.get("/getName/:id", function (req, res) {
 });
 
 
-// THIS POST CREATES A TABLE DATA WITH USE OF MONGODB
-app.post("/create-table", function (req, res) {
+// when landing page loads, then run this request to determine the # of cards we need to dynamically generate. -Ray
+app.post("/get-count-records", function (req, res) {
 
->>>>>>> InboxFeature1
   res.setHeader('Content-Type', 'application/json');
 
   let count = db.collection("posts").countDocuments({

@@ -1,8 +1,10 @@
-<<<<<<< HEAD
-import React, { useRef, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import React, { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import $ from 'jquery';
+import { useAuth } from "../contexts/AuthContext";
+
+
+
 //import cssClasses from '*.module.css';
 
 
@@ -59,13 +61,6 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1)
     }
   }));
-=======
-import React, { useRef, useState, useEffect } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
-import $ from 'jquery';
-import { useAuth } from "../contexts/AuthContext";
->>>>>>> InboxFeature1
 
 export default function PostAd() {
     const titleRef = useRef();
@@ -83,11 +78,8 @@ export default function PostAd() {
     const [loading, setLoading] = useState(false);
     const {currentUser} = useAuth();
     const history = useHistory();
-<<<<<<< HEAD
     const classes = useStyles();
-=======
     const [name, setName] = useState();
->>>>>>> InboxFeature1
 
     function handleChange(e) {
         setState({
@@ -282,10 +274,10 @@ export default function PostAd() {
              inputRef={contactRef}
              />
 
-        <Form.Group id="pictures">
+        {/* <Form.Group id="pictures">
         <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
         <img src={imageState.file} id="previewImage"/>
-        </Form.Group>
+        </Form.Group> */}
        
         <Button
         type="submit"
@@ -306,9 +298,4 @@ export default function PostAd() {
 
     )
 }
-
-    function createAd() {
-        //Ajax call wtih all the data to create an ad here.
-        
-    }
     

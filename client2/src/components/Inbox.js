@@ -60,8 +60,8 @@ export default function Inbox() {
                 <List>
                 {completeDonations.map((donation) => (
                     <ListItem key={donation}>
-                        <ListItemText primary={donation.author.name}/>
-                        <Paper>Total Bottles: {donation.totalBottles}</Paper>
+                        <ListItemText primary={donation.title}/>
+                        <Paper>Name: {donation.author.name}<br/>Total Bottles: {donation.totalBottles}</Paper>
                     </ListItem>
                 ))}
                 </List>
