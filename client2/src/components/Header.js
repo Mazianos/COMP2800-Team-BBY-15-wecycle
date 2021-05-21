@@ -10,10 +10,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
-import LockOpenIcon from '@material-ui/icons/LockOpen'; // log in
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'; // sign out
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'; //user profile?
-import GroupIcon from '@material-ui/icons/Group'; // team 
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import GroupIcon from '@material-ui/icons/Group';
 
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import wecycle from '../images/wecycle_logo.PNG';
@@ -63,12 +63,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-/**
- * The code line 63 to 147 is composed of Material UI Drawer Component code. 
- * Please refer to https://material-ui.com/components/drawers/ for 'Temporary Drawer'
- * 
- * @returns header 
- */
+   {/* 
+* Used template of copyright blurb from material UI templates and MUI CSS. Lines 120-220.
+* @see https://material-ui.com/components/drawers/
+*
+**/}
 export default function Header() {
     const classes = useStyles();
 
@@ -192,10 +191,9 @@ export default function Header() {
         <div className={classes.main} id="header">
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
-                    <div className={classes.navbarTitle} onClick = "/">
-                        <img src = {wecycle} className={classes.wecycleLogo} onClick = "/" />
+                    <div className={classes.navbarTitle} >
+                        <img src = {wecycle} className={classes.wecycleLogo} onClick={landingRedirect} />
                     </div>
-                    <IconButton>
 
                         {['right'].map((anchor) => (
 
@@ -209,7 +207,6 @@ export default function Header() {
                                 </Drawer>
                             </React.Fragment>
                         ))}
-                    </IconButton>
 
                 </Toolbar>
             </AppBar>
