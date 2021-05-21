@@ -99,7 +99,6 @@ const useStyles = makeStyles((theme) => ({
     height: "30vh",
     marginBottom: "0vh",
     padding: 0,
-    marginTop: "40px",
   },
   list: {
     width: "100%",
@@ -133,26 +132,6 @@ function Landing() {
   const toggleDrawer = (open) => (event) => {
     setState(open);
   };
-
-  useEffect(() => {
-    fetch("/get-landing-records")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          this.setState({
-            isLoaded: true,
-            postDetails: result.records, // Large JSON object with everything open or pending
-          });
-        }
-        // (error) => {
-        //   this.setState({
-        //     isLoaded: false,
-        //     postDetails: [],
-        //   });
-        // }
-      );
-  }, []);
 
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
@@ -190,13 +169,12 @@ function Landing() {
   }, [element]);
 
   function handleCreateAd() {
-    history.push('/postDono');
+    history.push("/postDono");
   }
 
   return (
-    
-    <div id="landingPage">
-      <div id="navbarContainer">
+    <div>
+      <div >
         <Header />
       </div>
       {/* <div className="quoteContainer">
@@ -204,7 +182,6 @@ function Landing() {
           <li id="firstParagraph">Donate bottles for the community</li>
           <br></br>
           <li id="secondParagraph">Recycle bottles for the community </li>
-          <li id="secondParagraph">Share Recycleable Bottles and Cans </li>
           <li id="thirdParagraph">In the City of Vancouver</li>
         </ul>
       </div> */}
@@ -212,9 +189,9 @@ function Landing() {
         <Container className={classes.sizing}>
           <Grid container className={classes.sizing}>
             <Grid item xs={12} className={classes.sizing}>
-              <Grid container justify="center" spacing={4}>
+              <Grid container justify="center" spacing={3}>
                 {[0, 1, 2].map((value) => (
-                  <Grid key={value} style={{ marginTop: "5vh" }} item>
+                  <Grid key={value} style={{ marginTop: "20vh" }} item>
                     <div className="paperCSS">
                       <Typography>Hello</Typography>
                     </div>
@@ -223,12 +200,19 @@ function Landing() {
               </Grid>
             </Grid>
           </Grid>
-          <Typography variant="h5" component="h5" align="center" display="inline"> 
-            Let's recycle! 
-          </Typography> 
-          <Typography variant="h6" component="h5" >
-            Donate your bottles or help your neighbors recycle them. 
-          </Typography> 
+          <div id="textBlock">
+            <Typography
+              variant="h5"
+              component="h5"
+              align="center"
+              display="inline"
+            >
+              Let's recycle!
+            </Typography>
+            <Typography variant="h6" component="h5">
+              Donate your bottles or help your neighbors recycle them.
+            </Typography>
+          </div>
 
           <button className="signupBtn" onClick={handleCreateAd}>
             Donate now!
@@ -262,23 +246,6 @@ function Landing() {
           <li key={more} ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
-      <button className="signupBtn" onClick={handleCreateAd}>Post A New Donation</button>
-    <div className="adListings">
-      <ul>
-      {data.map(row =>(
-        <li key={row} style={{background: "transparent", color: "white"}}>
-          {row}
-        </li>
-      ))}
-
-      {loading && <li>Loading...</li>}
-
-      {!loading && more &&(
-        <li ref={setElement} style={{background: "white"}}>
-        </li>
-      )}
-      </ul>
-    </div>
     </div>
   );
 }

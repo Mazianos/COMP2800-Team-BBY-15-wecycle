@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.bottleLogo {
+    box-sizing: border-box;
+    position: absolute;
+}
+
+
+
+section {
+    position: relative;
+    
+}
+
