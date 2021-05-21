@@ -144,8 +144,9 @@ export default function Login() {
         variant="contained"
         color="primary"
         className={classes.submit}
+        onClick={handleSubmit}
         >
-        Sign In
+        Log In
         </Button>
         <Grid container>
         <Grid item xs>

@@ -25,8 +25,8 @@ function App() {
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
                     {/* <Route path="/postDetails" component={PostingDetails}/> */}
-                    <PrivateRoute path="/donorPost" component={DonorPost}/>
                     <Route path="/error" component={Error}/>
+                    <PrivateRoute path="/donorPost" component={DonorPost}/>
                     <PrivateRoute path="/postDono" component={PostAd}/>
                     <PrivateRoute path="/inbox" component={Inbox}/>
                 </Switch>

@@ -1,6 +1,8 @@
-import React from 'react';
-
+import React, {useState, useRef, useEffect} from 'react';
+import { useAuth } from "../contexts/AuthContext";
+import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, FormControlLabel, Checkbox, Container} from '@material-ui/core';
 
 import { CardMedia, Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar, Typography, Collapse, TextField } from '@material-ui/core';
 
@@ -27,17 +29,14 @@ const useStyles = makeStyles(() => ({
         marginLeft: "15px",
     },
     firstTextfield: {
-        height: "300px",
         width: "130%",
         marginTop: "4em",
     },
     secondTextfield: {
-        height: "80px",
         width: "130%",
         marginTop: "4em",
     },
     thirdTextfield: {
-        height: "80px",
         width: "130%",
         marginTop: "4em",
         marginBottom: "4em",
@@ -59,68 +58,150 @@ const useStyles = makeStyles(() => ({
 
 export default function DonorPost() {
     const classes = useStyles();
+    const {currentUser} = useAuth();
+    const [yourDonation, setDonation] = useState([]);
+    const titleRef = useRef();
+    const cityRef = useRef();
+    const postalRef = useRef();
+    const descRef = useRef();
+    const contactRef = useRef();
+    const bottleRef = useRef();
+    const plasticRef = useRef();
+    const otherRef = useRef();
+    const aluminumRef = useRef();
+    const glassRef = useRef();
+    const history = useHistory();
+
+    useEffect(() => {
+        fetch(`/get-own-post/${currentUser.uid}`).then((res) => res.json())
+        .then((result) => {
+            setDonation(result);
+            console.log(yourDonation);
+        })
+    }, []);
+
+    async function handleUpdate() {
+        let newData = {
+
+        }
+
+        // Default options are marked with *
+        await fetch("/update-own-post", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            }, // manual, *follow, error
+            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(newData) // body data type must match "Content-Type" header
+        }).then((res) => res.json()).then((result) => {
+
+        }); // parses JSON response into native JavaScript objects
+    }
 
     return (
         <div className={classes.background}>
             <AboutUsHeading />
             <div className={classes.overall}>
-                <div className={classes.topHeading}>
-                    <p>Posting Date: </p>
-                        <div className = {classes.postingDate}></div> // where posting date woud go into
-                    <p>Status: </p>
-                        <div className = {classes.status}></div> // where status would go into
-                </div>
-                <div className={classes.claimNotification}>
+                {yourDonation.map((dono) => (
+                    <div>
+                    <div className={classes.topHeading}>
+                        <p>Posting Date: {dono.postDate}</p>
+                            <div className = {classes.postingDate}></div> {/* where posting date woud go into*/}
+                        <p>Status: {dono.status}</p>
+                            <div className = {classes.status}></div> {/*where status would go into*/}
+                    </div>
+                    {/* <div className={classes.image}>
+                        <img src={dono.postImage} width={200} height={100} />
+                        <Button variant="outlined" className={classes.updatePhoto}>Update Photo</Button>
+                    </div> */}
+                    </div>
+                ))}
+                <Container>
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="title"
+                    label="Title"
+                    name="Title"
+                    autoFocus
+                    inputRef={titleRef}
+                    />
 
-                </div>
-                <div className={classes.image}>
-                    <img src="https://dummyimage.com/600x400/000/fff" width={200} height={100} />
-                    <Button variant="outlined" className={classes.updatePhoto}>Update Photo</Button>
-                </div>
-                <div className={classes.textFieldOne}>
                     <TextField
-                        id="text-field-one"
-                        label=""
-                        placeholder="Description (type, city, etc..)"
-                        variant="outlined"
-                        InputProps = {{
-                            className: classes.firstTextfield
-                        }}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="City"
+                    label="City/Neighbourhood"
+                    name="City"
+                    inputRef={cityRef}
                     />
-                </div>
-                <div className={classes.textFieldTwo}>
+
                     <TextField
-                        id="text-field-two"
-                        label=""
-                        placeholder="Contact info."
-                        variant="outlined"
-                        size="small"
-                        width="5"
-                        columns = "15"
-                        multiline={true}
-                        InputProps = {{
-                            className: classes.secondTextfield
-                        }}
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="postalCode"
+                    label="Postal Code"
+                    name="Postal Code"
+                    inputRef={postalRef}
                     />
-                </div>
-                <div className={classes.textFieldThree}>
+
                     <TextField
-                        id="text-field-two"
-                        label=""
-                        placeholder="General location"
-                        variant="outlined"
-                        size="small"
-                        width="5"
-                        columns = "15"
-                        multiline={true}
-                        InputProps = {{
-                            className: classes.thirdTextfield
-                        }}
+                    id="bottleTotal"
+                    name="Bottles"
+                    type="number"
+                    label="Total bottles"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    inputRef={bottleRef}
                     />
-                </div>
+
+                    <Grid item xs={12}>
+                    <FormControlLabel
+                        control={<Checkbox value="plastic" color="primary" inputRef={plasticRef} />}
+                        label="Plastic"
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="Glass" color="primary" inputRef={glassRef} />}
+                        label="Glass"
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="Aluminum" color="primary" inputRef={aluminumRef} />}
+                        label="Aluminum"
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="Other" color="primary" inputRef={otherRef} />}
+                        label="Other"
+                    />
+                    </Grid>
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="description"
+                    label="Description"
+                    name="Description"
+                    inputRef={descRef}
+                    />
+                    
+                    <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    id="postalCode"
+                    label="Contact Info"
+                    name="Contact Info"
+                    inputRef={contactRef}
+                    />
+            </Container>
                 <div className={classes.buttons}>
-                    <Button variant="outlined" className={classes.return}>Return</Button>
-                    <Button variant="outlined" className={classes.update}>Update</Button>
+                    <Button variant="outlined" className={classes.return} onClick={history.push("/inbox")}>Return</Button>
+                    <Button variant="outlined" className={classes.update} onClick={handleUpdate}>Update</Button>
                 </div>
             </div>
         </div>
