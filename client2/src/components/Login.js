@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router-dom';
 
-
+import LoginHeading from './Header';
 
 //Material UI imports 
 
@@ -46,7 +46,7 @@ function Copyright() {
   //Styling for MUI
 const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(16),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -102,14 +102,15 @@ export default function Login() {
 *
 **/}
     return (
-        
+
     <Container component="main" maxWidth="xs">
+    <LoginHeading />
     <CssBaseline />
     <div className={classes.paper}>
     <Typography component="h1" variant="h5">
         Log in
     </Typography>
-    <form className={classes.form} noValidate>
+    <form className={classes.form} noValidate onSubmit={handleSubmit}> 
         <TextField
         variant="outlined"
         margin="normal"

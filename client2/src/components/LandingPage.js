@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/landingPage.css";
 import Navbar from "./Navbar";
+import Header from "./Header";
 import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import ProductCard from "./ProductCard";
@@ -27,7 +28,7 @@ fetch("/get-landing-records")
   });
 
 const perPage = 60;
-const types = { 
+const types = {
   start: "START",
   loaded: "LOADED",
 };
@@ -95,9 +96,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   sizing: {
-    height: "50vh",
+    height: "30vh",
     marginBottom: "0vh",
     padding: 0,
+    marginTop: "40px",
   },
   list: {
     width: "100%",
@@ -195,7 +197,7 @@ function Landing() {
     
     <div id="landingPage">
       <div id="navbarContainer">
-        <Navbar />
+        <Header />
       </div>
       {/* <div className="quoteContainer">
         <ul className="quote">
@@ -221,12 +223,18 @@ function Landing() {
               </Grid>
             </Grid>
           </Grid>
+          <Typography variant="h5" component="h5" align="center" display="inline"> 
+            Let's recycle! 
+          </Typography> 
+          <Typography variant="h6" component="h5" >
+            Donate your bottles or help your neighbors recycle them. 
+          </Typography> 
+
+          <button className="signupBtn" onClick={handleCreateAd}>
+            Donate now!
+          </button>
         </Container>
       </div>
-
-      <button className="signupBtn" onClick={handleCreateAd}>
-        Post A New Ad
-      </button>
 
       {/* grid container for the dynamically generated cards go here! */}
       <div className="adListings">
@@ -236,10 +244,7 @@ function Landing() {
           // direction="column"
         >
           {data.map((card) => (
-            // <li key={row} style={{ background: "transparent", color: "white" }}>
-            //   {row}
-            // </li>
-            <Grid item key={card} xs={12} sm={6} md={3} align="center">
+            <Grid item key={card._id} xs={12} sm={6} md={3} align="center">
               <ProductCard
                 title={card.title}
                 date={card.postDate}
@@ -247,13 +252,6 @@ function Landing() {
                 postID={card._id}
                 allData={card} // how about i just pass the entire card instead of making another fetch(0)
               />
-              {/* <Drawer
-                anchor={"bottom"}
-                open={state}
-                onClose={toggleDrawer(false)}
-                >
-                {<DrawerContent />}
-              </Drawer> */}
             </Grid>
           ))}
         </Grid>
@@ -261,7 +259,7 @@ function Landing() {
         {loading && <li>Loading...</li>}
 
         {!loading && more && (
-          <li ref={setElement} style={{ background: "white" }}></li>
+          <li key={more} ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
       <button className="signupBtn" onClick={handleCreateAd}>Post A New Donation</button>

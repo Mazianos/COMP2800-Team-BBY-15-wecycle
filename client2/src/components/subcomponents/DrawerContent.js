@@ -12,8 +12,10 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
+import Snackbar from "@material-ui/core/Snackbar";
 import ContactPhoneOutlinedIcon from "@material-ui/icons/ContactPhoneOutlined";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function grabData(inputPostID) {
   fetch(`/postDetails/${inputPostID}`)
@@ -24,8 +26,26 @@ function grabData(inputPostID) {
     })
     .catch((err) => {
       console.log(err + " data not loaded!");
-    //   alert("Are you sure you have the correct postID?");
+      //   alert("Are you sure you have the correct postID?");
       return null;
+    });
+}
+
+function updateData(myData) {
+  console.log("running updateData", myData);
+  fetch("/claim_Req", {
+    method: "POST", 
+    body: JSON.stringify(myData), // stringify is needed to send!!!
+    headers: {  
+      "Content-Type": "application/json" // content type is needed as well!!!
+  },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((e) => {
+      console.error("Error:", e);
     });
 }
 
@@ -52,12 +72,55 @@ const useStyles = makeStyles({
 });
 
 export default function DrawerContent(props) {
+  const { currentUser } = useAuth(); // firebase
+  const [open, setOpen] = React.useState(false); // popup alter when 'claimed'
   const classes = useStyles();
   const history = useHistory();
   var postData = grabData(props.postID);
   if (postData === null) {
     history.push("/");
   }
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
+  function claimRequest() {
+    console.log("clicked");
+    // Send the data
+    let dataToSend = {
+      postID: props.allData._id,
+      postAuthor: props.allData.author,
+      postCollector: currentUser.uid || "testUser",
+      // postCollector: "testUser",
+    };
+    console.log("your data", dataToSend);
+
+    console.log("trying to right before running fetch");
+    updateData(dataToSend)
+    console.log("runs after the updateData")
+
+    handleClick();
+    // Close the drawer
+    // props.reRender();
+    props.onClose();
+    // setTimeout(history.push("/"), 3000);
+    // history.push("/");
+    window.location.reload();
+
+    // Post some sort of feedback.
+
+  }
+
   return (
     <div>
       <Card className={classes.root}>
@@ -69,7 +132,7 @@ export default function DrawerContent(props) {
         <div className={classes.contentCentered}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Location: {props.allData.postalCode}
+              Location: {props.allData.postalCode || "oops! this is empty"}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
               Posting Date: {props.allData.postDate}
@@ -95,13 +158,20 @@ export default function DrawerContent(props) {
             size="small"
             color="primary"
             variant="contained"
-            onClick={() => console.log("hello")}
+            onClick={() => claimRequest()}
+            // onClick={() => console.log("hello")}
           >
             Claim
           </Button>
         </CardActions>
       </Card>
-
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={6000}
+        message="Successfully Claimed!"
+      />
       <Divider />
     </div>
   );

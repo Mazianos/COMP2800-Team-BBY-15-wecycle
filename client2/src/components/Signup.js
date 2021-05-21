@@ -14,6 +14,7 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import SignupHeading from './Header';
 
      {/* 
 * Used template of copyright blurb from material UI templates and MUI CSS. Lines 26-55.
@@ -38,7 +39,7 @@ function Copyright() {
 
   const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(16),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -124,6 +125,7 @@ export default function Signup() {
         
         <Container component="main" maxWidth="xs">
         <CssBaseline/>
+        <SignupHeading />
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Sign up

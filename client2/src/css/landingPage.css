@@ -1,5 +1,5 @@
 .adListings {
-  background-image: url('../images/white-concrete.jpg');
+  background-image: url("../images/white-concrete.jpg");
   background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -9,8 +9,10 @@
 }
 
 #hero {
-  background-image: url('../images/landingpagefinal.jpg');
+  background-color: #6d706a;
+  /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
   height: 82vh;
+  text-align: center;
 }
 
 .quoteContainer {
@@ -18,25 +20,29 @@
   justify-content: center;
 }
 
-.landingQuote{
+.landingQuote {
   color: white;
   font-weight: bold;
   font-size: 32pt;
 }
 
 .signupBtn {
-  position: fixed;
+  /* position: fixed;
   top: 95%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); */
+  display: grid;
+  /* align-self: center; */
+  margin: 0 auto;
+  margin-top: 10vh;
   background-color: #4f772d;
   box-shadow: 0 3px #999;
   color: white;
   font-size: 16px;
   font-weight: bold;
   padding: 10px 16px;
-  outline:none;
+  outline: none;
   border: none;
   cursor: pointer;
   border-radius: 16px;
@@ -51,21 +57,21 @@
   box-shadow: 2px 2px #666;
 }
 
-.quoteContainer{
+.quoteContainer {
   top: 80%;
   left: 50%;
 }
 
 .quote {
   list-style-type: none;
-  color: white;
+  /* color: white; */
   font-size: 24pt;
 }
 
-#firstParagraph, #thirdParagraph {
+#firstParagraph,
+#thirdParagraph {
   text-align: center;
 }
-
 
 .paperCSS {
   background: rgba(255, 255, 255, 0.2);
@@ -73,9 +79,15 @@
   width: 100px;
 }
 
+#textBlock {
+  display: grid;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 600px) {
   #hero {
-    background-image: url('../images/mobileLanding.png');
+    background-color: #6d706a;
+    /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
     object-fit: cover;
     background-repeat: no-repeat;
   }
