@@ -111,7 +111,7 @@ export default function Header() {
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
                     <h1 className={classes.navbarTitle}>
-                        We<span className={classes.colorText}>cycle</span>
+                        We <a href="./html/easteregg.html"><span className={classes.colorText}>cycle</span> </a>
                     </h1>
                     <IconButton>
 
