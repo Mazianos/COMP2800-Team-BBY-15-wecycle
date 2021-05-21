@@ -49,7 +49,7 @@ export default function Inbox() {
                 Accepted Donations
                 <List>
                     {activeDonations.map((donation) => (
-                        <ListItem key={donation}>
+                        <ListItem key={donation._id}>
                             <ListItemText primary={donation.title}/>
                             <Paper>Name: {donation.author.name}<br/>Contact Number: {donation.contact}<br/>Total Bottles: {donation.totalBottles}</Paper>
                         </ListItem>
