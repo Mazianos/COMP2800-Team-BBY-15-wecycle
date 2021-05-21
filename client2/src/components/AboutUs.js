@@ -1,10 +1,11 @@
-import React from 'react';
-
+import React, { useState, useEffect, useRef }  from 'react';
 import Ray from '../images/ray.jpg';
 import Jason from '../images/Jason_Ahn.jpg';
 import Johnson from '../images/JLau.png';
 import Mazin from '../images/MazM.jpg';
 import waterBottle from '../images/water-bottle.jpg';
+import nature from '../images/nature.jpg';
+import rocket from '../images/rocket.jpg';
 
 // Components imported from material-ui
 import { Collapse, IconButton, Button, Typography, AppBar, Card, CardActions, CardActionArea, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
@@ -23,7 +24,7 @@ const useStyles = makeStyles(() => ({
         maxHeight: '100vh',
         maxWidth: '100vw',
         backgroundSize: 'cover',
-        backgroundImage: "url(" + waterBottle + ")",
+        backgroundImage: "url(" + nature + ")",
     },
     root: {
         maxWidth: 645,
@@ -80,12 +81,52 @@ const useStyles = makeStyles(() => ({
 
 export default function AboutUs() {
     const classes = useStyles();
+    // const [xPosition, setXPosition] = useState(10);
+    // const [yPosition, setYPosition] = useState(10);
+    // const [xSpeed, setXSpeed] = useState(10);
+    // const [ySpeed, setYSpeed] = useState(10);
+    var xPosition = 10
+    var yPosition = 10
+    var xSpeed = 10
+    var ySpeed = 10
+
+    const FPS = 60;
+    const logo = useRef()
+
+    function moveLogo() {
+
+        if (xPosition + logo.current.clientWidth >= window.innerWidth || xPosition <= 0) {
+            xSpeed = -xSpeed;
+       
+        }
+        if (yPosition + logo.current.clientHeight >= window.innerHeight || yPosition <= 0) {
+            ySpeed = -ySpeed;
+           
+        }
+        logo.current.style.left = xPosition + 'px';
+        logo.current.style.top = yPosition + 'px';
+        
+    }
+
+
+    function run() { 
+        setInterval(()=> {
+            xPosition += xSpeed;
+            yPosition += ySpeed;
+            moveLogo();
+            
+        },1000 / FPS);
+    }
+
+
+
+
 
     return (
         <div className={classes.main}>
             <AboutUsHeading />
             <div className={classes.titleBar}>
-                <h1 className={classes.titleHead}>
+                <h1 className={classes.titleHead} ref={logo} onClick={run} style={{color: "antiquewhite"}}>
                     Meet the Team
                 </h1>
                 <IconButton>
