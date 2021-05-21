@@ -100,6 +100,10 @@ export default function Header() {
         history.push("/postAd");
     }
 
+    function inbox() {
+        history.push("/inbox");
+    }
+
     async function handleLogout() {
         setError('');
 
@@ -160,6 +164,14 @@ export default function Header() {
             <List>
                 {['Post Bottles'].map((text, index) => (
                     <ListItem button key = {text} onClick = {loginRedirect}>
+                        <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
+                        <ListItemText primary = {text} />
+                    </ListItem>
+                ))}
+            </List>
+            <List>
+                {['Profile'].map((text, index) => (
+                    <ListItem button key = {text} onClick = {inbox}>
                         <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
                         <ListItemText primary = {text} />
                     </ListItem>

@@ -183,7 +183,7 @@ export default function PostAd() {
             <Typography component="h1" variant="h5">
         Create a new donation
     </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={createAd}>
             <TextField
              variant="outlined"
              margin="normal"
