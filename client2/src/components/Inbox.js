@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
+import Header from "./Header";
 import { Paper, Button, List, ListItem, ListItemText } from '@material-ui/core'
 import { useAuth } from "../contexts/AuthContext";
 
@@ -37,8 +38,8 @@ export default function Inbox() {
 
     return (
         <>
-            <Navbar/>
-            <div>
+            <Header />
+            <div style={{ marginTop: "13vh" }}>
                 Your Donation
                 <Paper elevation={0} variant="outlined">
                     <Button variant="contained" ></Button>
