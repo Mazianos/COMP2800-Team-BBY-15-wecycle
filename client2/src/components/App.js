@@ -24,7 +24,6 @@ function App() {
                     <Route path="/signup" component={Signup}/>
                     <Route path="/login" component={Login}/>
                     <Route path="/aboutUs" component={AboutUs}/>
-                    {/* <Route path="/postDetails" component={PostingDetails}/> */}
                     <PrivateRoute path="/donorPost" component={DonorPost}/>
                     <Route path="/error" component={Error}/>
                     <PrivateRoute path="/postDono" component={PostAd}/>

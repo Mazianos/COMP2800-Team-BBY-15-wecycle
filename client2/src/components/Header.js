@@ -180,10 +180,9 @@ export default function Header() {
         <div className={classes.main} id="header">
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
-                    <div className={classes.navbarTitle} onClick = "/">
-                        <img src = {wecycle} className={classes.wecycleLogo} onClick = "/" />
+                    <div className={classes.navbarTitle} >
+                        <img src = {wecycle} className={classes.wecycleLogo} onClick={landingRedirect} />
                     </div>
-                    <IconButton>
 
                         {['right'].map((anchor) => (
 
@@ -197,7 +196,6 @@ export default function Header() {
                                 </Drawer>
                             </React.Fragment>
                         ))}
-                    </IconButton>
 
                 </Toolbar>
             </AppBar>
