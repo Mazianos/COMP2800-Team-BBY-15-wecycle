@@ -206,6 +206,25 @@ app.get("/postDetails/:postID", function(req, res) {
 })
 
 
+app.post("/claim_Req", (req, res) => {
+  // console.log("Claim Request received", req.body.myData, req.body.myData._id); 
+  res.setHeader('Content-Type', 'application/json');
+
+
+  async function updatePost() {
+    db.collection("posts")
+      .updateOne({_id: mongoose.Types.ObjectId(req.body.postID)},
+      { $set: {"collectorID": `${req.body.postCollector}`, "status": "Closed"}})
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+      console.log(req.body.postID, req.body.status, req.params.postID, "testing on the backend");
+  }
+  updatePost();
+
+
+  res.send({ records: `claim req success` });
+})
+
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
 // this is for aws hosting
 app.get('/*', (req, res) => {

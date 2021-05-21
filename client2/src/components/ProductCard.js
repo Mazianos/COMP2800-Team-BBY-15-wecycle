@@ -8,10 +8,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
 import DrawerContent from "./subcomponents/DrawerContent";
 import { Drawer } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +31,15 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
+  const history = useHistory();
+  const [needsRender, setRender] = React.useState(false);
+
+  const toggleRender = (refresh) => {
+    setRender(refresh, () => {
+      console.log(needsRender, "parent updated");
+    });
+
+  }
 
   const toggleDrawer = (open) => (event) => {
     setState(open);
@@ -74,7 +82,7 @@ export default function MediaCard(props) {
         </CardActions>
       </Card>
       <Drawer anchor={"bottom"} open={state} onClose={toggleDrawer(false)}>
-        {<DrawerContent postID={props.postID} allData={props.allData}/>}
+        {<DrawerContent postID={props.postID} allData={props.allData} onClose={toggleDrawer(false)} reRender={() => {toggleRender(true)}}/>}
       </Drawer>
     </>
   );
