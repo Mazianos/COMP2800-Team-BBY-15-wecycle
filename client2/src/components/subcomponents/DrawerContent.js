@@ -114,8 +114,8 @@ export default function DrawerContent(props) {
     // props.reRender();
     props.onClose();
     // setTimeout(history.push("/"), 3000);
-    
-   
+    // history.push("/");
+    window.location.reload();
 
     // Post some sort of feedback.
 

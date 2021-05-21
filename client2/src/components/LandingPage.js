@@ -27,7 +27,7 @@ fetch("/get-landing-records")
   });
 
 const perPage = 60;
-const types = { 
+const types = {
   start: "START",
   loaded: "LOADED",
 };
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   sizing: {
-    height: "50vh",
+    height: "30vh",
     marginBottom: "0vh",
     padding: 0,
   },
@@ -199,12 +199,18 @@ function Landing() {
               </Grid>
             </Grid>
           </Grid>
+          <Typography variant="h5" component="h5" align="center" display="inline"> 
+            Let's recycle! 
+          </Typography> 
+          <Typography variant="h6" component="h5" >
+            Donate your bottles or help your neighbors recycle them. 
+          </Typography> 
+
+          <button className="signupBtn" onClick={handleCreateAd}>
+            Donate now!
+          </button>
         </Container>
       </div>
-
-      <button className="signupBtn" onClick={handleCreateAd}>
-        Post A New Ad
-      </button>
 
       {/* grid container for the dynamically generated cards go here! */}
       <div className="adListings">
