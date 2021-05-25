@@ -110,75 +110,39 @@ export default function PostAd() {
       otherBot = true;
     }
 
-        let myData = {
-            authorID: currentUser.uid, 
-            authorName: name, // from session data
-            title: titleRef.current.value,
-            location: cityRef.current.value,
-            postalCode: postalRef.current.value,
-            type: {
-                plastic: plasticBot,
-                glass: glassBot,
-                aluminum: aluminumBot,
-                other: otherBot
-            },
-            estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
-            description: descRef.current.value,
-            contact: contactRef.current.value, // user contact number auto fill?
-            postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-        }
-            setLoading(true);
-            await $.ajax({
-                url: "/create-ad",
-                data: myData,
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    console.log("Success: ", data);
-                    setLoading(false)
-                    history.push("/")
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", jqXHR, textStatus, errorThrown);
-                    setLoading(false);
-                },
-            });
-
-    try {
-      let myData = {
-        author: { id: currentUser.uid, name: name }, // from session data
+    let myData = {
+        authorID: currentUser.uid, 
+        authorName: name, // from session data
         title: titleRef.current.value,
+        location: cityRef.current.value,
         postalCode: postalRef.current.value,
         type: {
-          plastic: plasticBot,
-          glass: glassBot,
-          aluminum: aluminumBot,
-          other: otherBot,
+            plastic: plasticBot,
+            glass: glassBot,
+            aluminum: aluminumBot,
+            other: otherBot
         },
-        estimatedBottles: bottleRef.current.value, // number input for bottles. Sent to user Schema
+        estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
         description: descRef.current.value,
         contact: contactRef.current.value, // user contact number auto fill?
-        postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-      };
-      setLoading(true);
-      await $.ajax({
-        url: "/create-ad",
-        data: myData,
-        dataType: "json",
-        type: "POST",
-        success: function (data) {
-          console.log("Success: ", data);
-          setLoading(false);
-          history.push("/");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.log("Error:", jqXHR, textStatus, errorThrown);
-          setLoading(false);
-        },
-      });
-    } catch (err) {
-      console.error(err);
+        postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
     }
+        setLoading(true);
+        await $.ajax({
+            url: "/create-ad",
+            data: myData,
+            dataType: "json",
+            type: "POST",
+            success: function(data) {
+                console.log("Success: ", data);
+                setLoading(false)
+                history.push("/")
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error:", jqXHR, textStatus, errorThrown);
+                setLoading(false);
+            },
+        });
   }
 
   return (
