@@ -43,17 +43,19 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "green"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(1, 0, 2),
+    background: 'Green'
   },
   upload: {
     margin: theme.spacing(1),
@@ -207,8 +209,8 @@ export default function PostAd() {
       <Container component="main" maxWidth="xs" style={{marginTop: "12vh"}}>
         <CssBaseline />
         <div classname={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Create a new donation
+          <Typography component="h1" variant="h5" className={classes.paper}>
+            Create A New Donation
           </Typography>
           <form className={classes.form} noValidate onSubmit={createAd}>
             <TextField
@@ -264,7 +266,7 @@ export default function PostAd() {
                 control={
                   <Checkbox
                     value="plastic"
-                    color="primary"
+                    color="default"
                     inputRef={plasticRef}
                   />
                 }
@@ -272,7 +274,7 @@ export default function PostAd() {
               />
               <FormControlLabel
                 control={
-                  <Checkbox value="Glass" color="primary" inputRef={glassRef} />
+                  <Checkbox value="Glass" color="default" inputRef={glassRef} />
                 }
                 label="Glass"
               />
@@ -280,7 +282,7 @@ export default function PostAd() {
                 control={
                   <Checkbox
                     value="Aluminum"
-                    color="primary"
+                    color="default"
                     inputRef={aluminumRef}
                   />
                 }
@@ -288,7 +290,7 @@ export default function PostAd() {
               />
               <FormControlLabel
                 control={
-                  <Checkbox value="Other" color="primary" inputRef={otherRef} />
+                  <Checkbox value="Other" color="default" inputRef={otherRef} />
                 }
                 label="Other"
               />
@@ -326,7 +328,6 @@ export default function PostAd() {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
             >
               Submit Donation

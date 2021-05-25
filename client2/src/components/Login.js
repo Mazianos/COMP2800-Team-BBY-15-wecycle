@@ -7,7 +7,6 @@ import LoginHeading from './Header';
 
 //Material UI imports 
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +18,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { green } from '@material-ui/core/colors';
 
 
    {/* 
@@ -50,18 +50,17 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+      color: 'Green'
     },
     form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
+      color: 'Green'
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
-    },
+      background: 'Green'
+    }
   }));
 
 
@@ -124,6 +123,7 @@ export default function Login() {
         inputRef={emailRef}
         />
         <TextField
+       
         variant="outlined"
         margin="normal"
         required
@@ -136,14 +136,14 @@ export default function Login() {
         inputRef={passwordRef}
         />
         <FormControlLabel
-        control={<Checkbox value="remember" color="primary" />}
+        className={classes.coloring}
+        control={<Checkbox value="remember" color="default"  />}
         label="Remember me"
         />
         <Button
         type="submit"
         fullWidth
         variant="contained"
-        color="primary"
         className={classes.submit}
         onClick={handleSubmit}
         >
@@ -155,7 +155,7 @@ export default function Login() {
             Forgot password?
             </Link>
         </Grid>
-        <Grid item>
+        <Grid item className={classes.color}>
             <Link href="/Signup" variant="body2">
             {"Don't have an account? Sign Up"}
             </Link>

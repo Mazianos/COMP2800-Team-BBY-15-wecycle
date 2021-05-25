@@ -13,6 +13,7 @@ import Box from '@material-ui/core/Box';
  import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import SignupHeading from './Header';
 
@@ -43,14 +44,18 @@ function Copyright() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      color: 'green'
+     
     },
     form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(3),
+      color: 'green'
     },
     submit: {
       marginTop: theme.spacing(3),
       margin: theme.spacing(1, 0, 2),
+      background: 'Green'
     }
 
   }));
@@ -127,7 +132,7 @@ export default function Signup() {
         <CssBaseline/>
         <SignupHeading />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" className={classes.paper}>
             Sign up
           </Typography>
          
