@@ -16,14 +16,14 @@ import Container from '@material-ui/core/Container';
 
 import SignupHeading from './Header';
 
-     {/* 
+     /* 
 * Used template of copyright blurb from material UI templates and MUI CSS. Lines 26-55.
 * @author oliviertassinari
 * @author eps1lon
 * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 * @see https://material-ui.com/getting-started/templates/
 *
-**/}
+**/
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
@@ -61,8 +61,7 @@ export default function Signup() {
     const passwordConfirmRef = useRef();
     const nameRef = useRef();
     const postalRef = useRef();
-    const { signup, login } = useAuth();
-    const [error, setError] = useState('');
+    const { signup } = useAuth();
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const { currentUser } = useAuth();
@@ -74,10 +73,9 @@ export default function Signup() {
         console.log(postalRef.current.value);
         
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Passwords don\'t match');
+            return 
         }
         try {
-            setError('');
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
 
@@ -105,21 +103,19 @@ export default function Signup() {
                 },
             });
 
-        } catch {
-            setError("Failed to create an account");
-        }
+        } catch {}
 
         setLoading(false);
     }
   
-    {/* 
+    /* 
 * Used Template of a page with textfields to make our post Sign up page. Lines 122-223
 * @author oliviertassinari
 * @author eps1lon
 * @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-up/SignUp.js
 * @see https://material-ui.com/getting-started/templates/
 *
-**/}
+**/
     
     return (
         

@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, FormControlLabel, Checkbox, Container} from '@material-ui/core';
 
-import { CardMedia, Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar, Typography, Collapse, TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 import AboutUsHeading from './Header';
 
@@ -95,31 +95,26 @@ export default function DonorPost() {
             title: titleRef.current.value,
             postalCode: postalRef.current.value,
             type: {
-                // plastic: plastic.checked,
-                // glass: glass.checked,
-                // aluminum: aluminum.checked,
-                // other: other.checked,
+                plastic: plasticRef.current.checked,
+                glass: glassRef.current.checked,
+                aluminum: aluminumRef.current.checked,
+                other: otherRef.current.checked,
             },
             totalBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
             description: descRef.current.value,
             contact: contactRef.current.value,
             imageURL: null, //We will change this when we figure out image storing
-            // postDate: dateRef.current.value
         }
-
-        // Default options are marked with *
+        
         await fetch("/update-own-post", {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            method: 'POST',
+            cache: 'no-cache',
             headers: {
                 'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            }, // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(newData) // body data type must match "Content-Type" header
-        }).then((res) => res.json()).then((result) => {
-
-        }); // parses JSON response into native JavaScript objects
+            },
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(newData)
+        });
     }
 
     function handleReturn(e) {
@@ -141,10 +136,6 @@ export default function DonorPost() {
                         <p>Status: {dono.status}</p>
                             <div className = {classes.status}></div> {/*where status would go into*/}
                     </div>
-                    {/* <div className={classes.image}>
-                        <img src={dono.postImage} width={200} height={100} />
-                        <Button variant="outlined" className={classes.updatePhoto}>Update Photo</Button>
-                    </div> */}
                 
                 
                     <TextField
@@ -195,19 +186,19 @@ export default function DonorPost() {
 
                     <Grid item xs={12}>
                     <FormControlLabel
-                        control={<Checkbox value="plastic" color="primary" id="plastic" checked={dono.type.plastic}/>}
+                        control={<Checkbox value="plastic" color="primary" id="plastic" defaultChecked={dono.type.plastic} inputRef={plasticRef}/>}
                         label="Plastic"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Glass" color="primary" id="glass" checked={dono.type.glass}/>}
+                        control={<Checkbox value="Glass" color="primary" id="glass" defaultChecked={dono.type.glass} inputRef={glassRef}/>}
                         label="Glass"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Aluminum" color="primary" id="aluminum" checked={dono.type.aluminum}/>}
+                        control={<Checkbox value="Aluminum" color="primary" id="aluminum" defaultChecked={dono.type.aluminum} inputRef={aluminumRef}/>}
                         label="Aluminum"
                     />
                     <FormControlLabel
-                        control={<Checkbox value="Other" color="primary" id="other" checked={dono.type.other}/>}
+                        control={<Checkbox value="Other" color="primary" id="other" defaultChecked={dono.type.other} inputRef={otherRef}/>}
                         label="Other"
                     />
                     </Grid>
