@@ -54,9 +54,9 @@ app.use(bodyParser.json());
 app.post("/create-ad", async function (req, res){
   console.log(req.file);
   res.setHeader('Content-Type', 'application/json');
-  myModels.User.findOne({
+  // myModels.User.findOne({
 
-  })
+  // })
   var newPost = new myModels.Post({
     authorID: req.body.authorID, //userID FK in this 
     authorName: req.body.authorName,
@@ -75,15 +75,15 @@ app.post("/create-ad", async function (req, res){
     totalBottles: req.body.estimatedBottles
   })
 
-  app.post("/", (req, res) => {
-    image.findById(req.params.id)
-    .then((image) => {
-      image.title = req.body.title,
-      image.image = req.body.image,
-      image.author = req.body.author,
-      image.postImage = req.file.path
-    })
-  });
+  // app.post("/", (req, res) => {
+  //   image.findById(req.params.id)
+  //   .then((image) => {
+  //     image.title = req.body.title,
+  //     image.image = req.body.image,
+  //     image.author = req.body.author,
+  //     image.postImage = req.file.path
+  //   })
+  // });
 
   newPost.save(function(err, newPost){
     if (err) return console.error(err);

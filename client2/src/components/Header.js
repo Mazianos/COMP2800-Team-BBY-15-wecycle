@@ -108,7 +108,7 @@ export default function Header() {
 
         try {
             await logout();
-            history.pushState("/");
+            history.pushState("/"); // change this to window reload or history.push()
         } catch {
             setError("Failed to log out");
         }

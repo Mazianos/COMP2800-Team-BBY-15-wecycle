@@ -144,6 +144,7 @@ export default function AboutUs() {
             moveLogo();
           }, 1000 / FPS);
     } else {
+        clearInterval()
         // window.location.reload();
     }
   }
