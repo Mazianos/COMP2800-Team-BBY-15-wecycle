@@ -17,16 +17,16 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-{
-  /*
-   * Used template of copyright blurb from material UI templates and MUI CSS. Lines 29-60.
-   * @author oliviertassinari
-   * @author eps1lon
-   * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
-   * @see https://material-ui.com/getting-started/templates/
-   *
-   **/
-}
+
+/*
+  * Used template of copyright blurb from material UI templates and MUI CSS. Lines 29-60.
+  * @author oliviertassinari
+  * @author eps1lon
+  * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+  * @see https://material-ui.com/getting-started/templates/
+  *
+  **/
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -66,24 +66,16 @@ export default function PostAd() {
   const postalRef = useRef();
   const descRef = useRef();
   const contactRef = useRef();
-  const fileRef = useRef();
   const bottleRef = useRef();
   const plasticRef = useRef();
   const otherRef = useRef();
   const aluminumRef = useRef();
   const glassRef = useRef();
-  const [imageState, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState();
-
-  function handleChange(e) {
-    setState({
-      file: URL.createObjectURL(e.target.files[0]),
-    });
-  }
 
   useEffect(() => {
     fetch(`/getName/${currentUser.uid}`)
@@ -148,6 +140,7 @@ export default function PostAd() {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("Error:", jqXHR, textStatus, errorThrown);
+                    setLoading(false);
                 },
             });
 
@@ -180,6 +173,7 @@ export default function PostAd() {
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.log("Error:", jqXHR, textStatus, errorThrown);
+          setLoading(false);
         },
       });
     } catch (err) {
@@ -328,6 +322,7 @@ export default function PostAd() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={loading}
             >
               Submit Donation
             </Button>

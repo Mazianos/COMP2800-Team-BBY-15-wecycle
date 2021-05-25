@@ -1,5 +1,4 @@
 import React from "react";
-// import Navbar from './Navbar';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,7 +9,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import DrawerContent from "./subcomponents/DrawerContent";
 import { Drawer } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +29,6 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
-  const history = useHistory();
   const [needsRender, setRender] = React.useState(false);
 
   const toggleRender = (refresh) => {

@@ -7,7 +7,6 @@ import LoginHeading from './Header';
 
 //Material UI imports 
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -21,14 +20,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-   {/* 
+/* 
 * Used template of copyright blurb from material UI templates and MUI CSS. Lines 33-65.
 * @author oliviertassinari
 * @author eps1lon
 * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 * @see https://material-ui.com/getting-started/templates/
 *
-**/}
+**/
 
 function Copyright() {
     return (
@@ -70,37 +69,29 @@ export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { login } = useAuth();
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const classes = useStyles();
 
-    function clickSignup() {
-        history.push("/signup");
-    }
-
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            setError('');
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
             history.push("/");
-        } catch {
-            setError("Failed to log in");
-        }
+        } catch {}
 
         setLoading(false);
     }
 
-       {/* 
+/* 
 * Used Template of a page with textfields to make our Log in page. Lines 94-157
 * @author oliviertassinari
 * @author eps1lon
 * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 * @see https://material-ui.com/getting-started/templates/
 *
-**/}
+**/
     return (
 
     <Container component="main" maxWidth="xs">
@@ -146,6 +137,7 @@ export default function Login() {
         color="primary"
         className={classes.submit}
         onClick={handleSubmit}
+        disabled={loading}
         >
         Log In
         </Button>

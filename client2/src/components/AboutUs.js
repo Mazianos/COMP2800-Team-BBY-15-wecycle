@@ -1,29 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
 import Mazin from "../images/MazM.jpg";
-import waterBottle from "../images/water-bottle.jpg";
 import nature from "../images/nature.jpg";
-import rocket from "../images/rocket.jpg";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 // Components imported from material-ui
 import {
-  Collapse,
-  IconButton,
   Button,
   Typography,
-  AppBar,
   Card,
   CardActions,
   CardActionArea,
   CardContent,
-  CardMedia,
-  CssBaseline,
-  Grid,
-  Toolbar,
-  Container,
+  CardMedia
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -97,10 +88,6 @@ const useStyles = makeStyles(() => ({
 
 export default function AboutUs() {
   const classes = useStyles();
-  // const [xPosition, setXPosition] = useState(10);
-  // const [yPosition, setYPosition] = useState(10);
-  // const [xSpeed, setXSpeed] = useState(10);
-  // const [ySpeed, setYSpeed] = useState(10);
   const [runState, setRunState] = useState(false);
   var xPosition = 10;
   var yPosition = 10;
@@ -163,9 +150,7 @@ export default function AboutUs() {
             Meet the Team
           </h1>
         </ClickAwayListener>
-        {/* <IconButton> */}
         <ExpandMoreIcon className={classes.arrow} />
-        {/* </IconButton> */}
       </div>
 
       <Card className={classes.root}>
@@ -189,12 +174,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/rwong97/" target="_blank">
+          <a href="https://www.linkedin.com/in/rwong97/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/ray165" target="_blank">
+          <a href="https://github.com/ray165">
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -221,12 +206,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/jasonja-ahn/" target="_blank">
+          <a href="https://www.linkedin.com/in/jasonja-ahn/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/j-ahn94" target="_blank">
+          <a href="https://github.com/j-ahn94" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -258,12 +243,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
+          <a href="https://www.linkedin.com/in/johnsonlau/" >
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/JohnsonLau" target="_blank">
+          <a href="https://github.com/JohnsonLau" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -301,13 +286,13 @@ export default function AboutUs() {
         <CardActions>
           <a
             href="https://www.linkedin.com/in/mazin-marwan-0b3409154/"
-            target="_blank"
+            
           >
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/Mazianos" target="_blank">
+          <a href="https://github.com/Mazianos" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>

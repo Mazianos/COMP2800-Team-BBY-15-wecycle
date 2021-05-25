@@ -3,12 +3,8 @@
 @see https://www.youtube.com/watch?v=wMIARRCox9k
 */
 
-import { useHistory } from "react-router-dom";
-
-const history = useHistory();
 const logo = document.querySelector('.bottleLogo');
 const section = document.querySelector('section');
-const html = document.querySelector('html');
 const FPS = 60;
 
 section.style.height = window.innerHeight + 'px';
