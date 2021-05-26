@@ -18,7 +18,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { green } from '@material-ui/core/colors';
+
 
 
    {/* 
@@ -34,7 +34,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="#">
           WeCycle
         </Link>{'.com '}
         {new Date().getFullYear()}
@@ -60,6 +60,13 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
       background: 'Green'
+    },
+    forgot: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center'
     }
   }));
 
@@ -106,7 +113,9 @@ export default function Login() {
     <LoginHeading />
     <CssBaseline />
     <div className={classes.paper}>
-    <Typography component="h1" variant="h5">
+    <Typography 
+    component="h1" 
+    variant="h5">
         Log in
     </Typography>
     <form className={classes.form} noValidate onSubmit={handleSubmit}> 
@@ -149,15 +158,10 @@ export default function Login() {
         >
         Log In
         </Button>
-        <Grid container>
-        <Grid item xs>
-            <Link href="#" variant="body2">
-            Forgot password?
-            </Link>
-        </Grid>
-        <Grid item className={classes.color}>
+        <Grid>
+        <Grid item className={classes.forgot}>
             <Link href="/Signup" variant="body2">
-            {"Don't have an account? Sign Up"}
+            {"Don't have an account? Click here to sign up!"}
             </Link>
         </Grid>
         </Grid>
