@@ -9,8 +9,8 @@
 }
 
 #hero {
-  background-color: #6d706a;
-  /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+  background-image: linear-gradient(to right top, #0b6429, #2d852e, #51a72e, #7ac927, #a8eb12);
+  /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%230B6429&hex2=%23A8EB12&sub=1"); */
   height: 82vh;
   text-align: center;
 }
@@ -82,13 +82,13 @@
 #textBlock {
   display: grid;
   margin: 0 auto;
-  margin-top: 10vh;
+  margin-top: 13vh;
 }
 
 @media only screen and (max-width: 600px) {
   #hero {
-    background-color: #6d706a;
-    /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+    background-image: linear-gradient(to right top, #0b6429, #2d852e, #51a72e, #7ac927, #a8eb12);
+   /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%230B6429&hex2=%23A8EB12&sub=1"); */
     object-fit: cover;
     background-repeat: no-repeat;
   }
