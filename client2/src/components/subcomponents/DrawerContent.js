@@ -157,6 +157,7 @@ export default function DrawerContent(props) {
           >
             Claim
           </Button>
+          <div class="fb-share-button" data-href="http://ec2-34-211-120-230.us-west-2.compute.amazonaws.com:8001/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-34-211-120-230.us-west-2.compute.amazonaws.com%3A8001%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share to Facebook</a></div>
         </CardActions>
       </Card>
       <Snackbar

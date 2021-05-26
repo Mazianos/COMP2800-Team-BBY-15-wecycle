@@ -75,7 +75,7 @@ export default function DonorPost() {
     const [authorName, setAuthorName] = useState("");
 
     useEffect(() => {
-        fetch(`/get-own-post/${currentUser.uid}${authorName}`).then((res) => res.json())
+        fetch(`/get-own-post/${currentUser.uid}`).then((res) => res.json())
         .then((result) => {
             setDonation(result);
             console.log("Your dono: " + yourDonation);
@@ -88,10 +88,8 @@ export default function DonorPost() {
         e.preventDefault();
         let newData = {
             _id: postIDState,
-            author: {
-                id: currentUser.uid,
-                name: authorName
-            },
+            authorID: currentUser.uid,
+            authorName: authorName,
             title: titleRef.current.value,
             postalCode: postalRef.current.value,
             type: {

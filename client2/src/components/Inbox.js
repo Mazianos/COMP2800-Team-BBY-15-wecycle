@@ -36,7 +36,6 @@ export default function Inbox() {
           );
       }, []);
 
-
     return (
         <Container>
             <Header />
@@ -47,10 +46,25 @@ export default function Inbox() {
                 Accepted Donations
                 <List>
                     {activeDonations.map((donation) => (
+                      <Paper>
                         <ListItem key={donation._id}>
                             <ListItemText primary={donation.title}/>
-                            <Paper>Name: {donation.authorName || "Missing name"}<br/>Contact Number: {donation.contact}<br/>Total Bottles: {donation.totalBottles}</Paper>
-                        </ListItem>
+                              Name: {donation.authorName || "Missing name"}<br/>
+                              Contact Number: {donation.contact}<br/>
+                              Total Bottles: {donation.totalBottles}<br/>
+                              <Button onClick={function completeDono(id) {
+                                fetch(`/complete-donation`, {
+                                  method: 'POST',
+                                  cache: 'no-cache',
+                                  headers: {
+                                    'Content-Type': 'application/json'
+                                  },
+                                  referrerPolicy: 'no-referrer',
+                                  body: id
+                                }).then(window.location.reload());
+                              }}>Complete</Button>
+                          </ListItem>
+                        </Paper>
                         ))}
                 </List>
             </div>
