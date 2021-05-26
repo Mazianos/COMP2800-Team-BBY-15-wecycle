@@ -26,13 +26,12 @@ function grabData(inputPostID) {
 }
 
 function updateData(myData) {
-  console.log("running updateData", myData);
   fetch("/claim_Req", {
-    method: "POST", 
+    method: "POST",
     body: JSON.stringify(myData), // stringify is needed to send!!!
-    headers: {  
-      "Content-Type": "application/json" // content type is needed as well!!!
-  },
+    headers: {
+      "Content-Type": "application/json", // content type is needed as well!!!
+    },
   })
     .then((res) => res.json())
     .then((data) => {
@@ -81,44 +80,71 @@ export default function DrawerContent(props) {
     history.push("/");
   }
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  // const handleClick = () => {
+  //   console.log("summon snackbar")
+  //   setOpen(true);
+  // };
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+  // const handleClose = (event, reason) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
+
+  //   setOpen(false);
+  // };
+
+  function claimRequest() {
+    console.log(props);
+    if ((currentUser || {}).uid == null){
+      history.push("/login");
       return;
     }
 
-    setOpen(false);
-  };
-
-
-  function claimRequest() {
-    console.log("clicked");
     // Send the data
     let dataToSend = {
       postID: props.allData._id,
       postAuthor: props.allData.author,
-      postCollector: currentUser.uid || "testUser",
+      postCollector: (currentUser || {}).uid || "testUser", //if currentUser is null, then make .uid reference an empty object instead to surpress type error
       // postCollector: "testUser",
     };
     console.log("your data", dataToSend);
 
-    console.log("trying to right before running fetch");
-    updateData(dataToSend)
-    console.log("runs after the updateData")
+    fetch("/claim_Req", {
+      method: "POST",
+      body: JSON.stringify(dataToSend), // stringify is needed to send!!!
+      headers: {
+        "Content-Type": "application/json", // content type is needed as well!!!
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log(res);
+          return res.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        props.setMsgSnack("Successfully claimed!");
+        props.openSnackBar();
+      })
+      .catch((e) => {
+        console.error("Error:", e);
+        props.setMsgSnack("Error! Unable to claim post");
+        props.openSnackBar();
+      });
 
-    handleClick();
-    // Close the drawer
-    // props.reRender();
+    // try {
+    //   updateData(dataToSend);
+    //   props.openSnackBar();
+    // } catch (err) {
+    //   console.err(err);
+    // }
+
     props.onClose();
+
     // setTimeout(history.push("/"), 3000);
-    // history.push("/");
-    window.location.reload();
-
-    // Post some sort of feedback.
-
   }
 
   return (
@@ -160,20 +186,34 @@ export default function DrawerContent(props) {
             color="primary"
             variant="contained"
             onClick={() => claimRequest()}
-            // onClick={() => console.log("hello")}
+            // onClick={props.openSnackBar}
           >
             Claim
           </Button>
         </CardActions>
       </Card>
-      <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={open}
-        onClose={handleClose}
-        autoHideDuration={6000}
-        message="Successfully Claimed!"
-      />
+
       <Divider />
+      <a
+        class="twitter-share-button"
+        href="https://twitter.com/intent/tweet"
+        data-size="large"
+        data-text="Lets go recycle!"
+        data-url="https://dev.twitter.com/web/tweet-button"
+        data-hashtags="example,demo"
+        data-via="twitterdev"
+        target="_blank"
+        data-related="twitterapi,twitter"
+      >
+        Tweet
+      </a>
+      <a
+        class="twitter-share-button"
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=Hello%20world"
+      >
+        Tweet
+      </a>
     </div>
   );
 }

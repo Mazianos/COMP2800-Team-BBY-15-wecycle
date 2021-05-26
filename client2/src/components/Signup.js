@@ -28,7 +28,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="">
           WeCycle
         </Link>{'.com '}
         {new Date().getFullYear()}
@@ -70,6 +70,7 @@ export default function Signup() {
     const history = useHistory();
     const { currentUser } = useAuth();
     const classes = useStyles();
+    const [error, setError] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -77,39 +78,22 @@ export default function Signup() {
         console.log(postalRef.current.value);
         
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return 
+            return setError('Passwords don\'t match');
+        } else if (passwordRef.current.value.length < 6 || passwordConfirmRef.current.value.length < 6) {
+            return setError('Password needs atleast 6 characters');
         }
         try {
             setLoading(true);
-            await signup(emailRef.current.value, passwordRef.current.value);
-
-            let myData = {
-                name: nameRef.current.value,
-                address: postalRef.current.value,
-                contactNum: "testNum",
-                id: currentUser.uid,
-                email: emailRef.current.value
-            }   
-
-            $.ajax({
-                url: "/create-user",
-                data: myData,
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    console.log("Success: ", data);
-                    console.log(currentUser.uid)
-                    
-                    history.push("/");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error: ajax not sent", jqXHR, textStatus, errorThrown);
-                },
-            });
+            let myId = "";
+            await signup(emailRef.current.value, passwordRef.current.value)
+             .then(myId = (currentUser || {}).uid);
+            setError("Successfully signed up! Redirecting...");
+            setTimeout(function(){history.push("/")}, 2000);
 
         } catch {}
 
         setLoading(false);
+
     }
   
     /* 
@@ -203,6 +187,9 @@ export default function Signup() {
               </Grid>
             </Grid>
             <Grid>
+            <Typography align="center">
+              {error}
+            </Typography>
             <Button 
              
               type="submit"

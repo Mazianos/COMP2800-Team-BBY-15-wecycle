@@ -1,59 +1,58 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import {useHistory} from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, FormControlLabel, Checkbox, Container} from '@material-ui/core';
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, FormControlLabel, Checkbox, Container } from "@material-ui/core";
 
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 
-import AboutUsHeading from './Header';
+import AboutUsHeading from "./Header";
 
 // const photo = [
 //     "https://dummyimage.com/600x400/000/fff",
 // ];
 
 const useStyles = makeStyles(() => ({
-    topHeading: {
-        fontFamily: 'Roboto',
-        fontWeight: 'Bold',
-        fontSize: '20px',
-    },
-    background: {
-        marginTop: "100px",
-        backgroundColor: "#EEF9F0",
-    },
-    overall: {
-        textAlign: "center",
-    },
-    updatePhoto: {
-        marginLeft: "15px",
-    },
-    firstTextfield: {
-        width: "130%",
-        marginTop: "4em",
-    },
-    secondTextfield: {
-        width: "130%",
-        marginTop: "4em",
-    },
-    thirdTextfield: {
-        width: "130%",
-        marginTop: "4em",
-        marginBottom: "4em",
-    },
-    buttons: {
-        marginBottom: "5em",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    return: {
-        marginLeft: "5rem",
-    },
-    update: {
-        marginRight: "5rem",
-    },
-    
+  topHeading: {
+    fontFamily: "Roboto",
+    fontWeight: "Bold",
+    fontSize: "20px",
+  },
+  background: {
+    marginTop: "100px",
+    backgroundColor: "#EEF9F0",
+  },
+  overall: {
+    textAlign: "center",
+  },
+  updatePhoto: {
+    marginLeft: "15px",
+  },
+  firstTextfield: {
+    width: "130%",
+    marginTop: "4em",
+  },
+  secondTextfield: {
+    width: "130%",
+    marginTop: "4em",
+  },
+  thirdTextfield: {
+    width: "130%",
+    marginTop: "4em",
+    marginBottom: "4em",
+  },
+  buttons: {
+    marginBottom: "5em",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  return: {
+    marginLeft: "5rem",
+  },
+  update: {
+    marginRight: "5rem",
+  },
 }));
 
 export default function DonorPost() {
@@ -73,16 +72,33 @@ export default function DonorPost() {
     const history = useHistory();
     const [postIDState, setID] = useState("");
     const [authorName, setAuthorName] = useState("");
+    const [msg, setMsg] = useState("");
 
     useEffect(() => {
-        fetch(`/get-own-post/${currentUser.uid}${authorName}`).then((res) => res.json())
-        .then((result) => {
+        fetch(`/get-own-post/${currentUser.uid}`)
+          .then((res) => {
+            if (res.ok) {
+              res.json();
+            } else {
+              throw new Error("Couldn't fetch data");
+            }
+          })
+          .then((result) => {
             setDonation(result);
             console.log("Your dono: " + yourDonation);
             setID(result._id);
             setAuthorName(result.authorName);
-        })
-    }, []);
+    
+            if (Object.keys(result).length === 0) {
+              setMsg("No data found");
+            } else {
+              setMsg(" ");
+            }
+          })
+          .catch((err) => {
+            setMsg("No data found");
+          });
+      }, []);
 
     async function handleUpdate(e) {
         e.preventDefault();
@@ -125,6 +141,7 @@ export default function DonorPost() {
     return (
         <div className={classes.background}>
             <AboutUsHeading />
+            <Typography align="center" id="message">{msg}</Typography>
             <div className={classes.overall}>
                 {yourDonation.map((dono) => 
                 (<Container>
@@ -234,5 +251,3 @@ export default function DonorPost() {
 
     )
 }
-
-

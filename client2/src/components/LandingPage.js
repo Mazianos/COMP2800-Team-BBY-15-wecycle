@@ -6,6 +6,9 @@ import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container,Typography} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import DrawerContent from "./subcomponents/DrawerContent";
+import Snackbar from "@material-ui/core/Snackbar";
+import { useAuth } from "../contexts/AuthContext";
 
 //Infinite Scroll constants start
 
@@ -114,6 +117,30 @@ const useStyles = makeStyles((theme) => ({
 // dynamically generate cards using maps
 function Landing() {
   const classes = useStyles();
+  const [state, setState] = React.useState(false);
+  const { currentUser } = useAuth();
+
+  const [open, setOpen] = React.useState(false); // popup alter when 'claimed'
+  const [msgSnack, setMsgSnack] = React.useState("Successfully claimed!");
+  const handleClick = () => {
+    console.log("summon snackbar")
+    setOpen(true);
+  };
+ 
+  let welcomeText = (currentUser || {}).displayName || ""; // display the current username that's logged in or nothing.
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
+  const toggleDrawer = (open) => (event) => {
+    setState(open);
+  };
 
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
@@ -209,6 +236,8 @@ function Landing() {
                 status={card.status}
                 postID={card._id}
                 allData={card} // how about i just pass the entire card instead of making another fetch(0)
+                openSnackBar = {() => handleClick()}
+                setMsgSnack= {() => setMsgSnack}
               />
             </Grid>
           ))}
@@ -220,6 +249,13 @@ function Landing() {
           <li key={more} ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={4000}
+        message={msgSnack}
+      />
     </div>
   );
 }

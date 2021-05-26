@@ -1,43 +1,43 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react";
 //import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import LoginHeading from './Header';
+import LoginHeading from "./Header";
 
-//Material UI imports 
+//Material UI imports
 
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
-
-/* 
-* Used template of copyright blurb from material UI templates and MUI CSS. Lines 33-65.
-* @author oliviertassinari
-* @author eps1lon
-* @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
-* @see https://material-ui.com/getting-started/templates/
-*
-**/
+/*
+ * Used template of copyright blurb from material UI templates and MUI CSS. Lines 33-65.
+ * @author oliviertassinari
+ * @author eps1lon
+ * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+ * @see https://material-ui.com/getting-started/templates/
+ *
+ **/
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      {"Copyright © "}
+      <Link color="inherit" href="">
         WeCycle
-        </Link>{'.com '}
+      </Link>
+      {".com "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -46,59 +46,65 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(16),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: "#4f772d",
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "#31572C",
-    }
+    },
   },
 }));
-
-
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const classes = useStyles();
+  // const [msg, setMsg] = useState('');
+
+  function clickSignup() {
+    history.push("/signup");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
-    } catch { }
-
-    setLoading(false);
+      setError("Successfully logged in! Redirecting...");
+      setTimeout(() => {
+        history.push("/");
+      }, 2000);
+    } catch {
+      setError("Wrong email or password");
+    }
   }
 
-  /* 
-  * Used Template of a page with textfields to make our Log in page. Lines 94-157
-  * @author oliviertassinari
-  * @author eps1lon
-  * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
-  * @see https://material-ui.com/getting-started/templates/
-  *
-  **/
+  /*
+   * Used Template of a page with textfields to make our Log in page. Lines 94-157
+   * @author oliviertassinari
+   * @author eps1lon
+   * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+   * @see https://material-ui.com/getting-started/templates/
+   *
+   **/
   return (
-
-    <Container component="main" maxWidth="xs" className = {classes.mainDiv}>
+    <Container component="main" maxWidth="xs" className={classes.mainDiv}>
       <LoginHeading />
       <div className={classes.main}>
         <CssBaseline />
@@ -135,6 +141,7 @@ export default function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Typography align="center">{error}</Typography>
             <Button
               type="submit"
               fullWidth
@@ -145,12 +152,12 @@ export default function Login() {
               disabled={loading}
             >
               Log In
-        </Button>
+            </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
-            </Link>
+                </Link>
               </Grid>
               <Grid item>
                 <Link href="/Signup" variant="body2">
@@ -165,6 +172,5 @@ export default function Login() {
         </Box>
       </div>
     </Container>
-
-  )
+  );
 }
