@@ -216,7 +216,7 @@ app.post("/claim_Req", (req, res) => {
   async function updatePost() {
     db.collection("posts")
       .updateOne({_id: mongoose.Types.ObjectId(req.body.postID)},
-      { $set: {"collectorID": `${req.body.postCollector}`, "status": "Closed"}})
+      { $set: {"collectorID": `${req.body.postCollector}`, "status": "Pending"}})
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
       console.log(req.body.postID, req.body.status, req.params.postID, "testing on the backend");
