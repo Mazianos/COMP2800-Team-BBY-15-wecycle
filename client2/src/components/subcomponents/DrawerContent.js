@@ -63,6 +63,12 @@ const useStyles = makeStyles({
     alignContent: "center",
     fontSize: 15,
   },
+  button: {
+    backgroundColor: "#4f772d",
+      '&:hover': {
+      backgroundColor: "#31572C",
+      }
+  }
 });
 
 export default function DrawerContent(props) {
@@ -126,7 +132,7 @@ export default function DrawerContent(props) {
         <div className={classes.contentCentered}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Location: {props.allData.postalCode || "oops! this is empty"}
+              Location: {props.allData.postalCode || "Oops! This is empty"}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
               Posting Date: {props.allData.postDate}
@@ -149,6 +155,7 @@ export default function DrawerContent(props) {
               /> */}
         <CardActions>
           <Button
+            className = {classes.button}
             size="small"
             color="primary"
             variant="contained"

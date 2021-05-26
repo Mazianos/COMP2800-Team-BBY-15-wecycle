@@ -51,8 +51,12 @@ function Copyright() {
     submit: {
       marginTop: theme.spacing(3),
       margin: theme.spacing(1, 0, 2),
-    }
-
+      color: "white",
+      backgroundColor: "#4f772d",
+      '&:hover': {
+        backgroundColor: "#31572C",
+      }
+    },
   }));
 
 export default function Signup() {

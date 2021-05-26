@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 645,
     minHeight: "100vh",
-    background: "rgba(0,0,0,0.5)",
+    background: "#4f772d",
     margin: "20px",
     marginTop: "25rem",
     width: "50%",
@@ -76,6 +76,8 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontWeight: "bold",
+    margin: "0 auto",
+    marginBottom: "1.5rem",
   },
   linkedin: {
     textDecoration: "none",

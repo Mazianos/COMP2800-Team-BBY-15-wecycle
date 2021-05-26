@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#4f772d",
+      '&:hover': {
+      backgroundColor: "#31572C",
+      }
   },
   upload: {
     margin: theme.spacing(1),

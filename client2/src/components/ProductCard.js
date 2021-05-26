@@ -21,6 +21,14 @@ const useStyles = makeStyles({
     alignContent: "center",
     fontSize: 15,
   },
+  button: {
+    backgroundColor: "#4f772d",
+      '&:hover': {
+        backgroundColor: "#31572C",
+      },
+    width: "50%",
+    margin: "0 auto",
+  }
 });
 
 
@@ -69,6 +77,7 @@ export default function MediaCard(props) {
         <CardActions>
           {/* <Button size="small" color="primary" variant="contained" onClick={()=> window.location.href=`/postDetails/:postID=${props.postID}`}> */}
           <Button
+            className = {classes.button}
             size="small"
             color="primary"
             variant="contained"

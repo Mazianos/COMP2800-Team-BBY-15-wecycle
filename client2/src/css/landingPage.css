@@ -9,8 +9,8 @@
 }
 
 #hero {
-  background-image: linear-gradient(to right top, #0b6429, #2d852e, #51a72e, #7ac927, #a8eb12);
-  /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%230B6429&hex2=%23A8EB12&sub=1"); */
+  background-image: linear-gradient(to right top, #707374, #467679, #00786b, #007748, #0c730c);  
+  /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%23707374&hex2=%230C730C&sub=1"); */
   height: 82vh;
   text-align: center;
 }
@@ -83,12 +83,13 @@
   display: grid;
   margin: 0 auto;
   margin-top: 13vh;
+  color: rgba(255, 255, 255, 0.815);
 }
 
 @media only screen and (max-width: 600px) {
   #hero {
-    background-image: linear-gradient(to right top, #0b6429, #2d852e, #51a72e, #7ac927, #a8eb12);
-   /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%230B6429&hex2=%23A8EB12&sub=1"); */
+    background-image: linear-gradient(to right top, #707374, #467679, #00786b, #007748, #0c730c);    
+    /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%23707374&hex2=%230C730C&sub=1"); */
     object-fit: cover;
     background-repeat: no-repeat;
   }
