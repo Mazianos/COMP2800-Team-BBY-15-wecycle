@@ -3,7 +3,7 @@ import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
 import Mazin from "../images/MazM.jpg";
-import nature from "../images/nature.jpg";
+import four from "../images/four.jpg";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 // Components imported from material-ui
@@ -31,16 +31,16 @@ const useStyles = makeStyles(() => ({
     maxHeight: "100vh",
     maxWidth: "100vw",
     backgroundSize: "cover",
-    backgroundImage: "url(" + nature + ")",
+    backgroundImage: "url(" + four + ")",
   },
   root: {
     maxWidth: 645,
     minHeight: "100vh",
-    background: "rgba(0,0,0,0.5)",
+    background: "#4f772d",
     margin: "20px",
     marginTop: "25rem",
-    justifyContent: "center",
-    alignItems: "center",
+    width: "50%",
+    margin: "0 auto",
   },
   image: {
     height: 500,
@@ -62,7 +62,7 @@ const useStyles = makeStyles(() => ({
     marginTop: "15rem",
   },
   arrow: {
-    color: "antiquewhite",
+    color: "black",
     fontSize: "4rem",
     marginTop: "8rem",
   },
@@ -76,6 +76,8 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontWeight: "bold",
+    margin: "0 auto",
+    marginBottom: "1.5rem",
   },
   linkedin: {
     textDecoration: "none",
@@ -145,7 +147,7 @@ export default function AboutUs() {
             className={classes.titleHead}
             ref={logo}
             onClick={run}
-            style={{ color: "antiquewhite" }}
+            style={{ color: "black" }}
           >
             Meet the Team
           </h1>

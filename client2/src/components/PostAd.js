@@ -16,6 +16,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Snackbar from "@material-ui/core/Snackbar";
 
 
 /*
@@ -31,7 +32,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="">
         WeCycle
       </Link>
       {".com "}
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#4f772d",
+      '&:hover': {
+      backgroundColor: "#31572C",
+      }
   },
   upload: {
     margin: theme.spacing(1),
@@ -76,6 +81,22 @@ export default function PostAd() {
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState();
+
+  const [open, setOpen] = React.useState(false); // popup for snackbar component.
+  const [msgSnack, setMsgSnack] = React.useState("Error! Your post wasn't submited!")
+  const handleClick = () => {
+    setOpen(true);
+    // setTimeout(function(){history.push('/')}, 2500)
+    // setTimeout(function(){window.location.href = "/"}, 3000);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     fetch(`/getName/${currentUser.uid}`)
@@ -129,19 +150,23 @@ export default function PostAd() {
     }
         setLoading(true);
         await $.ajax({
-            url: "/create-ad",
-            data: myData,
-            dataType: "json",
-            type: "POST",
-            success: function(data) {
-                console.log("Success: ", data);
-                setLoading(false)
-                history.push("/")
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error:", jqXHR, textStatus, errorThrown);
-                setLoading(false);
-            },
+          url: "/create-ad",
+          data: myData,
+          dataType: "json",
+          type: "POST",
+          success: function (data) {
+            console.log("Success: ", data);
+            setLoading(false);
+            setMsgSnack("Successfully Submitted!");
+            handleClick();
+            setTimeout(function(){history.push('/')}, 2500)
+            setTimeout(function(){window.location.href = "/"}, 2500)
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error:", jqXHR, textStatus, errorThrown);
+            setMsgSnack("Error! Your post wasn't submited!");
+            handleClick();
+          },
         });
   }
 
@@ -162,7 +187,7 @@ export default function PostAd() {
         href="../../image/favicon-32x32.png"
       ></link>
       <Header />
-      <Container component="main" maxWidth="xs" style={{marginTop: "12vh"}}>
+      <Container component="main" maxWidth="xs" style={{ marginTop: "12vh" }}>
         <CssBaseline />
         <div classname={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -293,6 +318,13 @@ export default function PostAd() {
           </form>
         </div>
         <Copyright />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={open}
+          onClose={handleClose}
+          autoHideDuration={6000}
+          message={msgSnack}
+        />
       </Container>
     </>
   );

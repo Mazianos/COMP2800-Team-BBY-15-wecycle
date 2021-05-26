@@ -9,8 +9,8 @@
 }
 
 #hero {
-  background-color: #6d706a;
-  /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+  background-image: linear-gradient(to right top, #707374, #467679, #00786b, #007748, #0c730c);  
+  /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%23707374&hex2=%230C730C&sub=1"); */
   height: 82vh;
   text-align: center;
 }
@@ -27,11 +27,6 @@
 }
 
 .signupBtn {
-  /* position: fixed;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); */
   display: grid;
   /* align-self: center; */
   margin: 0 auto;
@@ -46,6 +41,7 @@
   border: none;
   cursor: pointer;
   border-radius: 16px;
+  width: 50%;
 }
 
 .signupBtn:hover {
@@ -82,13 +78,14 @@
 #textBlock {
   display: grid;
   margin: 0 auto;
-  margin-top: 10vh;
+  margin-top: 13vh;
+  color: rgba(255, 255, 255, 0.815);
 }
 
 @media only screen and (max-width: 600px) {
   #hero {
-    background-color: #6d706a;
-    /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
+    background-image: linear-gradient(to right top, #707374, #467679, #00786b, #007748, #0c730c);    
+    /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%23707374&hex2=%230C730C&sub=1"); */
     object-fit: cover;
     background-repeat: no-repeat;
   }

@@ -21,6 +21,14 @@ const useStyles = makeStyles({
     alignContent: "center",
     fontSize: 15,
   },
+  button: {
+    backgroundColor: "#4f772d",
+      '&:hover': {
+        backgroundColor: "#31572C",
+      },
+    width: "50%",
+    margin: "0 auto",
+  }
 });
 
 
@@ -54,13 +62,13 @@ export default function MediaCard(props) {
           />
           <div className={classes.contentCentered}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                Location {props.title}
+              <Typography gutterBottom variant="h5" component="h2" id="title">
+                {props.title}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h6">
+              <Typography gutterBottom variant="subtitle2" component="h6" id="date">
                 Posting Date: {props.date}
               </Typography>
-              <Typography gutterBottom variant="subtitle2" component="h6">
+              <Typography gutterBottom variant="subtitle2" component="h6" id="status">
                 Status: {props.status}
               </Typography>
             </CardContent>
@@ -69,6 +77,7 @@ export default function MediaCard(props) {
         <CardActions>
           {/* <Button size="small" color="primary" variant="contained" onClick={()=> window.location.href=`/postDetails/:postID=${props.postID}`}> */}
           <Button
+            className = {classes.button}
             size="small"
             color="primary"
             variant="contained"
@@ -79,7 +88,7 @@ export default function MediaCard(props) {
         </CardActions>
       </Card>
       <Drawer anchor={"bottom"} open={state} onClose={toggleDrawer(false)}>
-        {<DrawerContent postID={props.postID} allData={props.allData} onClose={toggleDrawer(false)} reRender={() => {toggleRender(true)}}/>}
+        {<DrawerContent postID={props.postID} allData={props.allData} onClose={toggleDrawer(false)} reRender={() => {toggleRender(true)}}  openSnackBar={props.openSnackBar} setMsgSnack={props.setMsgSnack}/>}
       </Drawer>
     </>
   );
