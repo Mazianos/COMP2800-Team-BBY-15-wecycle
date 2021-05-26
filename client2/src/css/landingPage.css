@@ -27,11 +27,6 @@
 }
 
 .signupBtn {
-  /* position: fixed;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); */
   display: grid;
   /* align-self: center; */
   margin: 0 auto;
@@ -46,6 +41,7 @@
   border: none;
   cursor: pointer;
   border-radius: 16px;
+  width: 50%;
 }
 
 .signupBtn:hover {

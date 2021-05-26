@@ -184,7 +184,7 @@ function Landing() {
               Let's recycle!
             </Typography>
             <Typography variant="h6" component="h5">
-              Donate bottles or help neighbour recycle
+              Donate bottles or help people recycle
             </Typography>
           </div>
 
