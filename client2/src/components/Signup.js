@@ -28,7 +28,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="">
           WeCycle
         </Link>{'.com '}
         {new Date().getFullYear()}
@@ -75,41 +75,52 @@ export default function Signup() {
         
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError('Passwords don\'t match');
+        } else if (passwordRef.current.value.length < 6 || passwordConfirmRef.current.value.length < 6) {
+            return setError('Password needs atleast 6 characters');
         }
         try {
             setError('');
             setLoading(true);
-            await signup(emailRef.current.value, passwordRef.current.value);
+            let myId = "";
+            await signup(emailRef.current.value, passwordRef.current.value)
+             .then(myId = (currentUser || {}).uid);
+            setError("Successfully signed up! Redirecting...");
+            setTimeout(function(){history.push("/")}, 2000);
 
-            let myData = {
-                name: nameRef.current.value,
-                address: postalRef.current.value,
-                contactNum: "testNum",
-                id: currentUser.uid,
-                email: emailRef.current.value
-            }   
+            // let myData = {
+            //     name: nameRef.current.value,
+            //     address: postalRef.current.value,
+            //     contactNum: "testNum",
+            //     id: myId,
+            //     email: emailRef.current.value
+            // }   
 
-            $.ajax({
-                url: "/create-user",
-                data: myData,
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    console.log("Success: ", data);
-                    console.log(currentUser.uid)
+            // console.log(myData);
+
+            // $.ajax({
+            //     url: "/create-user",
+            //     data: myData,
+            //     dataType: "json",
+            //     type: "POST",
+            //     success: function(data) {
+            //         console.log("Success: ", data);
+            //         console.log(currentUser.uid)
                     
-                    history.push("/");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error: ajax not sent", jqXHR, textStatus, errorThrown);
-                },
-            });
+                    
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //         console.log("Error: ajax not sent", jqXHR, textStatus, errorThrown);
+            //         console.log("Current user id from error ajax", currentUser.uid)
+            //         setError("Failed to create an account");
+            //     },
+            // });
 
         } catch {
             setError("Failed to create an account");
         }
 
         setLoading(false);
+
     }
   
     {/* 
@@ -203,6 +214,9 @@ export default function Signup() {
               </Grid>
             </Grid>
             <Grid>
+            <Typography align="center">
+              {error}
+            </Typography>
             <Button 
              
               type="submit"

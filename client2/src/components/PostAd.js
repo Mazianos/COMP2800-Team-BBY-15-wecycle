@@ -16,6 +16,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Snackbar from "@material-ui/core/Snackbar";
 
 {
   /*
@@ -31,7 +32,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="">
         WeCycle
       </Link>
       {".com "}
@@ -79,6 +80,21 @@ export default function PostAd() {
   const classes = useStyles();
   const [name, setName] = useState();
 
+  const [open, setOpen] = React.useState(false); // popup for snackbar component.
+  const [msgSnack, setMsgSnack] = React.useState("Error! Your post wasn't submited!")
+  const handleClick = () => {
+    setOpen(true);
+    // setTimeout(function(){history.push('/')}, 2500)
+    // setTimeout(function(){window.location.href = "/"}, 3000);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   function handleChange(e) {
     setState({
       file: URL.createObjectURL(e.target.files[0]),
@@ -118,73 +134,44 @@ export default function PostAd() {
       otherBot = true;
     }
 
-        let myData = {
-            authorID: currentUser.uid, 
-            authorName: name, // from session data
-            title: titleRef.current.value,
-            location: cityRef.current.value,
-            postalCode: postalRef.current.value,
-            type: {
-                plastic: plasticBot,
-                glass: glassBot,
-                aluminum: aluminumBot,
-                other: otherBot
-            },
-            estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
-            description: descRef.current.value,
-            contact: contactRef.current.value, // user contact number auto fill?
-            postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-        }
-            setLoading(true);
-            await $.ajax({
-                url: "/create-ad",
-                data: myData,
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    console.log("Success: ", data);
-                    setLoading(false)
-                    history.push("/")
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", jqXHR, textStatus, errorThrown);
-                },
-            });
+    let myData = {
+      authorID: currentUser.uid,
+      authorName: name, // from session data
+      title: titleRef.current.value,
+      location: cityRef.current.value,
+      postalCode: postalRef.current.value,
+      type: {
+        plastic: plasticBot,
+        glass: glassBot,
+        aluminum: aluminumBot,
+        other: otherBot,
+      },
+      estimatedBottles: bottleRef.current.value, // number input for bottles. Sent to user Schema
+      description: descRef.current.value,
+      contact: contactRef.current.value, // user contact number auto fill?
+      postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
+    };
+    setLoading(true);
+    await $.ajax({
+      url: "/create-ad",
+      data: myData,
+      dataType: "json",
+      type: "POST",
+      success: function (data) {
+        console.log("Success: ", data);
+        setLoading(false);
+        setMsgSnack("Successfully Submitted!");
+        handleClick();
+        setTimeout(function(){history.push('/')}, 2500)
+        setTimeout(function(){window.location.href = "/"}, 2500)
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("Error:", jqXHR, textStatus, errorThrown);
+        setMsgSnack("Error! Your post wasn't submited!");
+        handleClick();
+      },
+    });
 
-    try {
-      let myData = {
-        author: { id: currentUser.uid, name: name }, // from session data
-        title: titleRef.current.value,
-        postalCode: postalRef.current.value,
-        type: {
-          plastic: plasticBot,
-          glass: glassBot,
-          aluminum: aluminumBot,
-          other: otherBot,
-        },
-        estimatedBottles: bottleRef.current.value, // number input for bottles. Sent to user Schema
-        description: descRef.current.value,
-        contact: contactRef.current.value, // user contact number auto fill?
-        postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-      };
-      setLoading(true);
-      await $.ajax({
-        url: "/create-ad",
-        data: myData,
-        dataType: "json",
-        type: "POST",
-        success: function (data) {
-          console.log("Success: ", data);
-          setLoading(false);
-          history.push("/");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.log("Error:", jqXHR, textStatus, errorThrown);
-        },
-      });
-    } catch (err) {
-      console.error(err);
-    }
   }
 
   return (
@@ -204,7 +191,7 @@ export default function PostAd() {
         href="../../image/favicon-32x32.png"
       ></link>
       <Header />
-      <Container component="main" maxWidth="xs" style={{marginTop: "12vh"}}>
+      <Container component="main" maxWidth="xs" style={{ marginTop: "12vh" }}>
         <CssBaseline />
         <div classname={classes.paper}>
           <Typography component="h1" variant="h5">
@@ -328,12 +315,20 @@ export default function PostAd() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              // onClick={handleClick} snackbar click should happen after ajax
             >
               Submit Donation
             </Button>
           </form>
         </div>
         <Copyright />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={open}
+          onClose={handleClose}
+          autoHideDuration={6000}
+          message={msgSnack}
+        />
       </Container>
     </>
   );

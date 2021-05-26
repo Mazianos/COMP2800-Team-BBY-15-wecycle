@@ -34,7 +34,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit" href="">
           WeCycle
         </Link>{'.com '}
         {new Date().getFullYear()}
@@ -74,6 +74,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const classes = useStyles();
+    // const [msg, setMsg] = useState('');
 
     function clickSignup() {
         history.push("/signup");
@@ -82,12 +83,16 @@ export default function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            setError('');
+
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
-            history.push("/");
+            setError('Successfully logged in! Redirecting...');
+            setTimeout(() => {
+              history.push("/")
+            }, 2000);
+
         } catch {
-            setError("Failed to log in");
+            setError("Wrong email or password");
         }
 
         setLoading(false);
@@ -139,6 +144,9 @@ export default function Login() {
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
         />
+        <Typography align="center">
+          {error}
+        </Typography>
         <Button
         type="submit"
         fullWidth
