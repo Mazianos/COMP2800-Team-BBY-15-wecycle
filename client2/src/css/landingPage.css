@@ -11,8 +11,9 @@
 #hero {
   background-image: linear-gradient(to right top, #707374, #467679, #00786b, #007748, #0c730c);  
   /* background-image: url("https://mycolor.space/gradient?ori=to+right+top&hex=%23707374&hex2=%230C730C&sub=1"); */
-  height: 82vh;
+  height: 65vh;
   text-align: center;
+  padding-top: 2rem;
 }
 
 .quoteContainer {
