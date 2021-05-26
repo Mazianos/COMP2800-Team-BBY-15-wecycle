@@ -12,10 +12,10 @@ import { Drawer } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 285,
   },
   media: {
-    height: 140,
+    height: 300,
   },
   contentCentered: {
     alignContent: "center",

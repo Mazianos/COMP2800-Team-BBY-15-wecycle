@@ -188,19 +188,7 @@ function Landing() {
       </div>
       <div id="hero">
         <Container className={classes.sizing}>
-          <Grid container className={classes.sizing}>
-            <Grid item xs={12} className={classes.sizing}>
-              <Grid container justify="center" spacing={3}>
-                {[0, 1, 2].map((value) => (
-                  <Grid key={value} style={{ marginTop: "20vh" }} item>
-                    <div className="paperCSS">
-                      <Typography>Hello</Typography>
-                    </div>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
+          
           <div id="textBlock">
             <Typography
               variant="h5"
