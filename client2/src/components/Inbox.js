@@ -49,15 +49,9 @@ export default function Inbox() {
 
   useEffect(() => {
     fetch(`/generate-active-donations/${currentUser.uid}`)
-      .then((res) => {
-        if (res.ok) {
-          res.json();
-        } else {
-          throw new Error("Couldn't fetch data");
-        }
-      })
+      .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        console.log("active result: ", result);
         setActive(result);
         console.log(activeDonations);
 
@@ -73,26 +67,20 @@ export default function Inbox() {
 
   useEffect(() => {
     fetch(`/generate-complete-donations/${currentUser.uid}`)
-      .then((res) => {
-        if (res.ok) {
-          res.json();
-        } else {
-          throw new Error("Couldn't fetch data");
-        }
-      })
-      .then((result) => {
-        console.log(result);
-        setComplete(result);
-        console.log(completeDonations);
+    .then((res) => res.json())
+    .then((result) => {
+      console.log("complete result: ", result);
+      setComplete(result);
+      console.log(completeDonations);
 
-        if (Object.keys(result).length === 0) {
-          setMsgComplete("Oops! You dont have any completed donations!");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setMsgComplete("Couldn't fetch data");
-      });
+      if (Object.keys(result).length === 0) {
+        setMsgComplete("Oops! You dont have any complete donations!");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      setMsgComplete("Couldn't fetch data");
+    });
   }, []);
 
   return (
@@ -104,16 +92,26 @@ export default function Inbox() {
           <Typography align="center">{msgActive}</Typography>
           <List>
             {activeDonations.map((donation) => (
-              <ListItem key={donation._id}>
-                <ListItemText primary={donation.title} />
-                <Paper>
-                  Name: {donation.authorName || "Missing name"}
-                  <br />
-                  Contact Number: {donation.contact}
-                  <br />
-                  Total Bottles: {donation.totalBottles}
-                </Paper>
-              </ListItem>
+              <Paper>
+                <ListItem key={donation._id}>
+                  <ListItemText primary={donation.title} />
+                    Contact Number: {donation.contact}
+                    <br />
+                    Total Bottles: {donation.totalBottles}
+                    <br />
+                  <Button onClick={() => fetch(`/complete-donation`, {
+                    method: 'POST',
+                    cache: 'no-cache',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify({
+                      _id: donation._id
+                    })
+                  }).then(() => window.location.reload())}>Finish</Button>
+                </ListItem>
+              </Paper>
             ))}
           </List>
         </div>
@@ -122,14 +120,12 @@ export default function Inbox() {
           <Typography align="center">{msgComplete}</Typography>
           <List>
             {completeDonations.map((donation) => (
-              <ListItem key={donation}>
+              <Paper>
+              <ListItem key={donation._id}>
                 <ListItemText primary={donation.title} />
-                <Paper>
-                  Name: {donation.authorName || "Missing name"}
-                  <br />
                   Total Bottles: {donation.totalBottles}
-                </Paper>
               </ListItem>
+              </Paper>
             ))}
           </List>
         </div>

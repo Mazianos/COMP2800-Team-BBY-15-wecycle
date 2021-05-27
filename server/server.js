@@ -118,7 +118,7 @@ app.get("/generate-active-donations/:id", function (req, res) {
     let dataToSend = await db.collection("posts")
       .find({collectorID: req.params.id, status: "Pending"}).toArray();
 
-    console.log(dataToSend);
+    console.log("Active donations: ", dataToSend);
 
     res.json(dataToSend);
   
@@ -135,7 +135,7 @@ app.get("/generate-complete-donations/:id", function (req, res) {
     let dataToSend = await db.collection("posts")
       .find({collectorID: req.params.id, status: "Closed"}).toArray();
 
-    console.log(dataToSend);
+    console.log("Completed donations", dataToSend);
 
     res.json(dataToSend);
   
@@ -268,7 +268,11 @@ app.get('/get-own-post/:id', (req, res) => {
 
 app.post('/complete-donation', (req, res) => {
   console.log("Call to server to update post successful");
-  db.collection("posts").findOneAndUpdate({_id: req.body.id}, { $set: {"status": "Closed"}});
+  db.collection("posts")
+      .updateOne({_id: mongoose.Types.ObjectId(req.body._id)},
+      { $set: {"status": "Closed"}})
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
   res.send("Successfully updated the db");
 })
 

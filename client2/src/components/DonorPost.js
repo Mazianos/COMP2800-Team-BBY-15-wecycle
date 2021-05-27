@@ -128,7 +128,7 @@ export default function DonorPost() {
             },
             referrerPolicy: 'no-referrer',
             body: JSON.stringify(newData)
-        });
+        }).then((res) => console.log("response: ", res));
     }
 
     function handleReturn(e) {
