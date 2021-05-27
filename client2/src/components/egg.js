@@ -1,7 +1,3 @@
-/*Referenced a youtube video to make bouncing logo easter egg.
-@author WEB CIFAR
-@see https://www.youtube.com/watch?v=wMIARRCox9k
-*/
 
 const logo = document.querySelector('.bottleLogo');
 const section = document.querySelector('section');
@@ -11,6 +7,13 @@ section.style.height = window.innerHeight + 'px';
 section.style.width = window.innerWidth + 'px';
 
 //velocity variables for logo
+
+{/**
+ * Referenced a code from line 18 - 55 Youtube video to make bouncing logo easter egg.
+ * 
+ * @author WEB CIFAR
+ * @see https://www.youtube.com/watch?v=wMIARRCox9k
+*/}
 
 let xPosition = 10;
 let yPosition = 10

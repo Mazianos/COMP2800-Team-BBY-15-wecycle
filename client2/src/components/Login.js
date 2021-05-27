@@ -19,14 +19,14 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-/*
- * Used template of copyright blurb from material UI templates and MUI CSS. Lines 33-65.
+/**
+ * Used template of copyright blurb from material UI templates and MUI CSS. Lines 31-66.
+ * 
  * @author oliviertassinari
  * @author eps1lon
  * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
  * @see https://material-ui.com/getting-started/templates/
- *
- **/
+ */
 
 function Copyright() {
   return (

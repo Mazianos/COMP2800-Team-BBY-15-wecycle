@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
     const classes = useStyles();
 
-    const {currentUser, logout } = useAuth();
+    const { currentUser, logout } = useAuth();
     const history = useHistory();
 
     function aboutUsRedirect() {
@@ -90,9 +90,9 @@ export default function Header() {
         try {
             await logout();
             history.push("/");
-        } catch {}
+        } catch { }
     }
-    
+
     const [state, setState] = React.useState({
         right: false,
     });
@@ -105,6 +105,15 @@ export default function Header() {
         setState({ ...state, [anchor]: open });
     };
 
+   
+    /**
+     * Referenced Drawer component from line 115 to 210 from material UI.
+     * Referenced the code on https://material-ui.com/components/
+     * 
+     * @author Olivier Tassinari, Kristoffer K. & Matt
+     * @see https://material-ui.com/components/drawers/
+     * @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/drawers/SwipeableTemporaryDrawer.js
+     */
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -116,62 +125,62 @@ export default function Header() {
         >
             <List>
                 {['Home'].map((text, index) => (
-                    <ListItem button key={text} onClick = {landingRedirect} id="home">
+                    <ListItem button key={text} onClick={landingRedirect} id="home">
                         <ListItemIcon>{index = <HomeIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
-            
-                {currentUser === null ? 
+
+            {currentUser === null ?
                 <List>
                     {['Log In'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {loginRedirect} id="login">
+                        <ListItem button key={text} onClick={loginRedirect} id="login">
                             <ListItemIcon>{index = <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
-                    ))} 
-                </List>: <></>}
-            
-                {currentUser === null ?
+                    ))}
+                </List> : <></>}
+
+            {currentUser === null ?
                 <List>
                     {['Sign Up'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {signupRedirect} id="signup">
+                        <ListItem button key={text} onClick={signupRedirect} id="signup">
                             <ListItemIcon>{index = <AccountCircleIcon />}</ListItemIcon>
-                            <ListItemText primary = {text} />
+                            <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List> : <></>}
             <Divider />
-            
-                {currentUser !== null ?
+
+            {currentUser !== null ?
                 <List>
                     {['Profile'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {inbox} id="profile">
+                        <ListItem button key={text} onClick={inbox} id="profile">
                             <ListItemIcon>{index = <InboxIcon />}</ListItemIcon>
-                            <ListItemText primary = {text} />
+                            <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List> : <></>}
             <List>
                 {['About Us'].map((text, index) => (
-                    <ListItem button key={text} onClick = {aboutUsRedirect} id="aboutUs">
-                        <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
+                    <ListItem button key={text} onClick={aboutUsRedirect} id="aboutUs">
+                        <ListItemIcon>{index = <GroupIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
-                {currentUser !== null ?
+            {currentUser !== null ?
                 <List>
                     {['Log Out'].map((text, index) => (
-                        <ListItem button key={text} onClick = {handleLogout} id="logout">
-                            <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
+                        <ListItem button key={text} onClick={handleLogout} id="logout">
+                            <ListItemIcon>{index = <GroupIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List> : <></>}
-            
+
         </div>
     );
 
@@ -180,21 +189,21 @@ export default function Header() {
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
                     <div className={classes.navbarTitle} >
-                        <img src = {wecycle} className={classes.wecycleLogo} onClick={landingRedirect} alt="Wecycle Logo, redirect's to landing page" />
+                        <img src={wecycle} className={classes.wecycleLogo} onClick={landingRedirect} alt="Wecycle Logo, redirect's to landing page" />
                     </div>
 
-                        {['right'].map((anchor) => (
+                    {['right'].map((anchor) => (
 
-                            <React.Fragment key={anchor}>
-                                <IconButton onClick={toggleDrawer(anchor, true)}>
-                                    <SortIcon className={classes.icon} />
-                                </IconButton>
+                        <React.Fragment key={anchor}>
+                            <IconButton onClick={toggleDrawer(anchor, true)}>
+                                <SortIcon className={classes.icon} />
+                            </IconButton>
 
-                                <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                                    {list(anchor)}
-                                </Drawer>
-                            </React.Fragment>
-                        ))}
+                            <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                                {list(anchor)}
+                            </Drawer>
+                        </React.Fragment>
+                    ))}
 
                 </Toolbar>
             </AppBar>

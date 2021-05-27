@@ -32,8 +32,6 @@ const useStyles = makeStyles({
 });
 
 
-
-
 export default function MediaCard(props) {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
@@ -49,6 +47,15 @@ export default function MediaCard(props) {
   const toggleDrawer = (open) => (event) => {
     setState(open);
   };
+
+  {/**
+        * Line 62-99 creates Card component.
+        * Referenced the code on https://material-ui.com/components/
+        * 
+        * @author Olivier Tassinari, Kristoffer K. & Matt
+        * @see https://material-ui.com/components/cards
+        * @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/cards/MediaCard.js
+      */}
 
   return (
     <>
