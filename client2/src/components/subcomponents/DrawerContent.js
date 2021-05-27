@@ -16,6 +16,8 @@ import Snackbar from "@material-ui/core/Snackbar";
 import ContactPhoneOutlinedIcon from "@material-ui/icons/ContactPhoneOutlined";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import twitter from "../../images/twitter.png";
+import facebook from "../../images/facebook.png";
 
 function grabData(inputPostID) {
   fetch(`/postDetails/${inputPostID}`)
@@ -163,7 +165,7 @@ export default function DrawerContent(props) {
           >
             Claim
           </Button>
-          <div class="fb-share-button" data-href="http://ec2-34-211-120-230.us-west-2.compute.amazonaws.com:8001/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-34-211-120-230.us-west-2.compute.amazonaws.com%3A8001%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share to Facebook</a></div>
+          
         </CardActions>
       </Card>
       <Snackbar
@@ -173,7 +175,22 @@ export default function DrawerContent(props) {
         autoHideDuration={6000}
         message="Successfully Claimed!"
       />
-      <Divider />
+      <Divider/>
+      <div
+          color="primary" 
+          
+          variant="contained" size="small" 
+          class="fb-share-button" 
+          data-href="http://ec2-34-211-120-230.us-west-2.compute.amazonaws.com:8001/" data-layout="button" data-size="small">
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-34-211-120-230.us-west-2.compute.amazonaws.com%3A8001%2F&amp;src=sdkpreparse" 
+          class="fb-xfbml-parse-ignore"><img src={facebook} width="64" height="64"></img></a>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="I just donated bottles thanks to WeCycle!" data-url="http://ec2-34-211-120-230.us-west-2.compute.amazonaws.com:8001/" data-via="TweetsCycle" data-hashtags="Recycling " data-related="TweetsCycle" data-show-count="false"><img src={twitter} width="64" height="64"></img>
+            </a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
+          
+          
+          
     </div>
   );
 }
