@@ -116,7 +116,7 @@ export default function Header() {
         >
             <List>
                 {['Home'].map((text, index) => (
-                    <ListItem button key={text} onClick = {landingRedirect}>
+                    <ListItem button key={text} onClick = {landingRedirect} id="home">
                         <ListItemIcon>{index = <HomeIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
@@ -126,7 +126,7 @@ export default function Header() {
                 {currentUser === null ? 
                 <List>
                     {['Log In'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {loginRedirect}>
+                        <ListItem button key = {text} onClick = {loginRedirect} id="login">
                             <ListItemIcon>{index = <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
@@ -136,7 +136,7 @@ export default function Header() {
                 {currentUser === null ?
                 <List>
                     {['Sign Up'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {signupRedirect}>
+                        <ListItem button key = {text} onClick = {signupRedirect} id="signup">
                             <ListItemIcon>{index = <AccountCircleIcon />}</ListItemIcon>
                             <ListItemText primary = {text} />
                         </ListItem>
@@ -147,7 +147,7 @@ export default function Header() {
                 {currentUser !== null ?
                 <List>
                     {['Profile'].map((text, index) => (
-                        <ListItem button key = {text} onClick = {inbox}>
+                        <ListItem button key = {text} onClick = {inbox} id="profile">
                             <ListItemIcon>{index = <InboxIcon />}</ListItemIcon>
                             <ListItemText primary = {text} />
                         </ListItem>
@@ -155,7 +155,7 @@ export default function Header() {
                 </List> : <></>}
             <List>
                 {['About Us'].map((text, index) => (
-                    <ListItem button key={text} onClick = {aboutUsRedirect}>
+                    <ListItem button key={text} onClick = {aboutUsRedirect} id="aboutUs">
                         <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
@@ -165,7 +165,7 @@ export default function Header() {
                 {currentUser !== null ?
                 <List>
                     {['Log Out'].map((text, index) => (
-                        <ListItem button key={text} onClick = {handleLogout}>
+                        <ListItem button key={text} onClick = {handleLogout} id="logout">
                             <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>

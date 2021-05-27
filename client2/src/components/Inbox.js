@@ -11,12 +11,12 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -107,7 +107,11 @@ export default function Inbox() {
               <Grid item key={donation._id} align="center" justify="center">
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
                       {donation.title}
                     </Typography>
                     <Typography variant="h5" component="h2">
@@ -117,17 +121,32 @@ export default function Inbox() {
                       Contact number: {donation.contact}
                     </Typography>
                     <CardActions>
-                      <Button onClick={() => fetch(`/complete-donation`, {
-                        method: 'POST',
-                        cache: 'no-cache',
-                        headers: {
-                          'Content-Type': 'application/json'
-                        },
-                        referrerPolicy: 'no-referrer',
-                        body: JSON.stringify({
-                          _id: donation._id
-                        })
-                      }).then(() => window.location.reload())}>Finish</Button>
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        color="primary"
+                        align="center"
+                        onClick={() =>
+                          fetch(`/complete-donation`, {
+                            method: "POST",
+                            cache: "no-cache",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            referrerPolicy: "no-referrer",
+                            body: JSON.stringify({
+                              _id: donation._id,
+                            }),
+                          })
+                          .then(
+                            setTimeout(() => {
+                              window.location.reload();
+                            }, 1000)
+                          )
+                        }
+                      >
+                        Finish
+                      </Button>
                     </CardActions>
                   </CardContent>
                 </Card>
@@ -138,13 +157,17 @@ export default function Inbox() {
         <div className={classes.completedDonations}>
           Completed Donations
           <Typography align="center">{msgComplete}</Typography>
-          <Grid container spacing = {1} justify="center">
+          <Grid container spacing={1} justify="center">
             {(completeDonations || []).map((donation) => (
               <Grid item key={donation._id} align="center" justify="center">
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
-                    <CheckCircleIcon className={classes.icon}/>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    <CheckCircleIcon className={classes.icon} />
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
                       {donation.title}
                     </Typography>
                     <Typography variant="h5" component="h2">
@@ -152,20 +175,20 @@ export default function Inbox() {
                     </Typography>
                   </CardContent>
                 </Card>
-            </Grid>
-          ))}
+              </Grid>
+            ))}
           </Grid>
-      </div>
-      <div style={{ marginTop: "13vh" }}>
-        <Button
-          variant="contained"
-          className={classes.button}
-          onClick={() => history.push("/donorPost")}
-        >
-          Your Donation
+        </div>
+        <div style={{ marginTop: "13vh" }}>
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={() => history.push("/donorPost")}
+          >
+            Your Donation
           </Button>
+        </div>
       </div>
-      </div >
-    </Container >
-  )
+    </Container>
+  );
 }

@@ -81,6 +81,7 @@ export default function PostAd() {
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState();
+  const [msg, setMsg] = useState('');
 
   const [open, setOpen] = React.useState(false); // popup for snackbar component.
   const [msgSnack, setMsgSnack] = React.useState("Error! Your post wasn't submited!")
@@ -130,6 +131,34 @@ export default function PostAd() {
     if (otherRef.current.value === "on") {
       otherBot = true;
     }
+
+    // data validation.
+    if (!titleRef.current.value) {
+      return setMsg("Missing title");
+    }
+
+    if (!cityRef.current.value) {
+      return setMsg("Missing city/ neighbourhod");
+    }
+
+    if (!postalRef.current.value) {
+      return setMsg("Missing postal code");
+    }
+
+    if (!bottleRef.current.value) {
+      return setMsg("Please estimate the total number of bottles");
+    } else if (bottleRef.current.value <= 0) {
+      return setMsg("Total bottle count can't be negative or zero");
+    }
+
+    if (!descRef.current.value) {
+      return setMsg("Missing description");
+    }
+
+    if (!contactRef.current.value) {
+      return setMsg("Missing contact information");
+    }
+
 
     let myData = {
         authorID: currentUser.uid, 
@@ -304,7 +333,7 @@ export default function PostAd() {
         <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
         <img src={imageState.file} id="previewImage"/>
         </Form.Group> */}
-
+            <Typography align="center">{msg}</Typography>
             <Button
               type="submit"
               fullWidth
