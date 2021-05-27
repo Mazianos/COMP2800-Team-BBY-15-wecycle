@@ -78,9 +78,9 @@ export default function Header() {
         history.push("/signup");
     }
 
-    function postAd() {
-        history.push("/postDono");
-    }
+    // function postAd() {
+    //     history.push("/postDono");
+    // }
 
     function inbox() {
         history.push("/inbox");

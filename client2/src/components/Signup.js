@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
-import $ from "jquery";
 
 //Material UI imports
 import Button from "@material-ui/core/Button";
@@ -69,7 +68,6 @@ export default function Signup() {
   const { signup } = useAuth();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { currentUser } = useAuth();
   const classes = useStyles();
   const [error, setError] = useState("");
 
@@ -94,10 +92,7 @@ export default function Signup() {
     }
     try {
       setLoading(true);
-      let myId = "";
-      await signup(emailRef.current.value, passwordRef.current.value).then(
-        (myId = (currentUser || {}).uid)
-      );
+      await signup(emailRef.current.value, passwordRef.current.value);
       setError("Successfully signed up! Redirecting...");
       setTimeout(function () {
         history.push("/");

@@ -27,22 +27,6 @@ function grabData(inputPostID) {
     });
 }
 
-function updateData(myData) {
-  fetch("/claim_Req", {
-    method: "POST",
-    body: JSON.stringify(myData), // stringify is needed to send!!!
-    headers: {
-      "Content-Type": "application/json", // content type is needed as well!!!
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((e) => {
-      console.error("Error:", e);
-    });
-}
 
 const useStyles = makeStyles({
   list: {
@@ -82,10 +66,6 @@ export default function DrawerContent(props) {
     history.push("/");
   }
 
-  const handleClick = () => {
-    console.log("summon snackbar")
-    setOpen(true);
-  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -107,7 +87,6 @@ export default function DrawerContent(props) {
       postID: props.allData._id,
       postAuthor: props.allData.author,
       postCollector: (currentUser || {}).uid || "testUser", //if currentUser is null, then make .uid reference an empty object instead to surpress type error
-      // postCollector: "testUser",
     };
     console.log("your data", dataToSend);
 
