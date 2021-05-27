@@ -16,22 +16,23 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Snackbar from "@material-ui/core/Snackbar";
 
-{
-  /*
-   * Used template of copyright blurb from material UI templates and MUI CSS. Lines 29-60.
-   * @author oliviertassinari
-   * @author eps1lon
-   * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
-   * @see https://material-ui.com/getting-started/templates/
-   *
-   **/
-}
+
+/*
+  * Used template of copyright blurb from material UI templates and MUI CSS. Lines 29-60.
+  * @author oliviertassinari
+  * @author eps1lon
+  * @see https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+  * @see https://material-ui.com/getting-started/templates/
+  *
+  **/
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="">
         WeCycle
       </Link>
       {".com "}
@@ -54,8 +55,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(1, 0, 2),
-    background: 'Green'
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#4f772d",
+      '&:hover': {
+      backgroundColor: "#31572C",
+      }
   },
   upload: {
     margin: theme.spacing(1),
@@ -68,24 +72,33 @@ export default function PostAd() {
   const postalRef = useRef();
   const descRef = useRef();
   const contactRef = useRef();
-  const fileRef = useRef();
   const bottleRef = useRef();
   const plasticRef = useRef();
   const otherRef = useRef();
   const aluminumRef = useRef();
   const glassRef = useRef();
-  const [imageState, setState] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState();
+  const [msg, setMsg] = useState('');
 
-  function handleChange(e) {
-    setState({
-      file: URL.createObjectURL(e.target.files[0]),
-    });
-  }
+  const [open, setOpen] = React.useState(false); // popup for snackbar component.
+  const [msgSnack, setMsgSnack] = React.useState("Error! Your post wasn't submited!")
+  const handleClick = () => {
+    setOpen(true);
+    // setTimeout(function(){history.push('/')}, 2500)
+    // setTimeout(function(){window.location.href = "/"}, 3000);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   useEffect(() => {
     fetch(`/getName/${currentUser.uid}`)
@@ -120,73 +133,71 @@ export default function PostAd() {
       otherBot = true;
     }
 
-        let myData = {
-            authorID: currentUser.uid, 
-            authorName: name, // from session data
-            title: titleRef.current.value,
-            location: cityRef.current.value,
-            postalCode: postalRef.current.value,
-            type: {
-                plastic: plasticBot,
-                glass: glassBot,
-                aluminum: aluminumBot,
-                other: otherBot
-            },
-            estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
-            description: descRef.current.value,
-            contact: contactRef.current.value, // user contact number auto fill?
-            postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-        }
-            setLoading(true);
-            await $.ajax({
-                url: "/create-ad",
-                data: myData,
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    console.log("Success: ", data);
-                    setLoading(false)
-                    history.push("/")
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error:", jqXHR, textStatus, errorThrown);
-                },
-            });
+    // data validation.
+    if (!titleRef.current.value) {
+      return setMsg("Missing title");
+    }
 
-    try {
-      let myData = {
-        author: { id: currentUser.uid, name: name }, // from session data
+    if (!cityRef.current.value) {
+      return setMsg("Missing city/ neighbourhod");
+    }
+
+    if (!postalRef.current.value) {
+      return setMsg("Missing postal code");
+    }
+
+    if (!bottleRef.current.value) {
+      return setMsg("Please estimate the total number of bottles");
+    } else if (bottleRef.current.value <= 0) {
+      return setMsg("Total bottle count can't be negative or zero");
+    }
+
+    if (!descRef.current.value) {
+      return setMsg("Missing description");
+    }
+
+    if (!contactRef.current.value) {
+      return setMsg("Missing contact information");
+    }
+
+
+    let myData = {
+        authorID: currentUser.uid, 
+        authorName: name, // from session data
         title: titleRef.current.value,
+        location: cityRef.current.value,
         postalCode: postalRef.current.value,
         type: {
-          plastic: plasticBot,
-          glass: glassBot,
-          aluminum: aluminumBot,
-          other: otherBot,
+            plastic: plasticBot,
+            glass: glassBot,
+            aluminum: aluminumBot,
+            other: otherBot
         },
-        estimatedBottles: bottleRef.current.value, // number input for bottles. Sent to user Schema
+        estimatedBottles: bottleRef.current.value,  // number input for bottles. Sent to user Schema
         description: descRef.current.value,
         contact: contactRef.current.value, // user contact number auto fill?
-        postImage: null, // upload image, null for now. on client side when rendering. If null --> dummyimage.com
-      };
-      setLoading(true);
-      await $.ajax({
-        url: "/create-ad",
-        data: myData,
-        dataType: "json",
-        type: "POST",
-        success: function (data) {
-          console.log("Success: ", data);
-          setLoading(false);
-          history.push("/");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.log("Error:", jqXHR, textStatus, errorThrown);
-        },
-      });
-    } catch (err) {
-      console.error(err);
+        postImage: null // upload image, null for now. on client side when rendering. If null --> dummyimage.com
     }
+        setLoading(true);
+        await $.ajax({
+          url: "/create-ad",
+          data: myData,
+          dataType: "json",
+          type: "POST",
+          success: function (data) {
+            console.log("Success: ", data);
+            setLoading(false);
+            setMsgSnack("Successfully Submitted!");
+            handleClick();
+            setTimeout(function(){history.push('/')}, 2500)
+            setTimeout(function(){window.location.href = "/"}, 2500)
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Error:", jqXHR, textStatus, errorThrown);
+            setMsgSnack("Error! Your post wasn't submited!");
+            handleClick();
+          },
+        });
   }
 
   return (
@@ -206,7 +217,7 @@ export default function PostAd() {
         href="../../image/favicon-32x32.png"
       ></link>
       <Header />
-      <Container component="main" maxWidth="xs" style={{marginTop: "12vh"}}>
+      <Container component="main" maxWidth="xs" style={{ marginTop: "12vh" }}>
         <CssBaseline />
         <div classname={classes.paper}>
           <Typography component="h1" variant="h5" className={classes.paper}>
@@ -323,18 +334,26 @@ export default function PostAd() {
         <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
         <img src={imageState.file} id="previewImage"/>
         </Form.Group> */}
-
+            <Typography align="center">{msg}</Typography>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               className={classes.submit}
+              disabled={loading}
             >
               Submit Donation
             </Button>
           </form>
         </div>
         <Copyright />
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          open={open}
+          onClose={handleClose}
+          autoHideDuration={6000}
+          message={msgSnack}
+        />
       </Container>
     </>
   );

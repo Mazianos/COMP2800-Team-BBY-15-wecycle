@@ -1,38 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
 import Mazin from "../images/MazM.jpg";
-import waterBottle from "../images/water-bottle.jpg";
-import nature from "../images/nature.jpg";
-import rocket from "../images/rocket.jpg";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import four from "../images/four.jpg";
 
-// Components imported from material-ui
 import {
-  Collapse,
-  IconButton,
   Button,
   Typography,
-  AppBar,
   Card,
   CardActions,
   CardActionArea,
   CardContent,
-  CardMedia,
-  CssBaseline,
-  Grid,
-  Toolbar,
-  Container,
+  CardMedia
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-// Retrieved photo camera icon from material icons
-// See www.material-ui.com/components/material-icons/ to get more icons
-
 import { makeStyles } from "@material-ui/core/styles";
-
 import AboutUsHeading from "./Header";
 
 const useStyles = makeStyles(() => ({
@@ -40,16 +24,16 @@ const useStyles = makeStyles(() => ({
     maxHeight: "100vh",
     maxWidth: "100vw",
     backgroundSize: "cover",
-    backgroundImage: "url(" + nature + ")",
+    backgroundImage: "url(" + four + ")",
   },
   root: {
     maxWidth: 645,
     minHeight: "100vh",
-    background: "rgba(0,0,0,0.5)",
+    background: "#4f772d",
     margin: "20px",
     marginTop: "25rem",
-    justifyContent: "center",
-    alignItems: "center",
+    width: "50%",
+    margin: "0 auto",
   },
   image: {
     height: 500,
@@ -71,7 +55,7 @@ const useStyles = makeStyles(() => ({
     marginTop: "15rem",
   },
   arrow: {
-    color: "antiquewhite",
+    color: "black",
     fontSize: "4rem",
     marginTop: "8rem",
   },
@@ -85,6 +69,8 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontWeight: "bold",
+    margin: "0 auto",
+    marginBottom: "1.5rem",
   },
   linkedin: {
     textDecoration: "none",
@@ -97,75 +83,19 @@ const useStyles = makeStyles(() => ({
 
 export default function AboutUs() {
   const classes = useStyles();
-  // const [xPosition, setXPosition] = useState(10);
-  // const [yPosition, setYPosition] = useState(10);
-  // const [xSpeed, setXSpeed] = useState(10);
-  // const [ySpeed, setYSpeed] = useState(10);
-  const [runState, setRunState] = useState(false);
-  var xPosition = 10;
-  var yPosition = 10;
-  var xSpeed = 10;
-  var ySpeed = 10;
-
-  const FPS = 60;
-  const logo = useRef();
-
-  function moveLogo() {
-    if (runState === false) {
-        return;
-    }
-    if (
-      xPosition + (logo.current || {}).clientWidth >= window.innerWidth ||
-      xPosition <= 0
-    ) {
-      xSpeed = -xSpeed;
-    }
-    if (
-      yPosition + (logo.current || {}).clientHeight >= window.innerHeight ||
-      yPosition <= 0
-    ) {
-      ySpeed = -ySpeed;
-    }
-    (logo.current || {}).style.left = xPosition + "px";
-    (logo.current || {}).style.top = yPosition + "px";
-  }
-
-  const handleClickAway = () => {
-    setRunState(false);
-  };
-
-  const run = () => {
-    setRunState((prev) => !prev);  
-    console.log(runState);
-    if (runState) {
-        setInterval(() => {
-            xPosition += xSpeed;
-            yPosition += ySpeed;
-            moveLogo();
-          }, 1000 / FPS);
-    } else {
-        clearInterval()
-        // window.location.reload();
-    }
-  }
 
   return (
     <div className={classes.main}>
       <AboutUsHeading />
       <div className={classes.titleBar}>
-        <ClickAwayListener onClickAway={handleClickAway}>
           <h1
             className={classes.titleHead}
-            ref={logo}
-            onClick={run}
-            style={{ color: "antiquewhite" }}
+            
+            style={{ color: "black" }}
           >
             Meet the Team
           </h1>
-        </ClickAwayListener>
-        {/* <IconButton> */}
         <ExpandMoreIcon className={classes.arrow} />
-        {/* </IconButton> */}
       </div>
 
       <Card className={classes.root}>
@@ -189,12 +119,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/rwong97/" target="_blank">
+          <a href="https://www.linkedin.com/in/rwong97/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/ray165" target="_blank">
+          <a href="https://github.com/ray165">
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -221,12 +151,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/jasonja-ahn/" target="_blank">
+          <a href="https://www.linkedin.com/in/jasonja-ahn/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/j-ahn94" target="_blank">
+          <a href="https://github.com/j-ahn94" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -258,12 +188,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/johnsonlau/" target="_blank">
+          <a href="https://www.linkedin.com/in/johnsonlau/" >
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/JohnsonLau" target="_blank">
+          <a href="https://github.com/JohnsonLau" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -301,13 +231,13 @@ export default function AboutUs() {
         <CardActions>
           <a
             href="https://www.linkedin.com/in/mazin-marwan-0b3409154/"
-            target="_blank"
+            
           >
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/Mazianos" target="_blank">
+          <a href="https://github.com/Mazianos" >
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>

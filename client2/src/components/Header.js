@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Drawer, Button, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar, Typography, Collapse } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, AppBar, IconButton, Toolbar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import clsx from 'clsx';
 import SortIcon from '@material-ui/icons/Sort';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import GroupIcon from '@material-ui/icons/Group';
-
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import wecycle from '../images/wecycle_logo.PNG';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        /*height: "100vh",*/
         fontFamily: "Roboto",
     },
     navbar: {
@@ -63,16 +56,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-   {/* 
-* Used template of copyright blurb from material UI templates and MUI CSS. Lines 120-220.
-* @see https://material-ui.com/components/drawers/
-*
-**/}
 export default function Header() {
     const classes = useStyles();
 
     const {currentUser, logout } = useAuth();
-    const [error, setError] = useState("");
     const history = useHistory();
 
     function aboutUsRedirect() {
@@ -91,10 +78,6 @@ export default function Header() {
         history.push("/signup");
     }
 
-    function donorPost() {
-        history.push("/donorPost");
-    }
-
     function postAd() {
         history.push("/postDono");
     }
@@ -104,14 +87,10 @@ export default function Header() {
     }
 
     async function handleLogout() {
-        setError('');
-
         try {
             await logout();
-            history.pushState("/"); // change this to window reload or history.push()
-        } catch {
-            setError("Failed to log out");
-        }
+            history.push("/");
+        } catch {}
     }
     
     const [state, setState] = React.useState({
@@ -137,62 +116,62 @@ export default function Header() {
         >
             <List>
                 {['Home'].map((text, index) => (
-                    <ListItem button key={text} onClick = {landingRedirect}>
-                        <ListItemIcon>{index == <HomeIcon />}</ListItemIcon>
+                    <ListItem button key={text} onClick = {landingRedirect} id="home">
+                        <ListItemIcon>{index = <HomeIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
-            <List>
-                {['Log In'].map((text, index) => (
-                    <ListItem button key = {text} onClick = {loginRedirect}>
-                        <ListItemIcon>{index == <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <List>
-                {['Sign Up'].map((text, index) => (
-                    <ListItem button key = {text} onClick = {signupRedirect}>
-                        <ListItemIcon>{index == <AccountCircleIcon />}</ListItemIcon>
-                        <ListItemText primary = {text} />
-                    </ListItem>
-                ))}
-            </List>
+            
+                {currentUser === null ? 
+                <List>
+                    {['Log In'].map((text, index) => (
+                        <ListItem button key = {text} onClick = {loginRedirect} id="login">
+                            <ListItemIcon>{index = <MailIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))} 
+                </List>: <></>}
+            
+                {currentUser === null ?
+                <List>
+                    {['Sign Up'].map((text, index) => (
+                        <ListItem button key = {text} onClick = {signupRedirect} id="signup">
+                            <ListItemIcon>{index = <AccountCircleIcon />}</ListItemIcon>
+                            <ListItemText primary = {text} />
+                        </ListItem>
+                    ))}
+                </List> : <></>}
             <Divider />
-            <List>
-                {['Post Bottles'].map((text, index) => (
-                    <ListItem button key = {text} onClick = {postAd}>
-                        <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
-                        <ListItemText primary = {text} />
-                    </ListItem>
-                ))}
-            </List>
-            <List>
-                {['Profile'].map((text, index) => (
-                    <ListItem button key = {text} onClick = {inbox}>
-                        <ListItemIcon>{index == <InboxIcon />}</ListItemIcon>
-                        <ListItemText primary = {text} />
-                    </ListItem>
-                ))}
-            </List>
+            
+                {currentUser !== null ?
+                <List>
+                    {['Profile'].map((text, index) => (
+                        <ListItem button key = {text} onClick = {inbox} id="profile">
+                            <ListItemIcon>{index = <InboxIcon />}</ListItemIcon>
+                            <ListItemText primary = {text} />
+                        </ListItem>
+                    ))}
+                </List> : <></>}
             <List>
                 {['About Us'].map((text, index) => (
-                    <ListItem button key={text} onClick = {aboutUsRedirect}>
-                        <ListItemIcon>{index  == <GroupIcon />}</ListItemIcon>
+                    <ListItem button key={text} onClick = {aboutUsRedirect} id="aboutUs">
+                        <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
-            <List>
-                {['Log Out'].map((text, index) => (
-                    <ListItem button key={text} onClick = {handleLogout}>
-                        <ListItemIcon>{index  == <GroupIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+                {currentUser !== null ?
+                <List>
+                    {['Log Out'].map((text, index) => (
+                        <ListItem button key={text} onClick = {handleLogout} id="logout">
+                            <ListItemIcon>{index  = <GroupIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List> : <></>}
+            
         </div>
     );
 
@@ -201,7 +180,7 @@ export default function Header() {
             <AppBar className={classes.navbar}>
                 <Toolbar className={classes.navbarContent}>
                     <div className={classes.navbarTitle} >
-                        <img src = {wecycle} className={classes.wecycleLogo} onClick={landingRedirect} />
+                        <img src = {wecycle} className={classes.wecycleLogo} onClick={landingRedirect} alt="Wecycle Logo, redirect's to landing page" />
                     </div>
 
                         {['right'].map((anchor) => (

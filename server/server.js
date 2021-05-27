@@ -75,16 +75,6 @@ app.post("/create-ad", async function (req, res){
     totalBottles: req.body.estimatedBottles
   })
 
-  // app.post("/", (req, res) => {
-  //   image.findById(req.params.id)
-  //   .then((image) => {
-  //     image.title = req.body.title,
-  //     image.image = req.body.image,
-  //     image.author = req.body.author,
-  //     image.postImage = req.file.path
-  //   })
-  // });
-
   newPost.save(function(err, newPost){
     if (err) return console.error(err);
   });
@@ -116,9 +106,9 @@ app.get("/generate-active-donations/:id", function (req, res) {
   
   async function getData() {
     let dataToSend = await db.collection("posts")
-      .find({collectorID: req.params.id, status: "Open"}).toArray();
+      .find({collectorID: req.params.id, status: "Pending"}).toArray();
 
-    console.log(dataToSend);
+    console.log("Active donations: ", dataToSend);
 
     res.json(dataToSend);
   
@@ -135,7 +125,7 @@ app.get("/generate-complete-donations/:id", function (req, res) {
     let dataToSend = await db.collection("posts")
       .find({collectorID: req.params.id, status: "Closed"}).toArray();
 
-    console.log(dataToSend);
+    console.log("Completed donations", dataToSend);
 
     res.json(dataToSend);
   
@@ -216,7 +206,7 @@ app.post("/claim_Req", (req, res) => {
   async function updatePost() {
     db.collection("posts")
       .updateOne({_id: mongoose.Types.ObjectId(req.body.postID)},
-      { $set: {"collectorID": `${req.body.postCollector}`, "status": "Closed"}})
+      { $set: {"collectorID": `${req.body.postCollector}`, "status": "Pending"}})
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
       console.log(req.body.postID, req.body.status, req.params.postID, "testing on the backend");
@@ -265,6 +255,16 @@ app.get('/get-own-post/:id', (req, res) => {
 
   
 });
+
+app.post('/complete-donation', (req, res) => {
+  console.log("Call to server to update post successful");
+  db.collection("posts")
+      .updateOne({_id: mongoose.Types.ObjectId(req.body._id)},
+      { $set: {"status": "Closed"}})
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  res.send("Successfully updated the db");
+})
 
 // **May 13, 2021 Ray: If above routes arent captured then we send to React's index.html as / 
 // this is for aws hosting

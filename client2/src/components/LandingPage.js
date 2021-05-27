@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../css/landingPage.css";
-import Navbar from "./Navbar";
 import Header from "./Header";
 import { useHistory } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
-import { Container, Paper, Typography, Card, Drawer } from "@material-ui/core";
+import { Container,Typography} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import TemporaryDrawer from "./subcomponents/CustomDrawer";
 import DrawerContent from "./subcomponents/DrawerContent";
+import Snackbar from "@material-ui/core/Snackbar";
+import { useAuth } from "../contexts/AuthContext";
 
 //Infinite Scroll constants start
-// const allData = new Array(1000).fill(0).map((_val, i) => i + 1);
 
 var allData;
 
@@ -105,10 +104,6 @@ const useStyles = makeStyles((theme) => ({
     background: "red",
   },
   fullList: {
-    // width: 'auto',
-  },
-  root: {
-    // maxWidth: 345,
   },
   media: {
     height: 140,
@@ -121,12 +116,28 @@ const useStyles = makeStyles((theme) => ({
 
 // dynamically generate cards using maps
 function Landing() {
-  // const [count, setCount] = useState({}); // dont need this anymore
-  const [postDetails, setDetails] = useState({}); // Nested JSON objected with all data.
-  const [isLoaded, setIsLoaded] = useState({});
-  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
   const [state, setState] = React.useState(false);
+  const { currentUser } = useAuth();
+
+  const [open, setOpen] = React.useState(false); // popup alter when 'claimed'
+  const [msgSnack, setMsgSnack] = React.useState("Successfully claimed! Reloading...");
+  const handleClick = () => {
+    console.log("summon snackbar")
+    setOpen(true);
+    setTimeout(()=>{window.location.reload()}, 2000)
+  };
+ 
+  let welcomeText = (currentUser || {}).displayName || ""; // display the current username that's logged in or nothing.
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   const toggleDrawer = (open) => (event) => {
     setState(open);
@@ -176,29 +187,9 @@ function Landing() {
       <div >
         <Header />
       </div>
-      {/* <div className="quoteContainer">
-        <ul className="quote">
-          <li id="firstParagraph">Donate bottles for the community</li>
-          <br></br>
-          <li id="secondParagraph">Recycle bottles for the community </li>
-          <li id="thirdParagraph">In the City of Vancouver</li>
-        </ul>
-      </div> */}
       <div id="hero">
         <Container className={classes.sizing}>
-          <Grid container className={classes.sizing}>
-            <Grid item xs={12} className={classes.sizing}>
-              <Grid container justify="center" spacing={3}>
-                {[0, 1, 2].map((value) => (
-                  <Grid key={value} style={{ marginTop: "20vh" }} item>
-                    <div className="paperCSS">
-                      <Typography>Hello</Typography>
-                    </div>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-          </Grid>
+          
           <div id="textBlock">
             <Typography
               variant="h5"
@@ -209,7 +200,7 @@ function Landing() {
               Let's recycle!
             </Typography>
             <Typography variant="h6" component="h5">
-              Donate your bottles or help your neighbors recycle them.
+              Donate bottles or help people recycle
             </Typography>
           </div>
 
@@ -234,6 +225,8 @@ function Landing() {
                 status={card.status}
                 postID={card._id}
                 allData={card} // how about i just pass the entire card instead of making another fetch(0)
+                openSnackBar = {() => handleClick()}
+                setMsgSnack= {() => setMsgSnack}
               />
             </Grid>
           ))}
@@ -245,6 +238,13 @@ function Landing() {
           <li key={more} ref={setElement} style={{ background: "white" }}></li>
         )}
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={open}
+        onClose={handleClose}
+        autoHideDuration={4000}
+        message={msgSnack}
+      />
     </div>
   );
 }
