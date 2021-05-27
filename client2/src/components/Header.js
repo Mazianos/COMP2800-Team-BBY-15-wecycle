@@ -149,7 +149,7 @@ export default function Header() {
                 </List> : <></>}
             <Divider />
             <List>
-                {['Post Bottles'].map((text, index) => (
+                {['Profile'].map((text, index) => (
                     <ListItem button key = {text} onClick = {postAd}>
                         <ListItemIcon>{index = <InboxIcon />}</ListItemIcon>
                         <ListItemText primary = {text} />

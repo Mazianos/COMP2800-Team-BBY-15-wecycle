@@ -4,6 +4,11 @@ import { Paper, Button, List, ListItem, ListItemText, Container } from '@materia
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
+import Card from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -26,7 +31,16 @@ const useStyles = makeStyles((theme) => ({
   completedDonations: {
     fontSize: "1.5rem",
     fontWeight: "bold",
-  }
+  },
+  icon: {
+    float: "right",
+    marginRight: "1.0rem",
+    color: "#4f772d",
+  },
+  title: {
+    fontSize: "1.5rem",
+    color: "black",
+  },
 }));
 
 export default function Inbox() {
@@ -34,64 +48,102 @@ export default function Inbox() {
   // --> session handling by deault XYZ logged in. 
   const [activeDonations, setActive] = useState([]); // Nested JSON objected with all data.
   const [completeDonations, setComplete] = useState([]);
+  const [msgActive, setMsgActive] = useState("");
+  const [msgComplete, setMsgComplete] = useState("");
   const history = useHistory();
   const classes = useStyles();
 
   useEffect(() => {
     fetch(`/generate-active-donations/${currentUser.uid}`)
       .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setActive(result);
-          console.log(activeDonations);
+      .then((result) => {
+        setActive(result);
+        console.log(activeDonations);
+
+        if (Object.keys(result).length === 0) {
+          setMsgActive("Oops! You dont have any active donations!");
         }
-      );
+      })
+      .catch((err) => {
+        console.log(err);
+        setMsgActive("Couldn't fetch data");
+      });
   }, []);
 
   useEffect(() => {
     fetch(`/generate-complete-donations/${currentUser.uid}`)
       .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setComplete(result);
-          console.log(completeDonations);
+      .then((result) => {
+        setComplete(result);
+        console.log(completeDonations);
+
+        if (Object.keys(result).length === 0) {
+          setMsgComplete("Oops! You dont have any completed donations!");
         }
-      );
+      })
+      .catch((err) => {
+        console.log(err);
+        setMsgComplete("Couldn't fetch data");
+      });
   }, []);
 
   return (
     <Container>
       <Header />
       <div className={classes.main}>
-        <div className = {classes.acceptedDonations}>
+        <div className={classes.acceptedDonations}>
           Accepted Donations
-                <List>
+          <Grid container spacing={1} justify="center">
             {activeDonations.map((donation) => (
-              <ListItem key={donation._id}>
-                <ListItemText primary={donation.title} />
-                <Paper>Name: {donation.authorName || "Missing name"}<br />Contact Number: {donation.contact}<br />Total Bottles: {donation.totalBottles}</Paper>
-              </ListItem>
+              <Grid item key={donation._id} align="center" justify="center">
+                <Card className={classes.root} variant="outlined">
+                  <CardContent>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                      {donation.title}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                      Total bottles: {donation.totalBottles}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      Contact number: {donation.contact}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             ))}
-          </List>
+          </Grid>
         </div>
-        <div className = {classes.completedDonations}>
+        <div className={classes.completedDonations}>
           Completed Donations
-                <List>
-            {completeDonations.map((donation) => (
-              <ListItem key={donation}>
-                <ListItemText primary={donation.title} />
-                <Paper>Name: {donation.authorName || "Missing name"}<br />Total Bottles: {donation.totalBottles}</Paper>
-              </ListItem>
+          <Typography align="center">{msgComplete}</Typography>
+          <Grid container spacing = {1} justify="center">
+            {(completeDonations || []).map((donation) => (
+              <Grid item key={donation._id} align="center" justify="center">
+                <Card className={classes.root} variant="outlined">
+                  <CardContent>
+                    <CheckCircleIcon className={classes.icon}/>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                      {donation.title}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                      Total bottles: {donation.totalBottles}
+                    </Typography>
+                  </CardContent>
+                </Card>
+            </Grid>
             ))}
-          </List>
+          </Grid>
         </div>
         <div style={{ marginTop: "13vh" }}>
-          <Button variant="contained" className={classes.button} onClick={() => (history.push("/donorPost"))}>Your Donation</Button>
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={() => history.push("/donorPost")}
+          >
+            Your Donation
+          </Button>
         </div>
-      </div>
-
-    </Container>
+      </div >
+    </Container >
   )
 }
