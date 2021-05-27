@@ -121,10 +121,11 @@ function Landing() {
   const { currentUser } = useAuth();
 
   const [open, setOpen] = React.useState(false); // popup alter when 'claimed'
-  const [msgSnack, setMsgSnack] = React.useState("Successfully claimed!");
+  const [msgSnack, setMsgSnack] = React.useState("Successfully claimed! Reloading...");
   const handleClick = () => {
     console.log("summon snackbar")
     setOpen(true);
+    setTimeout(()=>{window.location.reload()}, 2000)
   };
  
   let welcomeText = (currentUser || {}).displayName || ""; // display the current username that's logged in or nothing.

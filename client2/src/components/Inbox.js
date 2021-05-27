@@ -49,13 +49,7 @@ export default function Inbox() {
 
   useEffect(() => {
     fetch(`/generate-active-donations/${currentUser.uid}`)
-      .then((res) => {
-        if (res.ok) {
-          res.json();
-        } else {
-          throw new Error("Couldn't fetch data");
-        }
-      })
+      .then((res) => res.json())
       .then((result) => {
         console.log(result);
         setActive(result);
@@ -73,15 +67,9 @@ export default function Inbox() {
 
   useEffect(() => {
     fetch(`/generate-complete-donations/${currentUser.uid}`)
-      .then((res) => {
-        if (res.ok) {
-          res.json();
-        } else {
-          throw new Error("Couldn't fetch data");
-        }
-      })
+      .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        console.log(result, result.toArray());
         setComplete(result);
         console.log(completeDonations);
 
@@ -103,12 +91,10 @@ export default function Inbox() {
           Accepted Donations
           <Typography align="center">{msgActive}</Typography>
           <List>
-            {activeDonations.map((donation) => (
+            {(activeDonations || []).map((donation) => (
               <ListItem key={donation._id}>
                 <ListItemText primary={donation.title} />
                 <Paper>
-                  Name: {donation.authorName || "Missing name"}
-                  <br />
                   Contact Number: {donation.contact}
                   <br />
                   Total Bottles: {donation.totalBottles}
@@ -121,12 +107,10 @@ export default function Inbox() {
           Completed Donations
           <Typography align="center">{msgComplete}</Typography>
           <List>
-            {completeDonations.map((donation) => (
+            {(completeDonations || []).map((donation) => (
               <ListItem key={donation}>
                 <ListItemText primary={donation.title} />
                 <Paper>
-                  Name: {donation.authorName || "Missing name"}
-                  <br />
                   Total Bottles: {donation.totalBottles}
                 </Paper>
               </ListItem>
