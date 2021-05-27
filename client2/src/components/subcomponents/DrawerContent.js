@@ -9,7 +9,15 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+
+/**
+ * Retrieved image from https://www.chalearning.ca/news/nutrition-month-2021-food-care/attachment/pnglot-com-twitter-bird-logo-png-139932/
+ */
 import twitter from "../../images/twitter.png";
+
+/**
+ * Retrieved image from https://kernel.sr/facebook-scalable-graphics-icon-facebook-logo-facebook-logo-png-clip-art/
+ */
 import facebook from "../../images/facebook.png";
 
 function grabData(inputPostID) {
@@ -54,6 +62,14 @@ const useStyles = makeStyles({
     },
   },
 });
+
+/**
+  * Referenced Drawer component from line 74 to 210 from material UI.
+  * Referenced the code on https://material-ui.com/components/
+  * 
+  * @author Olivier Tassinari, Kristoffer K. & Matt
+  * @see https://material-ui.com/components/drawers/
+*/
 
 export default function DrawerContent(props) {
   const { currentUser } = useAuth(); // firebase
@@ -147,7 +163,7 @@ export default function DrawerContent(props) {
             color="primary"
             variant="contained"
             onClick={() => claimRequest()}
-            // onClick={props.openSnackBar}
+          // onClick={props.openSnackBar}
           >
             Claim
           </Button>

@@ -104,15 +104,14 @@ export default function Signup() {
     setLoading(false);
   }
 
-  /*
-   * Used Template of a page with textfields to make our post Sign up page. Lines 122-223
+  /**
+   * Used Template of a page with textfields to make our post Sign up page. Lines 124-217.
+   * 
    * @author oliviertassinari
    * @author eps1lon
    * @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-up/SignUp.js
    * @see https://material-ui.com/getting-started/templates/
-   *
-   **/
-
+   */
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

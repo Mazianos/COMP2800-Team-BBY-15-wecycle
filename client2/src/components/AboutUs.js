@@ -3,6 +3,10 @@ import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
 import Mazin from "../images/MazM.jpg";
+
+/**
+ * Image retrieved from https://unsplash.com/photos/RcqYLVcfNRo
+ */
 import four from "../images/four.jpg";
 
 import {
@@ -92,9 +96,10 @@ export default function AboutUs() {
   const FPS = 60;
   const logo = useRef();
 
-  /*Referenced a youtube video to make bouncing logo easter egg. Adapted to react
-  @author WEB CIFAR
-  @see https://www.youtube.com/watch?v=wMIARRCox9k
+  /**Referenced a youtube video to make bouncing logo easter egg. Adapted to react
+   * 
+   * @author WEB CIFAR
+   * @see https://www.youtube.com/watch?v=wMIARRCox9k
   */
   function moveLogo() {
     if (runState === false) {
@@ -151,6 +156,14 @@ export default function AboutUs() {
         <ExpandMoreIcon className={classes.arrow} />
       </div>
 
+      {/**
+       * Line 162 - 304 creates Card component.
+       * Referenced the code on https://material-ui.com/components/
+       * 
+       * @author Olivier Tassinari, Kristoffer K. & Matt
+       * @see https://material-ui.com/components/cards/
+       * @see https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/cards/MediaCard.js
+      */}
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia className={classes.image} image={Ray} />

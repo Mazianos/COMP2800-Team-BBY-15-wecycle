@@ -99,8 +99,6 @@ app.post("/create-user", function (req, res) {
   })
 });
 
-
-
 app.get("/generate-active-donations/:id", function (req, res) {
   console.log("Call to query db successful, returning active donations");
   
