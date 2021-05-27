@@ -1,10 +1,9 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
 import Mazin from "../images/MazM.jpg";
 import four from "../images/four.jpg";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 import {
   Button,
@@ -84,68 +83,18 @@ const useStyles = makeStyles(() => ({
 
 export default function AboutUs() {
   const classes = useStyles();
-  const [runState, setRunState] = useState(false);
-  var xPosition = 10;
-  var yPosition = 10;
-  var xSpeed = 10;
-  var ySpeed = 10;
-
-  const FPS = 60;
-  const logo = useRef();
-
-  function moveLogo() {
-    if (runState === false) {
-        return;
-    }
-    if (
-      xPosition + (logo.current || {}).clientWidth >= window.innerWidth ||
-      xPosition <= 0
-    ) {
-      xSpeed = -xSpeed;
-    }
-    if (
-      yPosition + (logo.current || {}).clientHeight >= window.innerHeight ||
-      yPosition <= 0
-    ) {
-      ySpeed = -ySpeed;
-    }
-    (logo.current || {}).style.left = xPosition + "px";
-    (logo.current || {}).style.top = yPosition + "px";
-  }
-
-  const handleClickAway = () => {
-    setRunState(false);
-  };
-
-  const run = () => {
-    setRunState((prev) => !prev);  
-    console.log(runState);
-    if (runState) {
-        setInterval(() => {
-            xPosition += xSpeed;
-            yPosition += ySpeed;
-            moveLogo();
-          }, 1000 / FPS);
-    } else {
-        clearInterval()
-        // window.location.reload();
-    }
-  }
 
   return (
     <div className={classes.main}>
       <AboutUsHeading />
       <div className={classes.titleBar}>
-        <ClickAwayListener onClickAway={handleClickAway}>
           <h1
             className={classes.titleHead}
-            ref={logo}
-            onClick={run}
+            
             style={{ color: "black" }}
           >
             Meet the Team
           </h1>
-        </ClickAwayListener>
         <ExpandMoreIcon className={classes.arrow} />
       </div>
 
