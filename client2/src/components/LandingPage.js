@@ -6,9 +6,7 @@ import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
 import { Container,Typography} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DrawerContent from "./subcomponents/DrawerContent";
 import Snackbar from "@material-ui/core/Snackbar";
-import { useAuth } from "../contexts/AuthContext";
 
 //Infinite Scroll constants start
 
@@ -117,8 +115,7 @@ const useStyles = makeStyles((theme) => ({
 // dynamically generate cards using maps
 function Landing() {
   const classes = useStyles();
-  const [state, setState] = React.useState(false);
-  const { currentUser } = useAuth();
+  // const [state, setState] = React.useState(false);
 
   const [open, setOpen] = React.useState(false); // popup alter when 'claimed'
   const [msgSnack, setMsgSnack] = React.useState("Successfully claimed! Reloading...");
@@ -127,8 +124,6 @@ function Landing() {
     setOpen(true);
     setTimeout(()=>{window.location.reload()}, 2000)
   };
- 
-  let welcomeText = (currentUser || {}).displayName || ""; // display the current username that's logged in or nothing.
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -139,9 +134,9 @@ function Landing() {
   };
 
 
-  const toggleDrawer = (open) => (event) => {
-    setState(open);
-  };
+  // const toggleDrawer = (open) => (event) => {
+  //   setState(open);
+  // };
 
   const history = useHistory();
   const { data, loading, more, load } = React.useContext(MyContext);
