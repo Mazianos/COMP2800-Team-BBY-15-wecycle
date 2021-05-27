@@ -31,3 +31,5 @@ yarn-error.log*
 cert.pem
 
 .env.local
+
+readme.md
