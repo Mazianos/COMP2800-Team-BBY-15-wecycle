@@ -87,13 +87,13 @@ export default function DrawerContent(props) {
   //   setOpen(true);
   // };
 
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
+  const handleClose = (event, reason) => {
+     if (reason === 'clickaway') {
+       return;
+     }
 
-  //   setOpen(false);
-  // };
+     setOpen(false);
+   };
 
   function claimRequest() {
     console.log(props);
