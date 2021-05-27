@@ -1,13 +1,19 @@
 import React from "react";
+import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import { Typography } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import { Typography, Grow } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Snackbar from "@material-ui/core/Snackbar";
+import ContactPhoneOutlinedIcon from "@material-ui/icons/ContactPhoneOutlined";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import twitter from "../../images/twitter.png";
@@ -28,12 +34,13 @@ function grabData(inputPostID) {
 }
 
 function updateData(myData) {
+  console.log("running updateData", myData);
   fetch("/claim_Req", {
-    method: "POST",
+    method: "POST", 
     body: JSON.stringify(myData), // stringify is needed to send!!!
-    headers: {
-      "Content-Type": "application/json", // content type is needed as well!!!
-    },
+    headers: {  
+      "Content-Type": "application/json" // content type is needed as well!!!
+  },
   })
     .then((res) => res.json())
     .then((data) => {
@@ -64,12 +71,6 @@ const useStyles = makeStyles({
     alignContent: "center",
     fontSize: 15,
   },
-  button: {
-    backgroundColor: "#4f772d",
-      '&:hover': {
-      backgroundColor: "#31572C",
-      }
-  }
 });
 
 export default function DrawerContent(props) {
@@ -82,71 +83,44 @@ export default function DrawerContent(props) {
     history.push("/");
   }
 
-  // const handleClick = () => {
-  //   console.log("summon snackbar")
-  //   setOpen(true);
-  // };
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
-
-  function claimRequest() {
-    console.log(props);
-    if ((currentUser || {}).uid == null){
-      history.push("/login");
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
       return;
     }
 
+    setOpen(false);
+  };
+
+
+  function claimRequest() {
+    console.log("clicked");
     // Send the data
     let dataToSend = {
       postID: props.allData._id,
       postAuthor: props.allData.author,
-      postCollector: (currentUser || {}).uid || "testUser", //if currentUser is null, then make .uid reference an empty object instead to surpress type error
+      postCollector: currentUser.uid || "testUser",
       // postCollector: "testUser",
     };
     console.log("your data", dataToSend);
 
-    fetch("/claim_Req", {
-      method: "POST",
-      body: JSON.stringify(dataToSend), // stringify is needed to send!!!
-      headers: {
-        "Content-Type": "application/json", // content type is needed as well!!!
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log(res);
-          return res.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        console.log("Success:", data);
-        props.setMsgSnack("Successfully claimed!");
-        props.openSnackBar();
-      })
-      .catch((e) => {
-        console.error("Error:", e);
-        props.setMsgSnack("Error! Unable to claim post");
-        props.openSnackBar();
-      });
+    console.log("trying to right before running fetch");
+    updateData(dataToSend)
+    console.log("runs after the updateData")
 
-    // try {
-    //   updateData(dataToSend);
-    //   props.openSnackBar();
-    // } catch (err) {
-    //   console.err(err);
-    // }
-
+    handleClick();
+    // Close the drawer
+    // props.reRender();
     props.onClose();
-
     // setTimeout(history.push("/"), 3000);
+    // history.push("/");
+    window.location.reload();
+
+    // Post some sort of feedback.
+
   }
 
   return (
@@ -160,7 +134,7 @@ export default function DrawerContent(props) {
         <div className={classes.contentCentered}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Location: {props.allData.postalCode || "Oops! This is empty"}
+              Location: {props.allData.postalCode || "oops! this is empty"}
             </Typography>
             <Typography gutterBottom variant="subtitle2" component="h6">
               Posting Date: {props.allData.postDate}
@@ -183,12 +157,11 @@ export default function DrawerContent(props) {
               /> */}
         <CardActions>
           <Button
-            className = {classes.button}
             size="small"
             color="primary"
             variant="contained"
             onClick={() => claimRequest()}
-            // onClick={props.openSnackBar}
+            // onClick={() => console.log("hello")}
           >
             Claim
           </Button>
@@ -212,8 +185,8 @@ export default function DrawerContent(props) {
           <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-34-211-120-230.us-west-2.compute.amazonaws.com%3A8001%2F&amp;src=sdkpreparse" 
           class="fb-xfbml-parse-ignore"><img src={facebook} width="64" height="64"></img></a>
           <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="I just donated bottles thanks to WeCycle!" data-url="http://ec2-34-211-120-230.us-west-2.compute.amazonaws.com:8001/" data-via="TweetsCycle" data-hashtags="Recycling " data-related="TweetsCycle" data-show-count="false"><img src={twitter} width="64" height="64"></img>
-            </a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            
+            </a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           </div>
           
           
