@@ -33,7 +33,6 @@ const useStyles = makeStyles(() => ({
     margin: "20px",
     marginTop: "25rem",
     width: "50%",
-    margin: "0 auto",
   },
   image: {
     height: 500,

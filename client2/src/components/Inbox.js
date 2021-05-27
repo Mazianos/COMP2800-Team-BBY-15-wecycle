@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import {
-  Paper,
   Button,
-  List,
-  ListItem,
-  ListItemText,
   Container,
 } from "@material-ui/core";
 import { useAuth } from "../contexts/AuthContext";
@@ -102,9 +98,10 @@ export default function Inbox() {
       <div className={classes.main}>
         <div className={classes.acceptedDonations}>
           Accepted Donations
+          <Typography align="center">{msgActive}</Typography>
           <Grid container spacing={1} justify="center">
             {activeDonations.map((donation) => (
-              <Grid item key={donation._id} align="center" justify="center">
+              <Grid item key={donation._id} align="center" >
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
                     <Typography
@@ -159,7 +156,7 @@ export default function Inbox() {
           <Typography align="center">{msgComplete}</Typography>
           <Grid container spacing={1} justify="center">
             {(completeDonations || []).map((donation) => (
-              <Grid item key={donation._id} align="center" justify="center">
+              <Grid item key={donation._id} align="center" >
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
                     <CheckCircleIcon className={classes.icon} />

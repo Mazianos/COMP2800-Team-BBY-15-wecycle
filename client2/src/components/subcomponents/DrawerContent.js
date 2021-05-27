@@ -76,7 +76,6 @@ export default function DrawerContent(props) {
       postID: props.allData._id,
       postAuthor: props.allData.author,
       postCollector: (currentUser || {}).uid || "testUser", //if currentUser is null, then make .uid reference an empty object instead to surpress type error
-      // postCollector: "testUser",
     };
     console.log("your data", dataToSend);
 
