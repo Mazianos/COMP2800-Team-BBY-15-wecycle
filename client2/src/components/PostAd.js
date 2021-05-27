@@ -44,14 +44,15 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(16),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "green"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -81,6 +82,7 @@ export default function PostAd() {
   const history = useHistory();
   const classes = useStyles();
   const [name, setName] = useState();
+  const [msg, setMsg] = useState('');
 
   const [open, setOpen] = React.useState(false); // popup for snackbar component.
   const [msgSnack, setMsgSnack] = React.useState("Error! Your post wasn't submited!")
@@ -130,6 +132,34 @@ export default function PostAd() {
     if (otherRef.current.value === "on") {
       otherBot = true;
     }
+
+    // data validation.
+    if (!titleRef.current.value) {
+      return setMsg("Missing title");
+    }
+
+    if (!cityRef.current.value) {
+      return setMsg("Missing city/ neighbourhod");
+    }
+
+    if (!postalRef.current.value) {
+      return setMsg("Missing postal code");
+    }
+
+    if (!bottleRef.current.value) {
+      return setMsg("Please estimate the total number of bottles");
+    } else if (bottleRef.current.value <= 0) {
+      return setMsg("Total bottle count can't be negative or zero");
+    }
+
+    if (!descRef.current.value) {
+      return setMsg("Missing description");
+    }
+
+    if (!contactRef.current.value) {
+      return setMsg("Missing contact information");
+    }
+
 
     let myData = {
         authorID: currentUser.uid, 
@@ -190,8 +220,8 @@ export default function PostAd() {
       <Container component="main" maxWidth="xs" style={{ marginTop: "12vh" }}>
         <CssBaseline />
         <div classname={classes.paper}>
-          <Typography component="h1" variant="h5">
-            Create a new donation
+          <Typography component="h1" variant="h5" className={classes.paper}>
+            Create A New Donation
           </Typography>
           <form className={classes.form} noValidate onSubmit={createAd}>
             <TextField
@@ -247,7 +277,7 @@ export default function PostAd() {
                 control={
                   <Checkbox
                     value="plastic"
-                    color="primary"
+                    color="default"
                     inputRef={plasticRef}
                   />
                 }
@@ -255,7 +285,7 @@ export default function PostAd() {
               />
               <FormControlLabel
                 control={
-                  <Checkbox value="Glass" color="primary" inputRef={glassRef} />
+                  <Checkbox value="Glass" color="default" inputRef={glassRef} />
                 }
                 label="Glass"
               />
@@ -263,7 +293,7 @@ export default function PostAd() {
                 control={
                   <Checkbox
                     value="Aluminum"
-                    color="primary"
+                    color="default"
                     inputRef={aluminumRef}
                   />
                 }
@@ -271,7 +301,7 @@ export default function PostAd() {
               />
               <FormControlLabel
                 control={
-                  <Checkbox value="Other" color="primary" inputRef={otherRef} />
+                  <Checkbox value="Other" color="default" inputRef={otherRef} />
                 }
                 label="Other"
               />
@@ -304,12 +334,11 @@ export default function PostAd() {
         <Form.Control type="file" ref={fileRef} required onChange={handleChange}/>
         <img src={imageState.file} id="previewImage"/>
         </Form.Group> */}
-
+            <Typography align="center">{msg}</Typography>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
               disabled={loading}
             >

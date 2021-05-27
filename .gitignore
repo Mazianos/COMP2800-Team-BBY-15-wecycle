@@ -8,6 +8,8 @@ client2/build
 /client2/node_modules
 /.pnp
 .pnp.js
+/client
+/client/ 
 
 # testing
 /coverage
