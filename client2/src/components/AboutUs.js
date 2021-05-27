@@ -6,7 +6,6 @@ import Mazin from "../images/MazM.jpg";
 import four from "../images/four.jpg";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
-// Components imported from material-ui
 import {
   Button,
   Typography,
@@ -18,12 +17,7 @@ import {
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-// Retrieved photo camera icon from material icons
-// See www.material-ui.com/components/material-icons/ to get more icons
-
 import { makeStyles } from "@material-ui/core/styles";
-
 import AboutUsHeading from "./Header";
 
 const useStyles = makeStyles(() => ({

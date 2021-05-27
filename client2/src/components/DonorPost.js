@@ -76,13 +76,8 @@ export default function DonorPost() {
 
     useEffect(() => {
         fetch(`/get-own-post/${currentUser.uid}`)
-          .then((res) => {
-            if (res.ok) {
-              res.json();
-            } else {
-              throw new Error("Couldn't fetch data");
-            }
-          })
+          .then((res) =>
+            res.json())
           .then((result) => {
             setDonation(result);
             console.log("Your dono: " + yourDonation);

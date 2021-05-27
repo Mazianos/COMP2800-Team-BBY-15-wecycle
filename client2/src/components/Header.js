@@ -56,11 +56,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-/* 
-* Used template of copyright blurb from material UI templates and MUI CSS. Lines 120-220.
-* @see https://material-ui.com/components/drawers/
-*
-**/
 export default function Header() {
     const classes = useStyles();
 
