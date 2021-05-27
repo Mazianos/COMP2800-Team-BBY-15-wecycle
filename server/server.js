@@ -75,16 +75,6 @@ app.post("/create-ad", async function (req, res){
     totalBottles: req.body.estimatedBottles
   })
 
-  // app.post("/", (req, res) => {
-  //   image.findById(req.params.id)
-  //   .then((image) => {
-  //     image.title = req.body.title,
-  //     image.image = req.body.image,
-  //     image.author = req.body.author,
-  //     image.postImage = req.file.path
-  //   })
-  // });
-
   newPost.save(function(err, newPost){
     if (err) return console.error(err);
   });
@@ -116,7 +106,7 @@ app.get("/generate-active-donations/:id", function (req, res) {
   
   async function getData() {
     let dataToSend = await db.collection("posts")
-      .find({collectorID: req.params.id, status: "Open"}).toArray();
+      .find({collectorID: req.params.id, status: "Pending"}).toArray();
 
     console.log(dataToSend);
 
