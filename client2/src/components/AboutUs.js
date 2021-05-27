@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Ray from "../images/ray.jpg";
 import Jason from "../images/Jason_Ahn.jpg";
 import Johnson from "../images/JLau.png";
@@ -12,7 +12,7 @@ import {
   CardActions,
   CardActionArea,
   CardContent,
-  CardMedia
+  CardMedia,
 } from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -32,7 +32,8 @@ const useStyles = makeStyles(() => ({
     background: "#4f772d",
     margin: "20px",
     marginTop: "25rem",
-    width: "50%",
+    width: "100%",
+    margin: "0 auto",
   },
   image: {
     height: 500,
@@ -82,18 +83,71 @@ const useStyles = makeStyles(() => ({
 
 export default function AboutUs() {
   const classes = useStyles();
+  const [runState, setRunState] = useState(false);
+  var xPosition = 10;
+  var yPosition = 10;
+  var xSpeed = 10;
+  var ySpeed = 10;
+
+  const FPS = 60;
+  const logo = useRef();
+
+  /*Referenced a youtube video to make bouncing logo easter egg. Adapted to react
+  @author WEB CIFAR
+  @see https://www.youtube.com/watch?v=wMIARRCox9k
+  */
+  function moveLogo() {
+    if (runState === false) {
+      return;
+    }
+    if (
+      xPosition + (logo.current || {}).clientWidth >= window.innerWidth ||
+      xPosition <= 0
+    ) {
+      xSpeed = -xSpeed;
+    }
+    if (
+      yPosition + (logo.current || {}).clientHeight >= window.innerHeight ||
+      yPosition <= 0
+    ) {
+      ySpeed = -ySpeed;
+    }
+    (logo.current || {}).style.left = xPosition + "px";
+    (logo.current || {}).style.top = yPosition + "px";
+  }
+
+  const handleClickAway = () => {
+    setRunState(false);
+  };
+
+  const run = () => {
+    setRunState((prev) => !prev);
+    console.log(runState);
+    if (runState) {
+      setInterval(() => {
+        xPosition += xSpeed;
+        yPosition += ySpeed;
+        moveLogo();
+      }, 1000 / FPS);
+      setTimeout(window.location.reload(), 10000);
+    } else {
+      clearInterval();
+      // window.location.reload();
+    }
+  };
 
   return (
     <div className={classes.main}>
       <AboutUsHeading />
       <div className={classes.titleBar}>
-          <h1
-            className={classes.titleHead}
-            
-            style={{ color: "black" }}
-          >
-            Meet the Team
-          </h1>
+        <h1
+          className={classes.titleHead}
+          ref={logo}
+          onClick={run}
+          style={{ color: "black" }}
+        >
+          Meet the Team
+        </h1>
         <ExpandMoreIcon className={classes.arrow} />
       </div>
 
@@ -155,7 +209,7 @@ export default function AboutUs() {
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/j-ahn94" >
+          <a href="https://github.com/j-ahn94">
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -187,12 +241,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a href="https://www.linkedin.com/in/johnsonlau/" >
+          <a href="https://www.linkedin.com/in/johnsonlau/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/JohnsonLau" >
+          <a href="https://github.com/JohnsonLau">
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
@@ -228,15 +282,12 @@ export default function AboutUs() {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <a
-            href="https://www.linkedin.com/in/mazin-marwan-0b3409154/"
-            
-          >
+          <a href="https://www.linkedin.com/in/mazin-marwan-0b3409154/">
             <Button size="small" color="white" className={classes.linkedin}>
               LinkedIn
             </Button>
           </a>
-          <a href="https://github.com/Mazianos" >
+          <a href="https://github.com/Mazianos">
             <Button size="small" color="white" className={classes.linkedin}>
               Github
             </Button>
