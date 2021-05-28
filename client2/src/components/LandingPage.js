@@ -48,6 +48,11 @@ const reducer = (state, action) => {
 
 const MyContext = React.createContext();
 
+/*
+* Used youtube video as instructions to create infinite scroll mechanism.
+* @author Web Dev Simplified
+* @see https://www.youtube.com/watch?v=NZKUirTtxcg
+*/
 function MyProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, {
     loading: false,
